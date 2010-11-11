@@ -1,17 +1,20 @@
 package com.megapolis
 
+import grails.util.GrailsUtil
+import org.codehaus.groovy.grails.plugins.web.taglib.ApplicationTagLib
+
 class FacebookController {
+  static final def taglib = new ApplicationTagLib()
+  static final String APP_ID = "167042136651099"
+  static final String FACEBOOK_URI = "https://graph.facebook.com/oauth/authorize"
+  static final String REDIRECT_URI = taglib.createLink(controller:"facebook",action:"oauth_redirect")
+  static final String GRAPH_URI = "https://graph.facebook.com/oauth/access_token"
 
-  static final String appID = "167042136651099"
-  static final String facebook_uri = "https://graph.facebook.com/oauth/authorize"
-  static final String redirect_uri = createLink(controller:"facebook",action:"oauth_redirect")
-  static final String graph_uri = "https://graph.facebook.com/oauth/access_token"
-
-  def index = {
+  def beforeInterceptor = {
 
     if(!session.accessToken && GrailsUtil.environment == 'production')
-      redirect("${facebook_uri}?client_id=${appID}&redirect_uri=${redirect_uri}")
-  
+      redirect("${FACEBOOK_URI}?client_id=${APP_ID}&redirect_uri=${REDIRECT_URI}")
+    return true
   }
 
   def oauth_redirect = {
@@ -19,7 +22,7 @@ class FacebookController {
     if(params.error_reason)
       redirect(action:"error", params:[reason:params.error_reason])
 
-    session.accessToken = new URL(graph_uri+"?client_id=${appID}&redirect_uri=${redirect_uri}&client_secret=eb737aaffb98ae1cc196c5e2d88033de&code=${params.code}").text
+    session.accessToken = new URL(GRAPH_URI+"?client_id=${APP_ID}&redirect_uri=${REDIRECT_URI}&client_secret=eb737aaffb98ae1cc196c5e2d88033de&code=${params.code}").text
 
   }
 

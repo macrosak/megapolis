@@ -11,7 +11,7 @@
 <div style="height:500px; position: absolute; width:1200px; border:red 2px; overflow:hidden">
   <g:set var="zindex" value="${1000}"/>
 
-  <g:each in="${0..7}" var="j">
+  <g:each in="${0..12}" var="j">
     <g:each in="${12..-3}" var="i">
       <%
         def field = Field.findByCoordXAndCoordY(j, i)
