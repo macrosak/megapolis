@@ -4,7 +4,7 @@ class Building {
 
 
     int height
-    long price = 0
+    Long price
     String name = ""
     String filename
 

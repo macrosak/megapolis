@@ -20,11 +20,13 @@ class FacebookController {
   }
 
   def oauth_redirect = {
-
     if(params.error_reason)
       redirect(action:"error", params:[reason:params.error_reason])
+    try {
+        session.accessToken = new URL(GRAPH_URI+"?client_id=${APP_ID}&redirect_uri=${REDIRECT_URI}&client_secret=eb737aaffb98ae1cc196c5e2d88033de&code=${params.code}").text
+    } catch (Exception e) {
 
-    session.accessToken = new URL(GRAPH_URI+"?client_id=${APP_ID}&redirect_uri=${REDIRECT_URI}&client_secret=eb737aaffb98ae1cc196c5e2d88033de&code=${params.code}").text
+    }
     redirect(controller: 'city')
   }
 
