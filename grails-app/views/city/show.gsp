@@ -7,7 +7,8 @@
   <title><g:message code="default.show.label" args="[entityName]"/></title>
 </head>
 <body>
-<g:link action="generate">Generate!</g:link>
+Auth: ${session.accessToken}<br/><br/>
+<g:link action="generate">Generate!</g:link><br/><br/>
 <div style="height:500px; position: absolute; width:1200px; border:red 2px; overflow:hidden">
   <g:set var="zindex" value="${1000}"/>
 
