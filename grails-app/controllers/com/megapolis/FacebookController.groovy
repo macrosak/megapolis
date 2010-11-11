@@ -16,7 +16,16 @@ class FacebookController {
 
   def oauth_redirect = {
 
+    if(params.error_reason)
+      redirect(action:"error", params:[reason:params.error_reason])
+
     session.accessToken = new URL(graph_uri+"?client_id=${appID}&redirect_uri=${redirect_uri}&client_secret=eb737aaffb98ae1cc196c5e2d88033de&code=${params.code}").text
+
+  }
+
+  def error = {
+
+    return [reason:params.reason]
 
   }
 }
