@@ -4,10 +4,12 @@ import com.megapolis.FacebookController
 
 class CityController extends FacebookController {
     def terrainService
+    def facebookService
 
     def index = { redirect action: show}
 
     def show = {
+      [profile: facebookService.profile]
     }
 
     def generate = {
