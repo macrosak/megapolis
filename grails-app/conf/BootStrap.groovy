@@ -40,11 +40,11 @@ class BootStrap {
         def blue = new Building(dirname: 'skyscraper-blue', price: 19000,
                 income : 2300, name: 'Blue Sky Company',
                 iso: new Image(filename: 'iso.png', height: 802, width: 223, offsetX: 156).save(),
-                top: new Image(filename: 'top.png', height: 100, width: 150).save()).save(failOnError: true)
+                top: new Image(filename: 'top.png', height: 50, width: 100).save()).save(failOnError: true)
         def shop = new Building(dirname: 'small-shop', price: 1900,
                 income : 200, name: 'Johnson & Son Market',
                 iso: new Image(filename: 'iso.png', height: 306, width: 214, offsetX: 142).save(),
-                top: new Image(filename: 'top.png', height: 100, width: 150).save()).save(failOnError: true)
+                top: new Image(filename: 'top.png', height: 50, width: 100).save()).save(failOnError: true)
 
         def roadWE = new Building(dirname: 'road-upleft', price: 0, ground: true,
                 iso: new Image(filename: 'iso.png', height: 160, width: 320, offsetX: 160).save(),
