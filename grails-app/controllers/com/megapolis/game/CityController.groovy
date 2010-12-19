@@ -7,6 +7,10 @@ class CityController extends FacebookController {
     def facebookService
     def cityService
 
+    def newShow = {}
+
+    def profile = {}
+
     def index = { redirect action: 'show' }
 
     def show = {
