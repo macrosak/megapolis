@@ -9,7 +9,7 @@
   <head>
     <meta name="layout" content="main"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Sample title</title>
+    <title>City</title>
 
   </head>
   <body>

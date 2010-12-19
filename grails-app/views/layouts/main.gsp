@@ -11,6 +11,8 @@
     <style type="text/css">
       body { width: 760px; }
 
+      body, p, table, div {font-family:verdana}
+
       ul.menu { margin:0; padding:0; list-style-type: none; width:100%; font-family: verdana; background-color: #fdca00; }
       .menu li { margin:0; padding:0; float: left; text-align:center; margin-right:10px ;}
 
