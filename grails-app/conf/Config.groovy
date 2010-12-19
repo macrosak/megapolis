@@ -1,3 +1,5 @@
+import com.megapolis.math.Point
+
 // locations to search for config files that get merged into the main config
 // config files can either be Java properties files or ConfigSlurper scripts
 
@@ -84,4 +86,18 @@ log4j = {
            'net.sf.ehcache.hibernate'
 
     warn   'org.mortbay.log'
+}
+
+city {
+    view {
+        fields = new Point(6, 6)
+        canvas = new Point(1200, 500)
+        field = new Point(160, 80)
+    }
+
+    buy {
+        fields = new Point(12, 5)
+        canvas = new Point(1200, 500)
+        field = new Point(50, 50)
+    }
 }

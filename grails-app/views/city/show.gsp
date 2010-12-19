@@ -7,28 +7,52 @@
   <title><g:message code="default.show.label" args="[entityName]"/></title>
 </head>
 <body>
-Profile: ${profile.dump()}<br/><br/>
+Player: ${player} ${player.dump()}<br/>
+View: ${viewConfig.field.y}<br/>
 <g:link action="generate">Generate!</g:link><br/><br/>
-<div style="height:500px; position: absolute; width:1200px; border:red 2px; overflow:hidden">
-  <g:set var="zindex" value="${1000}"/>
-
-  <g:each in="${0..12}" var="j">
-    <g:each in="${12..-3}" var="i">
+<div style="height: ${viewConfig.canvas.y}px;
+  position: absolute;
+  width: ${viewConfig.canvas.x}px;
+  overflow:hidden;
+  background-color: #adadad;">
+  <g:set var="zindex" value="${1}"/>
+  <g:each in="${(-1 * viewConfig.fields.x)..viewConfig.fields.x}" var="j">
+    <g:each in="${viewConfig.fields.y..(-1 *viewConfig.fields.y)}" var="i">
       <%
-        def field = Field.findByCoordXAndCoordY(j, i)
+        def field = fields.find { it.coordX == position.x + j && it.coordY == position.y + i}
+
         def building = field?.building
-        def height = building?.height ?: 40
+        def image = building?.iso
+
+        def height = image?.height ?: viewConfig.field.y
+        def width = image?.width ?: viewConfig.field.x
+
+        def bottom = ((i - j) * viewConfig.field.y / 2) + viewConfig.canvas.y / 2 - viewConfig.field.y / 2
+        def left = ((j + i) * viewConfig.field.x / 2) - viewConfig.field.x / 2 + viewConfig.canvas.x / 2
+
+        bottom += image?.offsetY ?: 0
+        left -= image?.offsetX ?: 0
+        left += viewConfig.field.x / 2
+
       %>
-      <div style="position:absolute; float: left;
-      bottom: ${j * 39}px;
-      left:${i * 101 + j * 25}px;
-      width: 101px;
+      <g:if test="${building}">
+      <div id="${position.x + j};${position.y + i}"
+      style="position:absolute; float: left;
+      bottom: ${bottom}px;
+      left:${left}px;
+      width: ${width}px;
       height: ${height}px;
-      z-index: ${zindex--};">
-        <g:if test="${building}">
-          <img src="${resource(dir: 'images/buildings', file: building.filename)}"/>
-        </g:if>
+      z-index: ${building?.ground? 0 : zindex++};">
+
+          %{--<table width="${width}" border="0" cellspacing="0" cellpadding="0" height="${height}">--}%
+            %{--<tr background="${resource(dir: 'images/buildings/' + building.filename, file: 'iso.png')}">--}%
+              %{--<td>[i: ${i}, j: ${j}]</td>--}%
+            %{--</tr>--}%
+          %{--</table>--}%
+          <img src="${resource(dir: 'images/buildings/' + building.dirname, file: image.filename)}"/>
+
       </div>
+      </g:if>
     </g:each>
   </g:each>
 

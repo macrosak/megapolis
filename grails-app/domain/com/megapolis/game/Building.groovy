@@ -2,11 +2,12 @@ package com.megapolis.game
 
 class Building {
 
-
-    int height
+    boolean ground = false
     Long price
     String name = ""
-    String filename
+    String dirname
+    Image iso
+    Image top
 
     static constraints = {
 
