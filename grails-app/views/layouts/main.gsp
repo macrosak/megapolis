@@ -9,7 +9,7 @@
       <g:layoutHead />
 
     <style type="text/css">
-      body { width: 760px; }
+      body { width: 750px; }
 
       body, p, table, div {font-family:verdana}
 
@@ -35,8 +35,9 @@
         <li><g:link action="buyBuild" >Build</g:link></li>
       </ul>
 
-      <div class="clear" style="margin-bottom: 10px;"></div>
-      
+      <div class="clear" style="margin-bottom: 10px;">&nbsp;</div>
+
+
         <g:layoutBody />
     </body>
 </html>

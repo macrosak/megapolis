@@ -18,8 +18,8 @@ class TerrainService {
             it.delete()
         }
 
-        (-20..20).each { x ->
-            (-20..20).each { y ->
+        (-30..30).each { x ->
+            (-30..30).each { y ->
 //                if (x == 0 && y == 0)
 //                    new Field(coordX: x, coordY: y, building: black).save()
 //                else if (x == 3 && y == 0)

@@ -1,28 +1,24 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
-
+<%@ page import="com.megapolis.game.Field; com.megapolis.game.Building" %>
 <html>
-  <head>
-    <meta name="layout" content="main"/>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>City</title>
-
-  </head>
-  <body>
-
-  <div style="height: ${viewConfig.canvas.y}px;
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="layout" content="main"/>
+  <g:set var="entityName" value="${message(code: 'building.label', default: 'Building')}"/>
+  <title><g:message code="default.show.label" args="[entityName]"/></title>
+</head>
+<body>
+Player: ${player} ${player.dump()}<br/>
+View: ${viewConfig.field.y}<br/>
+<g:link action="show" params="[posX: position.x + 1, posY: position.y + 1]">&gt;</g:link><br/>
+<g:link action="show" params="[posX: position.x - 1, posY: position.y - 1]">&lt;</g:link><br/>
+<g:link action="show" params="[posX: position.x - 1, posY: position.y + 1]">^</g:link><br/>
+<g:link action="show" params="[posX: position.x + 1, posY: position.y - 1]">V</g:link><br/>
+<br/>
+<div style="height: ${viewConfig.canvas.y}px;
   position: absolute;
   width: ${viewConfig.canvas.x}px;
   overflow:hidden;
-  background-color: #adadad;
-  border:1px solid black; ">
-    <img style="position:absolute; z-index:1000" id="klikatko" src="${resource( dir:'images', file: 'mapcontrols.png')}" usemap="#_klikatko" border="0" width="59" height="59" alt="" />
-    <map id="_klikatko" name="klikatko">
-    <area shape="rect" coords="19,34,37,52" href="${createLink(action:'show', params:[posX: position.x + 1, posY: position.y - 1])}" alt="" title=""    />
-    <area shape="rect" coords="35,18,53,36" href="${createLink(action:'show', params:[posX: position.x + 1, posY: position.y + 1])}" alt="" title=""    />
-    <area shape="rect" coords="19,1,37,19" href="${createLink(action:'show', params:[posX: position.x - 1, posY: position.y + 1])}" alt="" title=""    />
-    <area shape="rect" coords="3,18,21,36" href="${createLink(action:'show', params:[posX: position.x - 1, posY: position.y - 1])}" alt="" title=""    />
-    <area shape="rect" coords="19,18,37,35" href="${createLink(action:'showSmall')}" alt="" title=""    />
-    </map>
+  background-color: #adadad;">
   <g:set var="zindex" value="${1}"/>
   <g:each in="${(-1 * viewConfig.fields.x)..viewConfig.fields.x}" var="j">
     <g:each in="${viewConfig.fields.y..(-1 *viewConfig.fields.y)}" var="i">
@@ -51,13 +47,19 @@
       width: ${width}px;
       height: ${height}px;
       z-index: ${building?.ground? 0 : zindex++};">
+
+          %{--<table width="${width}" border="0" cellspacing="0" cellpadding="0" height="${height}">--}%
+            %{--<tr background="${resource(dir: 'images/buildings/' + building.filename, file: 'iso.png')}">--}%
+              %{--<td>[i: ${i}, j: ${j}]</td>--}%
+            %{--</tr>--}%
+          %{--</table>--}%
           <img src="${resource(dir: 'images/buildings/' + building.dirname, file: image.filename)}"/>
+
       </div>
       </g:if>
     </g:each>
   </g:each>
 
-  </div>
-
-  </body>
+</div>
+</body>
 </html>

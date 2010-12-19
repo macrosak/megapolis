@@ -90,26 +90,26 @@ log4j = {
 
 city {
     view {
-        fields = new Point(6, 6)
-        canvas = new Point(1200, 500)
+        fields = new Point(5, 5)
+        canvas = new Point(750, 500)
         field = new Point(160, 80)
     }
 
     viewSmall {
-        fields = new Point(12, 12)
-        canvas = new Point(1200, 500)
+        fields = new Point(10, 10)
+        canvas = new Point(750, 500)
         field = new Point(80, 40)
     }
 
     buy {
         fields = new Point(12, 5)
-        canvas = new Point(1200, 500)
+        canvas = new Point(750, 500)
         field = new Point(50, 50)
     }
 
     roads {
         fields = new Point(24, 14)
-        canvas = new Point(1200, 700)
+        canvas = new Point(750, 500)
         field = new Point(25, 25)
     }
 }
