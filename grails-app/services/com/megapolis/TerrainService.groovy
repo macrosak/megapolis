@@ -11,6 +11,8 @@ class TerrainService {
         def background = Building.findByDirname('background')
         def rainbow = Building.findByDirname('skyscraper-rainbow')
         def black = Building.findByDirname('skyscraper-black')
+        def shops = Building.findByDirname('small-shop')
+        def blue = Building.findByDirname('skyscraper-blue')
         def office = Building.findByDirname('office1')
         def road = Building.findByDirname('road-upleft')
 
@@ -21,7 +23,7 @@ class TerrainService {
         (-30..30).each { x ->
             (-30..30).each { y ->
 //                if (x == 0 && y == 0)
-//                    new Field(coordX: x, coordY: y, building: black).save()
+//                    new Field(coordX: x, coordY: y, building: shops).save()
 //                else if (x == 3 && y == 0)
 //                    new Field(coordX: x, coordY: y, building: rainbow).save()
 //                else if (x == 0 && y == -3)
