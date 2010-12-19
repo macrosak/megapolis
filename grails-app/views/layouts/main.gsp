@@ -19,7 +19,9 @@
       .menu a { color: black; background-color: #fdca00; display: block; padding:5px; width:100%; /* border: 1px solid #d29e00;*/ text-decoration: none;}
       .menu a:hover { background-color: #bfd000; }
 
-      div.clear {clear: both;}
+      div.clear { clear: both; }
+
+      .income {color: green;}
     </style>
 
     </head>
@@ -27,10 +29,10 @@
       <a href="${link }"><img src="${resource(dir: 'images/', file: 'logo.png')}" alt="Megapolis" title="" border="0"></a>
 
       <ul class="menu">
-        <li><a href="#">City</a></li>
-        <li><a href="#">Profile</a></li>
-        <li><a href="#">Economy</a></li>
-        <li><a href="#">Build</a></li>
+        <li><g:link action="show" >City</g:link></li>
+        <li><g:link action="profile" >Profile</g:link></li>
+        %{--<li><g:link action="economy" >Economy</g:link></li>--}%
+        <li><g:link action="buyBuild" >Build</g:link></li>
       </ul>
 
       <div class="clear" style="margin-bottom: 10px;"></div>

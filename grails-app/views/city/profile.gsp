@@ -21,7 +21,7 @@
 
     <p>Money: $32400</p>
 
-    <p>Daily income: <span style="color:green;">+$3000</span></p>
+    <p>Daily income: <span class="income">+$3000</span></p>
 
 
   </body>

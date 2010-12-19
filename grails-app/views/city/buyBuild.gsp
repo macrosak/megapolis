@@ -64,7 +64,7 @@ function buy(x, y, p) {
   <table>
     <tr>
       <td style="width: 50px">Money:</td>
-      <td><span id="moneySpan">${player.money}</span> $</td>
+      <td>$<span id="moneySpan">${player.money}</span></td>
     </tr>
     <tr>
       <td style="width: 50px">Buy:</td>
@@ -72,13 +72,13 @@ function buy(x, y, p) {
     </tr>
     <tr>
       <td style="width: 50px">Price:</td>
-      <td><span id="priceOuterSpan"><span id="priceSpan">0</span> $</span></td>
+      <td><span id="priceOuterSpan">$<span id="priceSpan">0</span></span></td>
     </tr>
     <tr>
-      <td colspan="2" align="right">
+      <td colspan="2" align="left">
         <g:form action="buy">
           <span id="buyFormHidden"></span>
-          <g:submitButton name="buy" value="OK" id="buyButton"/>
+          <g:submitButton name="buy" value="Buy land" id="buyButton"/>
         </g:form>
       </td>
     </tr>
@@ -89,13 +89,23 @@ function buy(x, y, p) {
     <form action="build">
       <input type="hidden" name="field" value="" id="buildCoord"/>
       <input type="hidden" name="buildingId" value="" id="buildingId"/>
-      %{--<g:each in="${Building.findAllByGround(false)}" var="b">--}%
-      <g:each in="${Building.list()}" var="b">
+      <g:each in="${Building.findAllByGround(false)}" var="b">
+      %{--<g:each in="${Building.list()}" var="b">--}%
       <div>
+        <div>
+        <h2>${b.name}</h2>
         <input type="image" src="${resource(dir: 'images/buildings/' + b.dirname, file: 'preview.png')}" onclick="buildSubmit(${b.id})"/>
+        <br>
+        Price: $${b.price}
+        Income: <span class="income">+$${b.income}</span>
+        </div>
+        
       </div>
     </g:each>
     </form>
+
+    <button onclick="buildDialog.hide()">Cancel</button>
+
   </div>
 </g:dialog>
 
@@ -148,7 +158,9 @@ background-color: #adadad;">
                   left:${left}px;
                   width: ${width}px;
                   height: ${height}px;
-                  z-index: 0;">
+                  z-index: 0;
+                  border:1px solid black;"
+                  title="Price: $${field?.price}">
           </div>
         </a>
       </g:elseif>
