@@ -9,11 +9,7 @@
 <body>
 Player: ${player} ${player.dump()}<br/>
 View: ${viewConfig.field.y}<br/>
-<g:link action="show" params="[posX: position.x + 1, posY: position.y + 1]">&gt;</g:link><br/>
-<g:link action="show" params="[posX: position.x - 1, posY: position.y - 1]">&lt;</g:link><br/>
-<g:link action="show" params="[posX: position.x - 1, posY: position.y + 1]">^</g:link><br/>
-<g:link action="show" params="[posX: position.x + 1, posY: position.y - 1]">V</g:link><br/>
-<br/>
+<g:link action="generate">Generate!</g:link><br/><br/>
 <div style="height: ${viewConfig.canvas.y}px;
   position: absolute;
   width: ${viewConfig.canvas.x}px;
@@ -28,18 +24,18 @@ View: ${viewConfig.field.y}<br/>
         def building = field?.building
         def image = building?.iso
 
-        def height = image?.height ?: viewConfig.field.y
-        def width = image?.width ?: viewConfig.field.x
+        def height = image?.height/2 ?: viewConfig.field.y
+        def width = image?.width/2 ?: viewConfig.field.x
 
         def bottom = ((i - j) * viewConfig.field.y / 2) + viewConfig.canvas.y / 2 - viewConfig.field.y / 2
         def left = ((j + i) * viewConfig.field.x / 2) - viewConfig.field.x / 2 + viewConfig.canvas.x / 2
 
-        bottom += image?.offsetY ?: 0
-        left -= image?.offsetX ?: 0
+        bottom += image?.offsetY/2 ?: 0
+        left -= image?.offsetX/2 ?: 0
         left += viewConfig.field.x / 2
 
       %>
-      <g:if test="${building}">
+      <g:if test="${building && building.dirname != 'background'}">
       <div id="${position.x + j};${position.y + i}"
       style="position:absolute; float: left;
       bottom: ${bottom}px;
@@ -53,7 +49,7 @@ View: ${viewConfig.field.y}<br/>
               %{--<td>[i: ${i}, j: ${j}]</td>--}%
             %{--</tr>--}%
           %{--</table>--}%
-          <img src="${resource(dir: 'images/buildings/' + building.dirname, file: image.filename)}"/>
+          <img src="${resource(dir: 'images/buildings/' + building.dirname, file: 'iso_small.png')}"/>
 
       </div>
       </g:if>

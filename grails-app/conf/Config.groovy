@@ -95,9 +95,21 @@ city {
         field = new Point(160, 80)
     }
 
+    viewSmall {
+        fields = new Point(12, 12)
+        canvas = new Point(1200, 500)
+        field = new Point(80, 40)
+    }
+
     buy {
         fields = new Point(12, 5)
         canvas = new Point(1200, 500)
         field = new Point(50, 50)
+    }
+
+    roads {
+        fields = new Point(24, 14)
+        canvas = new Point(1200, 700)
+        field = new Point(25, 25)
     }
 }

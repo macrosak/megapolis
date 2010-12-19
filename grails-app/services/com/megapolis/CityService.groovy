@@ -5,6 +5,18 @@ import org.codehaus.groovy.grails.commons.ConfigurationHolder
 
 class CityService {
 
+    static scope = "session"
+
+    int posX = 0, posY = 0
+
+    def position(x, y) {
+        if(x)
+            posX = x.toInteger()
+        if(y)
+            posY = y.toInteger()
+        return [posX, posY]
+    }
+
     def getCityFields(x, y, config) {
         int width = config.fields.x
         int height = config.fields.y

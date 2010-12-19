@@ -37,8 +37,27 @@ class BootStrap {
                 iso: new Image(filename: 'iso.png', height: 293, width: 388, offsetX: 239).save(),
                 top: new Image(filename: 'top.png', height: 100, width: 150).save()).save(failOnError: true)
 
-
-
+        def roadWE = new Building(dirname: 'road-upleft', price: 0, ground: true,
+                iso: new Image(filename: 'iso.png', height: 160, width: 320, offsetX: 160).save(),
+                top: new Image(filename: 'top.png', height: 100, width: 100).save()).save(failOnError: true)
+        def roadNS = new Building(dirname: 'road-upright', price: 0, ground: true,
+                iso: new Image(filename: 'iso.png', height: 160, width: 320, offsetX: 160).save(),
+                top: new Image(filename: 'top.png', height: 100, width: 100).save()).save(failOnError: true)
+        def roadNE = new Building(dirname: 'road-north-east', price: 0, ground: true,
+                iso: new Image(filename: 'iso.png', height: 160, width: 320, offsetX: 160).save(),
+                top: new Image(filename: 'top.png', height: 100, width: 100).save()).save(failOnError: true)
+        def roadNW = new Building(dirname: 'road-north-west', price: 0, ground: true,
+                iso: new Image(filename: 'iso.png', height: 160, width: 320, offsetX: 160).save(),
+                top: new Image(filename: 'top.png', height: 100, width: 100).save()).save(failOnError: true)
+        def roadSE = new Building(dirname: 'road-south-east', price: 0, ground: true,
+                iso: new Image(filename: 'iso.png', height: 160, width: 320, offsetX: 160).save(),
+                top: new Image(filename: 'top.png', height: 100, width: 100).save()).save(failOnError: true)
+        def roadSW = new Building(dirname: 'road-south-west', price: 0, ground: true,
+                iso: new Image(filename: 'iso.png', height: 160, width: 320, offsetX: 160).save(),
+                top: new Image(filename: 'top.png', height: 100, width: 100).save()).save(failOnError: true)
+        def roadCR = new Building(dirname: 'crossroad', price: 0, ground: true,
+                iso: new Image(filename: 'iso.png', height: 160, width: 320, offsetX: 160).save(),
+                top: new Image(filename: 'top.png', height: 100, width: 100).save()).save(failOnError: true)
         terrainService.generateGrass()
 
     }

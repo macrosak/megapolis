@@ -11,7 +11,7 @@
 
 <g:javascript>
 
-function buy(x,y) {
+function buy(x, y, p) {
   var coords = "[" + x + "; " + y + "]"
   var divId = x + ";" + y
   if($('buyList').innerText.indexOf(coords) == -1 ) {
@@ -19,7 +19,15 @@ function buy(x,y) {
     if($('buyList').innerText != "")
       $('buyList').innerHTML += ",&nbsp;"
     $('buyList').innerText += coords;
-    $(divId).style.background = '#ffff00'
+    $(divId).style.background = '#ffff00';
+    var price = parseInt($('priceSpan').innerText);
+    var money = parseInt($('moneySpan').innerText);
+    price += p;
+    if(money < price) {
+      $('priceOuterSpan').style.color = '#ff0000';
+      $('buyButton').disabled = true;
+    }
+    $('priceSpan').innerText = price;
   } else {
     var hidden = $('hidden' + divId);
     $('buyFormHidden').removeChild(hidden);
@@ -28,10 +36,19 @@ function buy(x,y) {
     list = list.replace(",&nbsp;" + coords, "");
     list = list.replace(coords, "");
     $('buyList').innerHTML = list;
+    var price = parseInt($('priceSpan').innerText);
+
+    var money = parseInt($('moneySpan').innerText);
+    price -= p;
+    if(money >= price) {
+      $('priceOuterSpan').style.color = '#000000';
+      $('buyButton').disabled = false;
+    }
+    $('priceSpan').innerText = price;
   }
 }
 
-  function build(x, y) {
+  function build(x, y, price) {
     $('buildCoord').value = x + ";" + y
     buildDialog.show()
   }
@@ -46,14 +63,22 @@ function buy(x,y) {
 
   <table>
     <tr>
+      <td style="width: 50px">Money:</td>
+      <td><span id="moneySpan">${player.money}</span> $</td>
+    </tr>
+    <tr>
       <td style="width: 50px">Buy:</td>
       <td><div id="buyList"></div></td>
+    </tr>
+    <tr>
+      <td style="width: 50px">Price:</td>
+      <td><span id="priceOuterSpan"><span id="priceSpan">0</span> $</span></td>
     </tr>
     <tr>
       <td colspan="2" align="right">
         <g:form action="buy">
           <span id="buyFormHidden"></span>
-          <g:submitButton name="buy" value="OK"/>
+          <g:submitButton name="buy" value="OK" id="buyButton"/>
         </g:form>
       </td>
     </tr>
@@ -64,7 +89,8 @@ function buy(x,y) {
     <form action="build">
       <input type="hidden" name="field" value="" id="buildCoord"/>
       <input type="hidden" name="buildingId" value="" id="buildingId"/>
-    <g:each in="${Building.findAllByGround(false)}" var="b">
+      %{--<g:each in="${Building.findAllByGround(false)}" var="b">--}%
+      <g:each in="${Building.list()}" var="b">
       <div>
         <input type="image" src="${resource(dir: 'images/buildings/' + b.dirname, file: 'preview.png')}" onclick="buildSubmit(${b.id})"/>
       </div>
@@ -114,7 +140,7 @@ background-color: #adadad;">
         <%
           def action = field?.owner == null? 'buy': field?.owner == player ? 'build': 'null'
         %>
-        <a href="#" onclick="${action}(${position.x + j},${position.y + i})">
+        <a href="#" onclick="${action}(${position.x + j}, ${position.y + i}, ${field?.price})">
           <div id="${position.x + j};${position.y + i}"
                   style="position:absolute; float: left;
                   background-color: ${field?.owner == null? '#0000ff': field?.owner == player ? '#00ff00': '#ff0000'};
