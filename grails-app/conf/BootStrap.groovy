@@ -33,12 +33,13 @@ class BootStrap {
                 income : 300, name: 'OfficeBox Local Department',
                 iso: new Image(filename: 'iso.png', height: 278, width: 171, offsetX: 94).save(),
                 top: new Image(filename: 'top.png', height: 50, width: 100).save()).save(failOnError: true)
-        def road = new Building(dirname: 'road-upleft', price: 0, ground: true,
-                iso: new Image(filename: 'iso.png', height: 160, width: 320, offsetX: 160).save(),
-                top: new Image(filename: 'top.png', height: 100, width: 100).save()).save(failOnError: true)
         def factory = new Building(dirname: 'factory', price: 9000,
                 income : 700, name: 'Pudding Factory',
                 iso: new Image(filename: 'iso.png', height: 293, width: 388, offsetX: 239).save(),
+                top: new Image(filename: 'top.png', height: 100, width: 150).save()).save(failOnError: true)
+        def blue = new Building(dirname: 'skyscraper-blue', price: 19000,
+                income : 2300, name: 'Blue Sky Company',
+                iso: new Image(filename: 'iso.png', height: 802, width: 223, offsetX: 156).save(),
                 top: new Image(filename: 'top.png', height: 100, width: 150).save()).save(failOnError: true)
 
         def roadWE = new Building(dirname: 'road-upleft', price: 0, ground: true,
