@@ -114,6 +114,14 @@ position: absolute;
 width: ${viewConfig.canvas.x}px;
 overflow:hidden;
 background-color: #adadad;">
+  <img style="position:absolute; z-index:1000" id="klikatko" src="${resource( dir:'images', file: 'mapcontrols.png')}" usemap="#_klikatko" border="0" width="59" height="59" alt="" />
+    <map id="_klikatko" name="klikatko">
+    <area shape="rect" coords="19,34,37,52" href="${createLink(action:'buyBuild', params:[posY: position.y - 1])}" alt="" title=""    />
+    <area shape="rect" coords="35,18,53,36" href="${createLink(action:'buyBuild', params:[posX: position.x + 1])}" alt="" title=""    />
+    <area shape="rect" coords="19,1,37,19" href="${createLink(action:'buyBuild', params:[posY: position.y + 1])}" alt="" title=""    />
+    <area shape="rect" coords="3,18,21,36" href="${createLink(action:'buyBuild', params:[posX: position.x - 1])}" alt="" title=""    />
+    %{--<area shape="rect" coords="19,18,37,35" href="${createLink(action:'buyBuild')}" alt="" title=""    />--}%
+    </map>
   <g:set var="zindex" value="${1}"/>
   <g:each in="${(-1 * viewConfig.fields.x)..viewConfig.fields.x}" var="j">
     <g:each in="${viewConfig.fields.y..(-1 *viewConfig.fields.y)}" var="i">
@@ -156,8 +164,8 @@ background-color: #adadad;">
                   background-color: ${field?.owner == null? '#0000ff': field?.owner == player ? '#00ff00': '#ff0000'};
                   bottom: ${bottom}px;
                   left:${left}px;
-                  width: ${width}px;
-                  height: ${height}px;
+                  width: ${width -1}px;
+                  height: ${height -1}px;
                   z-index: 0;
                   border:1px solid black;"
                   title="Price: $${field?.price}">

@@ -22,7 +22,7 @@ class CityController extends FacebookController {
     }
 
     def showSmall = {
-         def player =  facebookService.player
+        def player =  facebookService.player
         def x, y
         (x, y) = cityService.position(params.posX, params.posY)
         def fields = cityService.getCityFields(x, y, grailsApplication.config.city.viewSmall)
@@ -31,8 +31,10 @@ class CityController extends FacebookController {
 
     def buyBuild = {
         def player =  facebookService.player
-        def fields = cityService.getCityFields(player.homeX, player.homeY, grailsApplication.config.city.buy)
-        [player: player, fields: fields, viewConfig: grailsApplication.config.city.buy, position: [x: player.homeX, y: player.homeY]]
+        def x, y
+        (x, y) = cityService.position(params.posX, params.posY)
+        def fields = cityService.getCityFields(x, y, grailsApplication.config.city.buy)
+        [player: player, fields: fields, viewConfig: grailsApplication.config.city.buy, position: [x: x, y: y]]
     }
 
     def roads = {
@@ -78,19 +80,19 @@ class CityController extends FacebookController {
         fields.each { road ->
             def newRoadEast = fields.find { it.coordX == road.coordX + 2 && it.coordY == road.coordY}
             def oldRoadEast = Field.findByCoordXAndCoordY(road.coordX + 2, road.coordY)
-            def roadEast = (newRoadEast || oldRoadEast?.building?.dirname.indexOf('road') > -1) ? 1 : 0
+            def roadEast = (newRoadEast || oldRoadEast?.building?.dirname?.indexOf('road') > -1) ? 1 : 0
 
             def newRoadWest = fields.find { it.coordX == road.coordX - 2 && it.coordY == road.coordY}
             def oldRoadWest = Field.findByCoordXAndCoordY(road.coordX - 2, road.coordY)
-            def roadWest = (newRoadWest || oldRoadWest?.building?.dirname.indexOf('road') > -1) ? 1 : 0
+            def roadWest = (newRoadWest || oldRoadWest?.building?.dirname?.indexOf('road') > -1) ? 1 : 0
 
             def newRoadNorth = fields.find { it.coordX == road.coordX && it.coordY == road.coordY + 2}
             def oldRoadNorth = Field.findByCoordXAndCoordY(road.coordX, road.coordY + 2)
-            def roadNorth = (newRoadNorth || oldRoadNorth?.building?.dirname.indexOf('road') > -1) ? 1 : 0
+            def roadNorth = (newRoadNorth || oldRoadNorth?.building?.dirname?.indexOf('road') > -1) ? 1 : 0
 
             def newRoadSouth = fields.find { it.coordX == road.coordX && it.coordY == road.coordY - 2}
             def oldRoadSouth = Field.findByCoordXAndCoordY(road.coordX, road.coordY - 2)
-            def roadSouth = (newRoadSouth || oldRoadSouth?.building?.dirname.indexOf('road') > -1) ? 1 : 0
+            def roadSouth = (newRoadSouth || oldRoadSouth?.building?.dirname?.indexOf('road') > -1) ? 1 : 0
 
             if(roadEast + roadWest + roadNorth + roadSouth > 2)
                 road.building = cr

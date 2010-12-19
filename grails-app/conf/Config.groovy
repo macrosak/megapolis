@@ -108,8 +108,8 @@ city {
     }
 
     roads {
-        fields = new Point(24, 14)
-        canvas = new Point(750, 500)
+        fields = new Point(30, 30)
+        canvas = new Point(1200, 1050)
         field = new Point(25, 25)
     }
 }
