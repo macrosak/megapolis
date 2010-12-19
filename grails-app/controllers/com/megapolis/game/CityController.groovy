@@ -22,9 +22,11 @@ class CityController extends FacebookController {
     }
 
     def showSmall = {
-        def player =  facebookService.player
-        def fields = cityService.getCityFields(player.homeX, player.homeY, grailsApplication.config.city.viewSmall)
-        [player: player, fields: fields, viewConfig: grailsApplication.config.city.viewSmall, position: [x: player.homeX, y: player.homeY]]
+         def player =  facebookService.player
+        def x, y
+        (x, y) = cityService.position(params.posX, params.posY)
+        def fields = cityService.getCityFields(x, y, grailsApplication.config.city.viewSmall)
+        [player: player, fields: fields, viewConfig: grailsApplication.config.city.viewSmall, position: [x: x, y: y]]
     }
 
     def buyBuild = {
