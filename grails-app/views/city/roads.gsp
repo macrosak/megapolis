@@ -14,11 +14,11 @@
 function road(x,y) {
   var coords = "[" + x + "; " + y + "]"
   var divId = x + ";" + y
-  if($('buyList').innerText.indexOf(coords) == -1 ) {
+  if($('buyList').innerHTML.indexOf(coords) == -1 ) {
     $('buyFormHidden').innerHTML += "<input type='hidden' name='field' value='" + divId + "' id='hidden" + divId + "'/>";
-    if($('buyList').innerText != "")
+    if($('buyList').innerHTML != "")
       $('buyList').innerHTML += ",&nbsp;"
-    $('buyList').innerText += coords;
+    $('buyList').innerHTML += coords;
     $(divId).style.background = '#ffff00'
   } else {
     var hidden = $('hidden' + divId);
