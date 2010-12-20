@@ -115,7 +115,7 @@ width: ${viewConfig.canvas.x}px;
 overflow:hidden;
 background-color: #adadad;">
   <img style="position:absolute; z-index:1000" id="klikatko" src="${resource( dir:'images', file: 'mapcontrols.png')}" usemap="#_klikatko" border="0" width="59" height="59" alt="" />
-    <map id="_klikatko" name="klikatko">
+    <map id="_klikatko" name="_klikatko">
     <area shape="rect" coords="19,34,37,52" href="${createLink(action:'buyBuild', params:[posY: position.y - 1])}" alt="" title=""    />
     <area shape="rect" coords="35,18,53,36" href="${createLink(action:'buyBuild', params:[posX: position.x + 1])}" alt="" title=""    />
     <area shape="rect" coords="19,1,37,19" href="${createLink(action:'buyBuild', params:[posY: position.y + 1])}" alt="" title=""    />
