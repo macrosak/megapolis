@@ -13,7 +13,7 @@
   </head>
   <body>
     <img src="http://profile.ak.fbcdn.net/hprofile-ak-snc4/hs846.snc4/70757_1678623744_979244_n.jpg" style="vertical-align:middle;">
-    <h1 style="display:inline; margin-left:15px;">Martin Hanák</h1>
+    <h1 style="display:inline; margin-left:15px;">${name}</h1>
 
     <p>Player rank: 332</p>
 

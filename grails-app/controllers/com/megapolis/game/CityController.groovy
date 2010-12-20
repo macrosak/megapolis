@@ -7,10 +7,6 @@ class CityController extends FacebookController {
     def facebookService
     def cityService
 
-    def newShow = {}
-
-    def profile = {}
-
     def index = { redirect action: 'show' }
 
     def show = {
@@ -155,6 +151,17 @@ class CityController extends FacebookController {
             }
         }
         redirect(action: 'show')
+    }
+
+    def flushSession = {
+        facebookService.accessToken = null
+        facebookService.me = null
+        facebookService.meMap = null
+    }
+
+    def profile = {
+        def player =  facebookService.player
+        [name: player?.profile?.name]
     }
 
 }

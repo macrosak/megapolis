@@ -29,6 +29,7 @@ function road(x,y) {
     list = list.replace(coords, "");
     $('buyList').innerHTML = list;
   }
+  return false;
 }
 
 </g:javascript>
@@ -72,7 +73,7 @@ background-color: #adadad;">
         def left = (j * viewConfig.field.x) - 2*viewConfig.field.x + viewConfig.canvas.x / 2
       %>
 
-        <a href="#" onclick="road(${position.x + j},${position.y + i})">
+        <a href="#" onclick="road(${position.x + j},${position.y + i}); return false;">
           <div id="${position.x + j};${position.y + i}"
                   style="position:absolute; float: left;
                   background-color: ${road? '#ff0000': '#0000ff'};

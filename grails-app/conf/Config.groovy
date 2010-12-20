@@ -53,7 +53,8 @@ grails.spring.bean.packages = []
 // set per-environment serverURL stem for creating absolute links
 environments {
     production {
-        grails.serverURL = "http://quanti.inkubator.cvut.cz:8081/fbgame-0.1/"
+        grails.serverURL = "http://quanti.inkubator.cvut.cz:8081/fbgame-0.1"
+//        grails.serverURL = "http://78.102.57.60:8080/fbgame"
     }
     development {
         grails.serverURL = "http://localhost:8080/${appName}"
@@ -90,13 +91,13 @@ log4j = {
 
 city {
     view {
-        fields = new Point(5, 5)
+        fields = new Point(6, 6)
         canvas = new Point(750, 500)
         field = new Point(160, 80)
     }
 
     viewSmall {
-        fields = new Point(10, 10)
+        fields = new Point(12, 12)
         canvas = new Point(750, 500)
         field = new Point(80, 40)
     }
@@ -109,7 +110,7 @@ city {
 
     roads {
         fields = new Point(30, 30)
-        canvas = new Point(1200, 1050)
+        canvas = new Point(1200, 750)
         field = new Point(25, 25)
     }
 }
