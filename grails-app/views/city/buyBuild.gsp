@@ -14,20 +14,20 @@
 function buy(x, y, p) {
   var coords = "[" + x + "; " + y + "]"
   var divId = x + ";" + y
-  if($('buyList').innerText.indexOf(coords) == -1 ) {
+  if($('buyList').innerHTML.indexOf(coords) == -1 ) {
     $('buyFormHidden').innerHTML += "<input type='hidden' name='field' value='" + divId + "' id='hidden" + divId + "'/>";
-    if($('buyList').innerText != "")
+    if($('buyList').innerHTML != "")
       $('buyList').innerHTML += ",&nbsp;"
-    $('buyList').innerText += coords;
+    $('buyList').innerHTML += coords;
     $(divId).style.background = '#ffff00';
-    var price = parseInt($('priceSpan').innerText);
-    var money = parseInt($('moneySpan').innerText);
+    var price = parseInt($('priceSpan').innerHTML);
+    var money = parseInt($('moneySpan').innerHTML);
     price += p;
     if(money < price) {
       $('priceOuterSpan').style.color = '#ff0000';
       $('buyButton').disabled = true;
     }
-    $('priceSpan').innerText = price;
+    $('priceSpan').innerHTML = price;
   } else {
     var hidden = $('hidden' + divId);
     $('buyFormHidden').removeChild(hidden);
@@ -36,15 +36,15 @@ function buy(x, y, p) {
     list = list.replace(",&nbsp;" + coords, "");
     list = list.replace(coords, "");
     $('buyList').innerHTML = list;
-    var price = parseInt($('priceSpan').innerText);
+    var price = parseInt($('priceSpan').innerHTML);
 
-    var money = parseInt($('moneySpan').innerText);
+    var money = parseInt($('moneySpan').innerHTML);
     price -= p;
     if(money >= price) {
       $('priceOuterSpan').style.color = '#000000';
       $('buyButton').disabled = false;
     }
-    $('priceSpan').innerText = price;
+    $('priceSpan').innerHTML = price;
   }
 }
 

@@ -53,8 +53,8 @@ grails.spring.bean.packages = []
 // set per-environment serverURL stem for creating absolute links
 environments {
     production {
-        grails.serverURL = "http://quanti.inkubator.cvut.cz:8081/fbgame-0.1"
-//        grails.serverURL = "http://78.102.57.60:8080/fbgame"
+//        grails.serverURL = "http://quanti.inkubator.cvut.cz:8081/fbgame-0.1"
+	grails.serverURL = "http://hanakus.spermik.info:8080/fbgame-0.1/"
     }
     development {
         grails.serverURL = "http://localhost:8080/${appName}"
