@@ -1,8 +1,8 @@
-package com.megapolis
+package com.megapolis.game
 
 import grails.test.*
 
-class PlayerServiceTests extends GrailsUnitTestCase {
+class GroundTests extends GrailsUnitTestCase {
     protected void setUp() {
         super.setUp()
     }

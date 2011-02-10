@@ -7,13 +7,11 @@ abstract class BuildingType {
     String dirname
     int price
 
-    Image ground
     Image large
     Image medium
     Image small
 
     static constraints = {
-        ground(nullable: true)
         medium(nullable: true)
         small(nullable: true)
     }

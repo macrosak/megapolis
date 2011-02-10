@@ -1,6 +1,10 @@
 import com.megapolis.game.Field
 import com.megapolis.game.Building
 import com.megapolis.game.Image
+import com.megapolis.game.BuildingType
+import com.megapolis.game.Residential
+import com.megapolis.game.Shop
+import com.megapolis.game.Ground
 
 class BootStrap {
     def terrainService
@@ -18,42 +22,41 @@ class BootStrap {
 //        def office = new Building(filename: 'office1', height: 278, width: 171, price: 1, offsetX: 94).save(failOnError: true)
 //        def road = new Building(filename: 'road-upleft', height: 160, width: 320, price: 1, ground: true, offsetX: 160).save(failOnError: true)
 
-        def back = new Building(dirname: 'background', price: 1, ground: true,
-                iso: new Image(filename: 'iso.png', height: 80, width: 160, offsetX: 80).save(),
-                top: new Image(filename: 'top.png', height: 50, width: 50).save()).save(failOnError: true)
-        def rainbow = new Building(dirname: 'skyscraper-rainbow', price: 15000,
-                income : 1000, name: 'Rainbow Corp. HQ',
-                iso: new Image(filename: 'iso.png', height: 598, width: 194, offsetX: 119).save(),
-                top: new Image(filename: 'top.png', height: 50, width: 100).save()).save(failOnError: true)
-        def black = new Building(dirname: 'skyscraper-black', price: 20000,
-                income : 2500, name: 'OfficeBox International',
-                iso: new Image(filename: 'iso.png', height: 833, width: 244, offsetX: 123).save(),
-                top: new Image(filename: 'top.png', height: 100, width: 100).save()).save(failOnError: true)
-        def office = new Building(dirname: 'office1', price: 3000,
-                income : 300, name: 'OfficeBox Local Department',
-                iso: new Image(filename: 'iso.png', height: 278, width: 171, offsetX: 94).save(),
-                top: new Image(filename: 'top.png', height: 50, width: 100).save()).save(failOnError: true)
-        def factory = new Building(dirname: 'factory', price: 9000,
-                income : 700, name: 'Pudding Factory',
-                iso: new Image(filename: 'iso.png', height: 293, width: 388, offsetX: 239).save(),
-                top: new Image(filename: 'top.png', height: 100, width: 150).save()).save(failOnError: true)
-        def blue = new Building(dirname: 'skyscraper-blue', price: 19000,
-                income : 2300, name: 'Blue Sky Company',
-                iso: new Image(filename: 'iso.png', height: 802, width: 223, offsetX: 156).save(),
-                top: new Image(filename: 'top.png', height: 50, width: 100).save()).save(failOnError: true)
-        def shop = new Building(dirname: 'small-shop', price: 1900,
-                income : 200, name: 'Johnson & Son Market',
-                iso: new Image(filename: 'iso.png', height: 306, width: 214, offsetX: 142).save(),
-                top: new Image(filename: 'top.png', height: 50, width: 100).save()).save(failOnError: true)
+//        def back = new Building(dirname: 'background', price: 1, ground: true,
+//                iso: new Image(filename: 'iso.png', height: 80, width: 160, offsetX: 80).save(),
+//                top: new Image(filename: 'top.png', height: 50, width: 50).save()).save(failOnError: true)
+//        def rainbow = new Building(dirname: 'skyscraper-rainbow', price: 15000,
+//                income : 1000, name: 'Rainbow Corp. HQ',
+//                iso: new Image(filename: 'iso.png', height: 598, width: 194, offsetX: 119).save(),
+//                top: new Image(filename: 'top.png', height: 50, width: 100).save()).save(failOnError: true)
+//        def black = new Building(dirname: 'skyscraper-black', price: 20000,
+//                income : 2500, name: 'OfficeBox International',
+//                iso: new Image(filename: 'iso.png', height: 833, width: 244, offsetX: 123).save(),
+//                top: new Image(filename: 'top.png', height: 100, width: 100).save()).save(failOnError: true)
+//        def office = new Building(dirname: 'office1', price: 3000,
+//                income : 300, name: 'OfficeBox Local Department',
+//                iso: new Image(filename: 'iso.png', height: 278, width: 171, offsetX: 94).save(),
+//                top: new Image(filename: 'top.png', height: 50, width: 100).save()).save(failOnError: true)
+//        def factory = new Building(dirname: 'factory', price: 9000,
+//                income : 700, name: 'Pudding Factory',
+//                iso: new Image(filename: 'iso.png', height: 293, width: 388, offsetX: 239).save(),
+//                top: new Image(filename: 'top.png', height: 100, width: 150).save()).save(failOnError: true)
+//        def blue = new Building(dirname: 'skyscraper-blue', price: 19000,
+//                income : 2300, name: 'Blue Sky Company',
+//                iso: new Image(filename: 'iso.png', height: 802, width: 223, offsetX: 156).save(),
+//                top: new Image(filename: 'top.png', height: 50, width: 100).save()).save(failOnError: true)
+//        def shop = new Building(dirname: 'small-shop', price: 1900,
+//                income : 200, name: 'Johnson & Son Market',
+//                iso: new Image(filename: 'iso.png', height: 306, width: 214, offsetX: 142).save(),
+//                top: new Image(filename: 'top.png', height: 50, width: 100).save()).save(failOnError: true)
         //////////////
-        def office2 = new Building(dirname: 'office2', price: 3000,
-                                income : 300, name: 'NewOffices Local Department',
-                                iso: new Image(filename: 'iso.png', height: 350, width: 258, offsetX: 129, offsetY: -1).save(),
-                                top: new Image(filename: 'top.png', height: 50, width: 100).save()).save(failOnError: true)
-        def house1 = new Building(dirname: 'house1', price: 3000,
-                                income : 300, name: 'house',
-                                iso: new Image(filename: 'iso.png', height: 184, width: 258, offsetX: 129, offsetY: -1).save(),
-                                top: new Image(filename: 'top.png', height: 50, width: 100).save()).save(failOnError: true)
+
+        def house1 = new Residential(dirname: 'house1', name: 'Luxury Residence', price: 1000,
+                lucrativity: 10, maxResidents: 20,
+                large: new Image(filename: 'iso.png', height: 184, width: 258, offsetX: 129, offsetY: -1).save()).save(failOnError: true)
+        def shop = new Shop(dirname: 'office2', name: 'City Mall', price: 3000,
+                lucrativity: 30, profitTime: 60, salesRange: 2, maxProfit: 500, idealCustomersCount: 200,
+                large: new Image(filename: 'iso.png', height: 350, width: 258, offsetX: 129, offsetY: -1).save()).save(failOnError: true)
 
 
 //        def roadWE = new Building(dirname: 'road-upleft', price: 1, ground: true,
@@ -77,27 +80,20 @@ class BootStrap {
 //        def roadCR = new Building(dirname: 'crossroad', price: 1, ground: true,
 //                iso: new Image(filename: 'iso.png', height: 160, width: 320, offsetX: 160).save(),
 //                top: new Image(filename: 'top.png', height: 100, width: 100).save()).save(failOnError: true)
-        def roadWE = new Building(dirname: 'road-upleft', price: 1, ground: true,
-                iso: new Image(filename: 'iso.png', height: 130, width: 256, offsetX: 128, offsetY: -1).save(),
-                top: new Image(filename: 'top.png', height: 100, width: 100).save()).save(failOnError: true)
-        def roadNS = new Building(dirname: 'road-upright', price: 1, ground: true,
-                iso: new Image(filename: 'iso.png', height: 130, width: 256, offsetX: 128, offsetY: -1).save(),
-                top: new Image(filename: 'top.png', height: 100, width: 100).save()).save(failOnError: true)
-        def roadNE = new Building(dirname: 'road-north-east', price: 1, ground: true,
-                iso: new Image(filename: 'iso.png', height: 130, width: 256, offsetX: 128, offsetY: -1).save(),
-                top: new Image(filename: 'top.png', height: 100, width: 100).save()).save(failOnError: true)
-        def roadNW = new Building(dirname: 'road-north-west', price: 1, ground: true,
-                iso: new Image(filename: 'iso.png', height: 130, width: 256, offsetX: 128, offsetY: -1).save(),
-                top: new Image(filename: 'top.png', height: 100, width: 100).save()).save(failOnError: true)
-        def roadSE = new Building(dirname: 'road-south-east', price: 1, ground: true,
-                iso: new Image(filename: 'iso.png', height: 130, width: 256, offsetX: 128, offsetY: -1).save(),
-                top: new Image(filename: 'top.png', height: 100, width: 100).save()).save(failOnError: true)
-        def roadSW = new Building(dirname: 'road-south-west', price: 1, ground: true,
-                iso: new Image(filename: 'iso.png', height: 130, width: 256, offsetX: 128, offsetY: -1).save(),
-                top: new Image(filename: 'top.png', height: 100, width: 100).save()).save(failOnError: true)
-        def roadCR = new Building(dirname: 'crossroad', price: 1, ground: true,
-                iso: new Image(filename: 'iso.png', height: 130, width: 256, offsetX: 128, offsetY: -1).save(),
-                top: new Image(filename: 'top.png', height: 100, width: 100).save()).save(failOnError: true)
+        def roadWE = new Ground(dirname: 'road-upleft', price: 1, ground: true,
+                large: new Image(filename: 'iso.png', height: 130, width: 256, offsetX: 128, offsetY: -1).save()).save(failOnError: true)
+        def roadNS = new Ground(dirname: 'road-upright', price: 1, ground: true,
+                large: new Image(filename: 'iso.png', height: 130, width: 256, offsetX: 128, offsetY: -1).save()).save(failOnError: true)
+        def roadNE = new Ground(dirname: 'road-north-east', price: 1, ground: true,
+                large: new Image(filename: 'iso.png', height: 130, width: 256, offsetX: 128, offsetY: -1).save()).save(failOnError: true)
+        def roadNW = new Ground(dirname: 'road-north-west', price: 1, ground: true,
+                large: new Image(filename: 'iso.png', height: 130, width: 256, offsetX: 128, offsetY: -1).save()).save(failOnError: true)
+        def roadSE = new Ground(dirname: 'road-south-east', price: 1, ground: true,
+                large: new Image(filename: 'iso.png', height: 130, width: 256, offsetX: 128, offsetY: -1).save()).save(failOnError: true)
+        def roadSW = new Ground(dirname: 'road-south-west', price: 1, ground: true,
+                large: new Image(filename: 'iso.png', height: 130, width: 256, offsetX: 128, offsetY: -1).save()).save(failOnError: true)
+        def roadCR = new Ground(dirname: 'crossroad', price: 1, ground: true,
+                large: new Image(filename: 'iso.png', height: 130, width: 256, offsetX: 128, offsetY: -1).save()).save(failOnError: true)
         terrainService.generateGrass()
 
     }

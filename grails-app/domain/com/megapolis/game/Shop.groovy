@@ -4,6 +4,7 @@ class Shop extends BuildingType {
 
     def cityService
 
+    // in seconds
     int profitTime
     int salesRange
     int maxProfit

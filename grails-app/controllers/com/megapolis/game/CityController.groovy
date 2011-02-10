@@ -65,45 +65,45 @@ class CityController extends FacebookController {
             fields << Field.findByCoordXAndCoordY(coord[0].toInteger(), coord[1].toInteger())
         }
 
-        def we = Building.findByDirname('road-upleft')
-        def ns = Building.findByDirname('road-upright')
-        def ne = Building.findByDirname('road-north-east')
-        def nw = Building.findByDirname('road-north-west')
-        def se = Building.findByDirname('road-south-east')
-        def sw = Building.findByDirname('road-south-west')
-        def cr = Building.findByDirname('crossroad')
+        def we = BuildingType.findByDirname('road-upleft')
+        def ns = BuildingType.findByDirname('road-upright')
+        def ne = BuildingType.findByDirname('road-north-east')
+        def nw = BuildingType.findByDirname('road-north-west')
+        def se = BuildingType.findByDirname('road-south-east')
+        def sw = BuildingType.findByDirname('road-south-west')
+        def cr = BuildingType.findByDirname('crossroad')
 
-        fields.each { road ->
-            def newRoadEast = fields.find { it.coordX == road.coordX + 2 && it.coordY == road.coordY}
-            def oldRoadEast = Field.findByCoordXAndCoordY(road.coordX + 2, road.coordY)
-            def roadEast = (newRoadEast || oldRoadEast?.building?.dirname?.indexOf('road') > -1) ? 1 : 0
+        fields.each { Field road ->
+            def newRoadEast = fields.find { it.coordX == road.coordX + 1 && it.coordY == road.coordY}
+            def oldRoadEast = Field.findByCoordXAndCoordY(road.coordX + 1, road.coordY)
+            def roadEast = (newRoadEast || oldRoadEast?.building?.type?.dirname?.indexOf('road') > -1) ? 1 : 0
 
-            def newRoadWest = fields.find { it.coordX == road.coordX - 2 && it.coordY == road.coordY}
-            def oldRoadWest = Field.findByCoordXAndCoordY(road.coordX - 2, road.coordY)
-            def roadWest = (newRoadWest || oldRoadWest?.building?.dirname?.indexOf('road') > -1) ? 1 : 0
+            def newRoadWest = fields.find { it.coordX == road.coordX - 1 && it.coordY == road.coordY}
+            def oldRoadWest = Field.findByCoordXAndCoordY(road.coordX - 1, road.coordY)
+            def roadWest = (newRoadWest || oldRoadWest?.building?.type?.dirname?.indexOf('road') > -1) ? 1 : 0
 
             def newRoadNorth = fields.find { it.coordX == road.coordX && it.coordY == road.coordY + 2}
-            def oldRoadNorth = Field.findByCoordXAndCoordY(road.coordX, road.coordY + 2)
-            def roadNorth = (newRoadNorth || oldRoadNorth?.building?.dirname?.indexOf('road') > -1) ? 1 : 0
+            def oldRoadNorth = Field.findByCoordXAndCoordY(road.coordX, road.coordY + 1)
+            def roadNorth = (newRoadNorth || oldRoadNorth?.building?.type?.dirname?.indexOf('road') > -1) ? 1 : 0
 
             def newRoadSouth = fields.find { it.coordX == road.coordX && it.coordY == road.coordY - 2}
-            def oldRoadSouth = Field.findByCoordXAndCoordY(road.coordX, road.coordY - 2)
-            def roadSouth = (newRoadSouth || oldRoadSouth?.building?.dirname?.indexOf('road') > -1) ? 1 : 0
+            def oldRoadSouth = Field.findByCoordXAndCoordY(road.coordX, road.coordY - 1)
+            def roadSouth = (newRoadSouth || oldRoadSouth?.building?.type?.dirname?.indexOf('road') > -1) ? 1 : 0
 
             if(roadEast + roadWest + roadNorth + roadSouth > 2)
-                road.building = cr
+                road.building = new Building(type: cr)
             else if(roadEast + roadWest == 2)
-                road.building = we
+                road.building = new Building(type: we)
             else if(roadNorth + roadSouth == 2)
-                road.building = ns
+                road.building = new Building(type: ns)
             else if(roadNorth + roadEast == 2)
-                road.building = ne
+                road.building = new Building(type: ne)
             else if(roadNorth + roadWest == 2)
-                road.building = nw
+                road.building = new Building(type: nw)
             else if(roadSouth + roadEast == 2)
-                road.building = se
+                road.building = new Building(type: se)
             else if(roadSouth + roadWest == 2)
-                road.building = sw
+                road.building = new Building(type: sw)
 
             road.save(flush: true)
         }
