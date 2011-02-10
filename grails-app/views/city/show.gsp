@@ -50,7 +50,7 @@
       left:${left}px;
       width: ${width}px;
       height: ${height}px;
-      z-index: ${building?.ground? 0 : zindex++};">
+      z-index: ${/*building?.ground? 0 : */zindex++};">
           <img src="${resource(dir: 'images/buildings/' + building.dirname, file: image.filename)}"/>
       </div>
       </g:if>

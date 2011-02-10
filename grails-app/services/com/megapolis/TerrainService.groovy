@@ -34,7 +34,7 @@ class TerrainService {
 //                }
 //                else if (y == -1) {}
 //                else
-                    new Field(coordX: x, coordY: y, price: 100).save()
+                    new Field(coordX: x, coordY: y/*, building: background*/).save()
             }
         }
     }

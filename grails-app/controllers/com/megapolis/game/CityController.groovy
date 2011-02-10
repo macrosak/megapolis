@@ -120,6 +120,21 @@ class CityController extends FacebookController {
         redirect(action: 'show')
     }
 
+    def repair = {
+        def off = Building.findByDirname('house1')
+        off.iso.offsetY = -1
+        off.save()
+
+//        def b = Building.findByDirname('background')
+////        b.iso.properties = [height: 64, width: 128, offsetX: 64]
+////        b.save()
+//        Field.findAllByBuilding(b).each {
+//            it.building = null
+//            it.save()
+//        }
+        redirect(action: 'show')
+    }
+
     def generate = {
         terrainService.generateGrass()
         redirect actionName: show
