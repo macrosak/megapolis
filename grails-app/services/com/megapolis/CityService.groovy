@@ -31,4 +31,16 @@ class CityService {
             }
         }
     }
+
+    int lucrativity(Field field) {
+
+    }
+
+    int population(Field field, int range) {
+
+    }
+
+    int neededShopCostumers(Field field, int range) {
+
+    }
 }

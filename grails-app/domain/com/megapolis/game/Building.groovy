@@ -2,13 +2,9 @@ package com.megapolis.game
 
 class Building {
 
-    boolean ground = false
-    Long price
-    Long income = 0
-    String name = ""
-    String dirname
-    Image iso
-    Image top
+    int residents
+    Calendar lastWithdrawal
+    BuildingType type
 
     static constraints = {
 
