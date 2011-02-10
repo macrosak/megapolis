@@ -11,7 +11,7 @@ class CityServiceTests extends GrailsUnitTestCase {
         super.tearDown()
     }
 
-    void testSomething() {
+    void testLucrativity() {
 
     }
 }
