@@ -2,6 +2,7 @@ package com.megapolis
 
 import com.megapolis.game.Field
 import org.codehaus.groovy.grails.commons.ConfigurationHolder
+import com.megapolis.game.Shop
 
 class CityService {
 
@@ -38,14 +39,7 @@ class CityService {
 
     int lucrativity(Field field) {
     
-      def fields = Field.createCriteria().list {
-            and {
-                ge('coordX', field.coordX - W)
-                le('coordX', field.coordX + W)
-                ge('coordY', field.coordY - W)
-                le('coordY', field.coordY + W)
-            }
-      }
+      def fields = getNearbyFields(field, W)
       
       def cat = [:]
     
@@ -71,12 +65,40 @@ class CityService {
         return Math.sqrt((f1.coordX-f2.coordX)**2+(f1.coordY-f2.coordY)**2)
     }
 
-
-    int population(Field field, int range) {
-
+    def getNearbyFields(Field field, int range) {
+      return Field.createCriteria().list {
+            and {
+                ge('coordX', field.coordX - range)
+                le('coordX', field.coordX + range)
+                ge('coordY', field.coordY - range)
+                le('coordY', field.coordY + range)
+                isNotNull('building')
+            }
+      }
     }
 
-    int neededShopCostumers(Field field, int range) {
+    int population(Field field, int range) {
+        def fields = getNearbyFields(field, W)
 
+        def result = 0
+
+        for (f in fields) {
+            result += f.building.residents
+        }
+
+        return result
+    }
+
+    int neededShopCustomers(Field field, int range) {
+        def fields = getNearbyFields(field, W)
+
+        def result = 0
+
+        for (f in fields) {
+            if(f.building.type.instanceOf(Shop))
+                result += f.building.residents
+        }
+
+        return result
     }
 }
