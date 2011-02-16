@@ -2,7 +2,15 @@ package com.megapolis
 
 class MegapolisTagLib {
 
-    def city = {
+    /**
+     * @param building
+     * @param x
+     * @param y
+     * @param viewConfig
+     * @param image (optional, default large)
+     */
+
+    def cityField = { attrs, body ->
 
     }
 
