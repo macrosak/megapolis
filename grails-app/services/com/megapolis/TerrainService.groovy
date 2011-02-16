@@ -8,13 +8,13 @@ class TerrainService {
     static transactional = true
 
     def generateGrass() {
-        def background = Building.findByDirname('background')
-        def rainbow = Building.findByDirname('skyscraper-rainbow')
-        def black = Building.findByDirname('skyscraper-black')
-        def shops = Building.findByDirname('small-shop')
-        def blue = Building.findByDirname('skyscraper-blue')
-        def office = Building.findByDirname('office1')
-        def road = Building.findByDirname('road-upleft')
+//        def background = Building.findByDirname('background')
+//        def rainbow = Building.findByDirname('skyscraper-rainbow')
+//        def black = Building.findByDirname('skyscraper-black')
+//        def shops = Building.findByDirname('small-shop')
+//        def blue = Building.findByDirname('skyscraper-blue')
+//        def office = Building.findByDirname('office1')
+//        def road = Building.findByDirname('road-upleft')
 
         Field.list().each {
             it.delete()

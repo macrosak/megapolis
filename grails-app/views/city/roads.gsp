@@ -59,18 +59,17 @@ background-color: #adadad;">
   <g:set var="zindex" value="${1}"/>
   <g:each in="${(-1 * viewConfig.fields.x)..viewConfig.fields.x}" var="j">
     <g:each in="${viewConfig.fields.y..(-1 *viewConfig.fields.y)}" var="i">
-      <g:if test="${i%2 == 0 && j%2==0}">
       <%
         def field = fields.find { it.coordX == position.x + j && it.coordY == position.y + i}
 
         def building = field?.building
-        def road = building && building.dirname.indexOf('road') > -1
+        def road = building && building.type?.dirname.indexOf('road') > -1
 
-        def height = viewConfig.field.y * 2
-        def width = viewConfig.field.x * 2
+        def height = viewConfig.field.y
+        def width = viewConfig.field.x
 
         def bottom = (i * viewConfig.field.y) + viewConfig.canvas.y / 2 - viewConfig.field.y
-        def left = (j * viewConfig.field.x) - 2*viewConfig.field.x + viewConfig.canvas.x / 2
+        def left = (j * viewConfig.field.x) - viewConfig.field.x + viewConfig.canvas.x / 2
       %>
 
         <a href="#" onclick="road(${position.x + j},${position.y + i}); return false;">
@@ -84,7 +83,6 @@ background-color: #adadad;">
                   z-index: 0;">
           </div>
         </a>
-        </g:if>
 
     </g:each>
   </g:each>

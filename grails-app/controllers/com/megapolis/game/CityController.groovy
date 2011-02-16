@@ -1,6 +1,7 @@
 package com.megapolis.game
 
 import com.megapolis.FacebookController
+import org.codehaus.groovy.grails.orm.hibernate.validation.UniqueConstraint
 
 class CityController extends FacebookController {
     def terrainService
@@ -13,29 +14,32 @@ class CityController extends FacebookController {
         def player =  facebookService.player
         def x, y
         (x, y) = cityService.position(params.posX, params.posY)
-        def fields = cityService.getCityFields(x, y, grailsApplication.config.city.view)
-        [player: player, fields: fields, viewConfig: grailsApplication.config.city.view, position: [x: x, y: y]]
+        def viewConfig = grailsApplication.config.views.cityLarge
+        def fields = cityService.getCityFields(x, y, viewConfig)
+        [player: player, fields: fields, viewConfig: viewConfig, position: [x: x, y: y]]
     }
 
     def showSmall = {
         def player =  facebookService.player
         def x, y
         (x, y) = cityService.position(params.posX, params.posY)
-        def fields = cityService.getCityFields(x, y, grailsApplication.config.city.viewSmall)
-        [player: player, fields: fields, viewConfig: grailsApplication.config.city.viewSmall, position: [x: x, y: y]]
+        def viewConfig = grailsApplication.config.views.cityMedium
+        def fields = cityService.getCityFields(x, y, viewConfig)
+        [player: player, fields: fields, viewConfig: viewConfig, position: [x: x, y: y]]
     }
 
     def buyBuild = {
         def player =  facebookService.player
         def x, y
         (x, y) = cityService.position(params.posX, params.posY)
-        def fields = cityService.getCityFields(x, y, grailsApplication.config.city.buy)
-        [player: player, fields: fields, viewConfig: grailsApplication.config.city.buy, position: [x: x, y: y]]
+        def viewConfig = grailsApplication.config.views.buy
+        def fields = cityService.getCityFields(x, y, viewConfig)
+        [player: player, fields: fields, viewConfig: viewConfig, position: [x: x, y: y]]
     }
 
     def roads = {
-        def fields = cityService.getCityFields(0, 0, grailsApplication.config.city.roads)
-        [fields: fields, viewConfig: grailsApplication.config.city.roads, position: [x: 0, y: 0]]
+        def fields = cityService.getCityFields(0, 0, grailsApplication.config.views.roads)
+        [fields: fields, viewConfig: grailsApplication.config.views.roads, position: [x: 0, y: 0]]
     }
 
     def buy = {
@@ -47,9 +51,9 @@ class CityController extends FacebookController {
             fields << Field.findByCoordXAndCoordY(coord[0].toInteger(), coord[1].toInteger())
         }
 
-        fields.each {
-            it.owner = player
-            it.save()
+        fields.each { Field f ->
+            f.owner = player
+            f.save()
         }
 
         player.save(flush: true)
@@ -82,28 +86,28 @@ class CityController extends FacebookController {
             def oldRoadWest = Field.findByCoordXAndCoordY(road.coordX - 1, road.coordY)
             def roadWest = (newRoadWest || oldRoadWest?.building?.type?.dirname?.indexOf('road') > -1) ? 1 : 0
 
-            def newRoadNorth = fields.find { it.coordX == road.coordX && it.coordY == road.coordY + 2}
+            def newRoadNorth = fields.find { it.coordX == road.coordX && it.coordY == road.coordY + 1}
             def oldRoadNorth = Field.findByCoordXAndCoordY(road.coordX, road.coordY + 1)
             def roadNorth = (newRoadNorth || oldRoadNorth?.building?.type?.dirname?.indexOf('road') > -1) ? 1 : 0
 
-            def newRoadSouth = fields.find { it.coordX == road.coordX && it.coordY == road.coordY - 2}
+            def newRoadSouth = fields.find { it.coordX == road.coordX && it.coordY == road.coordY - 1}
             def oldRoadSouth = Field.findByCoordXAndCoordY(road.coordX, road.coordY - 1)
             def roadSouth = (newRoadSouth || oldRoadSouth?.building?.type?.dirname?.indexOf('road') > -1) ? 1 : 0
 
             if(roadEast + roadWest + roadNorth + roadSouth > 2)
-                road.building = new Building(type: cr)
+                road.building = new Building(type: cr).save()
             else if(roadEast + roadWest == 2)
-                road.building = new Building(type: we)
+                road.building = new Building(type: we).save()
             else if(roadNorth + roadSouth == 2)
-                road.building = new Building(type: ns)
+                road.building = new Building(type: ns).save()
             else if(roadNorth + roadEast == 2)
-                road.building = new Building(type: ne)
+                road.building = new Building(type: ne).save()
             else if(roadNorth + roadWest == 2)
-                road.building = new Building(type: nw)
+                road.building = new Building(type: nw).save()
             else if(roadSouth + roadEast == 2)
-                road.building = new Building(type: se)
+                road.building = new Building(type: se).save()
             else if(roadSouth + roadWest == 2)
-                road.building = new Building(type: sw)
+                road.building = new Building(type: sw).save()
 
             road.save(flush: true)
         }
@@ -115,56 +119,22 @@ class CityController extends FacebookController {
         def coord = params.field.split(';')
         def x = coord[0].toInteger()
         def y = coord[1].toInteger()
-        Field.findByCoordXAndCoordY(x, y)?.delete()
-        new Field(coordX: x, coordY: y, building: Building.get(params.buildingId)).save()
+        def field = Field.findByCoordXAndCoordY(x, y)
+        def building = new Building(type: BuildingType.get(params.buildingId))
+        building.save()
+        field.building = building
+        field.save(flush:true)
         redirect(action: 'show')
     }
 
     def repair = {
-        def off = Building.findByDirname('house1')
-        off.iso.offsetY = -1
-        off.save()
-
-//        def b = Building.findByDirname('background')
-////        b.iso.properties = [height: 64, width: 128, offsetX: 64]
-////        b.save()
-//        Field.findAllByBuilding(b).each {
-//            it.building = null
-//            it.save()
-//        }
+        UniqueConstraint
+        println Field.findAllByCoordXAndCoordY(0,0).dump()
         redirect(action: 'show')
     }
 
     def generate = {
         terrainService.generateGrass()
-        redirect actionName: show
-        return
-
-        def small = Building.findByFilename('small.png')
-        def medium = Building.findByFilename('medium.png')
-        def high = Building.findByFilename('high.png')
-        def rl = Building.findByFilename('road_left.png')
-        def rr = Building.findByFilename('road_right.png')
-        def grass = Building.findByFilename('grass.png')
-        Field.executeUpdate("delete Field f")
-        def random = new Random()
-        def road = random.nextInt(11)
-        (0..12).each { x ->
-            (-3..12).each { y ->
-                def field = new Field(coordX: x, coordY: y)
-                if (y == road)
-                    field.building = rl
-                else if (y == road + 1)
-                    field.building = rr
-                else switch (random.nextInt(7)) {
-                        case 0: field.building = small; break;
-                        case 1: field.building = medium; break;
-                        case 2: field.building = high; break;
-                        default: field.building = grass
-                    }
-                field.save(flush: true)
-            }
-        }
         redirect(action: 'show')
     }
 

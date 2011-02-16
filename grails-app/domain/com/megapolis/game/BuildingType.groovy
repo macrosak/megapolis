@@ -1,6 +1,6 @@
 package com.megapolis.game
 
-abstract class BuildingType {
+class BuildingType {
 
     int lucrativity
     String name
@@ -18,5 +18,5 @@ abstract class BuildingType {
 
     static hasMany = [upgrades: BuildingType]
 
-    abstract int profit(Field field, Calendar lastWithdrawal)
+    int profit(Field field, Calendar lastWithdrawal) {0}
 }

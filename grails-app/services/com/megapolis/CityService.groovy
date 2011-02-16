@@ -6,7 +6,7 @@ import com.megapolis.game.Shop
 
 class CityService {
 
-    static scope = "session"
+    static scope = "singleton"
 
     static W = 2  // Lucrativity square radius
 

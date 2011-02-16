@@ -11,6 +11,7 @@ class Field {
     static constraints = {
         building(nullable: true)
         owner(nullable: true)
+        coordX(unique: 'coordY')
     }
 
     int price() {

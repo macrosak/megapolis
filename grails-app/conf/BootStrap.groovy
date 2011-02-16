@@ -51,10 +51,10 @@ class BootStrap {
 //                top: new Image(filename: 'top.png', height: 50, width: 100).save()).save(failOnError: true)
         //////////////
 
-        def house1 = new Residential(dirname: 'house1', name: 'Luxury Residence', price: 1000,
+        def house1 = new Residential(name: 'Luxury Residence', dirname: 'house1', price: 1000,
                 lucrativity: 10, maxResidents: 20,
                 large: new Image(filename: 'iso.png', height: 184, width: 258, offsetX: 129, offsetY: -1).save()).save(failOnError: true)
-        def shop = new Shop(dirname: 'office2', name: 'City Mall', price: 3000,
+        def shop = new Shop(name: 'City Mall', dirname: 'office2', price: 3000,
                 lucrativity: 30, profitTime: 60, salesRange: 2, maxProfit: 500, idealCustomersCount: 200,
                 large: new Image(filename: 'iso.png', height: 350, width: 258, offsetX: 129, offsetY: -1).save()).save(failOnError: true)
 
@@ -80,19 +80,20 @@ class BootStrap {
 //        def roadCR = new Building(dirname: 'crossroad', price: 1, ground: true,
 //                iso: new Image(filename: 'iso.png', height: 160, width: 320, offsetX: 160).save(),
 //                top: new Image(filename: 'top.png', height: 100, width: 100).save()).save(failOnError: true)
-        def roadWE = new Ground(dirname: 'road-upleft', price: 1, ground: true,
+
+        def roadWE = new Ground(name: 'Road', dirname: 'road-upleft', price: 1, ground: true,
                 large: new Image(filename: 'iso.png', height: 130, width: 256, offsetX: 128, offsetY: -1).save()).save(failOnError: true)
-        def roadNS = new Ground(dirname: 'road-upright', price: 1, ground: true,
+        def roadNS = new Ground(name: 'Road', dirname: 'road-upright', price: 1, ground: true,
                 large: new Image(filename: 'iso.png', height: 130, width: 256, offsetX: 128, offsetY: -1).save()).save(failOnError: true)
-        def roadNE = new Ground(dirname: 'road-north-east', price: 1, ground: true,
+        def roadNE = new Ground(name: 'Road', dirname: 'road-north-east', price: 1, ground: true,
                 large: new Image(filename: 'iso.png', height: 130, width: 256, offsetX: 128, offsetY: -1).save()).save(failOnError: true)
-        def roadNW = new Ground(dirname: 'road-north-west', price: 1, ground: true,
+        def roadNW = new Ground(name: 'Road', dirname: 'road-north-west', price: 1, ground: true,
                 large: new Image(filename: 'iso.png', height: 130, width: 256, offsetX: 128, offsetY: -1).save()).save(failOnError: true)
-        def roadSE = new Ground(dirname: 'road-south-east', price: 1, ground: true,
+        def roadSE = new Ground(name: 'Road', dirname: 'road-south-east', price: 1, ground: true,
                 large: new Image(filename: 'iso.png', height: 130, width: 256, offsetX: 128, offsetY: -1).save()).save(failOnError: true)
-        def roadSW = new Ground(dirname: 'road-south-west', price: 1, ground: true,
+        def roadSW = new Ground(name: 'Road', dirname: 'road-south-west', price: 1, ground: true,
                 large: new Image(filename: 'iso.png', height: 130, width: 256, offsetX: 128, offsetY: -1).save()).save(failOnError: true)
-        def roadCR = new Ground(dirname: 'crossroad', price: 1, ground: true,
+        def roadCR = new Ground(name: 'Road', dirname: 'crossroad', price: 1, ground: true,
                 large: new Image(filename: 'iso.png', height: 130, width: 256, offsetX: 128, offsetY: -1).save()).save(failOnError: true)
         terrainService.generateGrass()
 

@@ -1,4 +1,4 @@
-<%@ page import="com.megapolis.game.Field; com.megapolis.game.Building" %>
+<%@ page import="com.megapolis.game.Ground; com.megapolis.game.BuildingType; com.megapolis.game.Field; com.megapolis.game.Building" %>
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -89,15 +89,13 @@ function buy(x, y, p) {
     <form action="build">
       <input type="hidden" name="field" value="" id="buildCoord"/>
       <input type="hidden" name="buildingId" value="" id="buildingId"/>
-      <g:each in="${Building.findAllByGround(false)}" var="b">
-      %{--<g:each in="${Building.list()}" var="b">--}%
+      <g:each in="${BuildingType.list().findAll { !it.instanceOf(Ground)}}" var="b">
       <div>
         <div>
         <h2>${b.name}</h2>
-        <input type="image" src="${resource(dir: 'images/buildings/' + b.dirname, file: 'preview.png')}" onclick="buildSubmit(${b.id})"/>
+        <input type="image" src="${resource(dir: 'images/buildings/' + b.dirname, file: b.large.filename)}" onclick="buildSubmit(${b.id})"/>
         <br>
         Price: $${b.price}
-        Income: <span class="income">+$${b.income}</span>
         </div>
         
       </div>
@@ -128,50 +126,63 @@ background-color: #adadad;">
       <%
         def field = fields.find { it.coordX == position.x + j && it.coordY == position.y + i}
 
-        def building = field?.building
-        def image = building?.top
-
-        def height = image?.height ?: viewConfig.field.y
-        def width = image?.width ?: viewConfig.field.x
+//        def building = field?.building
+//        def image = building?.top
+//
+        def height = viewConfig.field.y
+        def width = viewConfig.field.x
 
         def bottom = (i * viewConfig.field.y) + viewConfig.canvas.y / 2 - viewConfig.field.y
         def left = (j * viewConfig.field.x) - viewConfig.field.x + viewConfig.canvas.x / 2
-
-        if(image)
-          left -= image.width - viewConfig.field.x
+//
+//        if(image)
+//          left -= image.width - viewConfig.field.x
       %>
-      <g:if test="${building && building.dirname != 'background'}">
+      %{--<g:if test="${building && building.dirname != 'background'}">--}%
 
-        <div id="${position.x + j};${position.y + i}"
-                style="position:absolute; float: left;
-                bottom: ${bottom}px;
-                left:${left}px;
-                width: ${width}px;
-                height: ${height}px;
-                z-index: 1;">
+        %{--<div id="${position.x + j};${position.y + i}"--}%
+                %{--style="position:absolute; float: left;--}%
+                %{--bottom: ${bottom}px;--}%
+                %{--left:${left}px;--}%
+                %{--width: ${width}px;--}%
+                %{--height: ${height}px;--}%
+                %{--z-index: 1;">--}%
 
-          <img src="${resource(dir: 'images/buildings/' + building.dirname, file: image.filename)}"/>
+          %{--<img src="${resource(dir: 'images/buildings/' + building.dirname, file: image.filename)}"/>--}%
 
-        </div>
-      </g:if>
-      <g:elseif test="${field}">
+        %{--</div>--}%
+      %{--</g:if>--}%
+      <g:if test="${field}">
         <%
-          def action = field?.owner == null? 'buy': field?.owner == player ? 'build': 'null'
+          def color = field?.owner == null? '#0000ff': '#ff0000'
+          def action = field?.owner == null? 'buy': 'null'
+
+          if(field?.building?.type?.instanceOf(Ground)) {
+            action = 'null'
+            color = '#aaaaaa'
+          }
+
+          if(field?.owner == player && field?.building == null) {
+            action = 'build'
+            color = '#00ff00'
+          }
+
+
         %>
-        <a href="#" onclick="${action}(${position.x + j}, ${position.y + i}, ${field?.price})">
+        <a href="#" onclick="${action}(${position.x + j}, ${position.y + i}, ${field?.price()})">
           <div id="${position.x + j};${position.y + i}"
                   style="position:absolute; float: left;
-                  background-color: ${field?.owner == null? '#0000ff': field?.owner == player ? '#00ff00': '#ff0000'};
+                  background-color: ${color};
                   bottom: ${bottom}px;
                   left:${left}px;
                   width: ${width -1}px;
                   height: ${height -1}px;
                   z-index: 0;
                   border:1px solid black;"
-                  title="Price: $${field?.price}">
+                  title="Price: $${field?.price()}">
           </div>
         </a>
-      </g:elseif>
+      </g:if>
 
     </g:each>
   </g:each>

@@ -30,7 +30,7 @@
         def field = fields.find { it.coordX == position.x + j && it.coordY == position.y + i}
 
         def building = field?.building
-        def image = building?.iso
+        def image = building?.type?.large
 
         def height = image?.height ?: viewConfig.field.y
         def width = image?.width ?: viewConfig.field.x
@@ -43,15 +43,15 @@
         left += viewConfig.field.x / 2
 
       %>
-      <g:if test="${building}">
+      <g:if test="${image}">
       <div id="${position.x + j};${position.y + i}"
       style="position:absolute; float: left;
       bottom: ${bottom}px;
       left:${left}px;
       width: ${width}px;
       height: ${height}px;
-      z-index: ${/*building?.ground? 0 : */zindex++};">
-          <img src="${resource(dir: 'images/buildings/' + building.dirname, file: image.filename)}"/>
+      z-index: ${zindex++};">
+          <img alt="buildingID = [${building?.id}, ${building?.type?.id}, ${building?.type?.dirname}]" src="${resource(dir: 'images/buildings/' + building.type.dirname, file: image.filename)}"/>
       </div>
       </g:if>
     </g:each>

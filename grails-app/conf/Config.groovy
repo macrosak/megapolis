@@ -89,19 +89,18 @@ log4j = {
     warn   'org.mortbay.log'
 }
 
-city {
-    view {
-        fields = new Point(8, 8)
+
+views {
+    cityLarge {
+        fields = new Point(4, 4)
         canvas = new Point(750, 500)
-//        canvas = new Point(1200, 700)
-//        field = new Point(160, 80)
-        field = new Point(128, 64)
+        field = new Point(256, 128)
     }
 
-    viewSmall {
-        fields = new Point(12, 12)
+    cityMedium {
+        fields = new Point(8, 8)
         canvas = new Point(750, 500)
-        field = new Point(64, 32)
+        field = new Point(128, 64)
     }
 
     buy {
