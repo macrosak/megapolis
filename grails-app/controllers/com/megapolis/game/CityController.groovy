@@ -76,6 +76,10 @@ class CityController extends FacebookController {
         def se = BuildingType.findByDirname('road-south-east')
         def sw = BuildingType.findByDirname('road-south-west')
         def cr = BuildingType.findByDirname('crossroad')
+        def tn = BuildingType.findByDirname('Tcrossroad-north')
+        def tw = BuildingType.findByDirname('Tcrossroad-west')
+        def ts = BuildingType.findByDirname('Tcrossroad-south')
+        def te = BuildingType.findByDirname('Tcrossroad-east')
 
         fields.each { Field road ->
             def newRoadEast = fields.find { it.coordX == road.coordX + 1 && it.coordY == road.coordY}
@@ -94,7 +98,7 @@ class CityController extends FacebookController {
             def oldRoadSouth = Field.findByCoordXAndCoordY(road.coordX, road.coordY - 1)
             def roadSouth = (newRoadSouth || oldRoadSouth?.building?.type?.dirname?.indexOf('road') > -1) ? 1 : 0
 
-            if(roadEast + roadWest + roadNorth + roadSouth > 2)
+            if(roadEast + roadWest + roadNorth + roadSouth == 4)
                 road.building = new Building(type: cr)
             else if(roadEast + roadWest == 2)
                 road.building = new Building(type: we)
@@ -108,7 +112,14 @@ class CityController extends FacebookController {
                 road.building = new Building(type: se)
             else if(roadSouth + roadWest == 2)
                 road.building = new Building(type: sw)
-
+            else if(roadSouth + roadWest + roadEast == 3)
+                road.building = new Building(type: ts)
+            else if(roadSouth + roadNorth + roadEast == 3)
+                road.building = new Building(type: te)
+            else if(roadNorth + roadWest + roadEast == 3)
+                road.building = new Building(type: tn)
+            else if(roadSouth + roadWest + roadNorth == 3)
+                road.building = new Building(type: tw)
             road.save(flush: true)
 
         }
