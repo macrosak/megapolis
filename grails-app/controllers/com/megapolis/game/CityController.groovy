@@ -95,21 +95,22 @@ class CityController extends FacebookController {
             def roadSouth = (newRoadSouth || oldRoadSouth?.building?.type?.dirname?.indexOf('road') > -1) ? 1 : 0
 
             if(roadEast + roadWest + roadNorth + roadSouth > 2)
-                road.building = new Building(type: cr).save()
+                road.building = new Building(type: cr)
             else if(roadEast + roadWest == 2)
-                road.building = new Building(type: we).save()
+                road.building = new Building(type: we)
             else if(roadNorth + roadSouth == 2)
-                road.building = new Building(type: ns).save()
+                road.building = new Building(type: ns)
             else if(roadNorth + roadEast == 2)
-                road.building = new Building(type: ne).save()
+                road.building = new Building(type: ne)
             else if(roadNorth + roadWest == 2)
-                road.building = new Building(type: nw).save()
+                road.building = new Building(type: nw)
             else if(roadSouth + roadEast == 2)
-                road.building = new Building(type: se).save()
+                road.building = new Building(type: se)
             else if(roadSouth + roadWest == 2)
-                road.building = new Building(type: sw).save()
+                road.building = new Building(type: sw)
 
             road.save(flush: true)
+
         }
         redirect(action: 'buyBuild')
 
@@ -121,15 +122,12 @@ class CityController extends FacebookController {
         def y = coord[1].toInteger()
         def field = Field.findByCoordXAndCoordY(x, y)
         def building = new Building(type: BuildingType.get(params.buildingId))
-        building.save()
         field.building = building
         field.save(flush:true)
         redirect(action: 'show')
     }
 
     def repair = {
-        UniqueConstraint
-        println Field.findAllByCoordXAndCoordY(0,0).dump()
         redirect(action: 'show')
     }
 
@@ -142,11 +140,6 @@ class CityController extends FacebookController {
         facebookService.accessToken = null
         facebookService.me = null
         facebookService.meMap = null
-    }
-
-    def profile = {
-        def player =  facebookService.player
-        [name: player?.profile?.name]
     }
 
 }

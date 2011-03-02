@@ -11,8 +11,4 @@ class Shop extends BuildingType {
     int idealCustomersCount
 
     static transients = ['cityService']
-
-    int profit(Field field, Calendar lastWithdrawal) {
-        return 0
-    }
 }
