@@ -12,7 +12,13 @@ class Shop extends BuildingType {
 
     static transients = ['cityService']
 
-    int profit(Field field, Calendar lastWithdrawal) {
-        return 0
+    int currentProfit(Field field) {
+        def population = cityService.population(field, cityService.W)
+        def neededShopCustomers = cityService.neededShopCustomers(field, cityService.W)
+
+        if(neededShopCustomers > 0)
+            return Math.min(maxProfit, Math.round(maxProfit*population/neededShopCustomers))
+        else
+            return 0
     }
 }

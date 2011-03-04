@@ -29,10 +29,12 @@
       <a href="${link }"><img src="${resource(dir: 'images/', file: 'logo.png')}" alt="Megapolis" title="" border="0"></a>
 
       <ul class="menu">
-        <li><g:link action="show" >City</g:link></li>
-        <li><g:link action="profile" >Profile</g:link></li>
+        <li><g:link controller="city" action="show" >City</g:link></li>
+        <li><g:link controller="player" action="profile" >Profile</g:link></li>
+        <li><g:link controller="player" action="myBuildings" >My Buildings</g:link></li>
         %{--<li><g:link action="economy" >Economy</g:link></li>--}%
-        <li><g:link action="buyBuild" >Build</g:link></li>
+        <li><g:link controller="city" action="buyBuild" >Build</g:link></li>
+        <li><g:link controller="city" action="roads" >Roads</g:link></li>
       </ul>
 
       <div class="clear" style="margin-bottom: 10px;">&nbsp;</div>

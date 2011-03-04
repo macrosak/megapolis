@@ -110,8 +110,8 @@ views {
     }
 
     roads {
-        fields = new Point(30, 30)
-        canvas = new Point(1200, 750)
-        field = new Point(25, 25)
+        fields = new Point(15, 15)
+        canvas = new Point(1000, 750)
+        field = new Point(50, 50)
     }
 }

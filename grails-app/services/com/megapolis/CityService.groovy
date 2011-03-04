@@ -8,7 +8,7 @@ class CityService {
 
     static scope = "singleton"
 
-    static W = 2  // Lucrativity square radius
+    public static W = 2  // Lucrativity square radius
 
     static magicX = 3
 
@@ -96,7 +96,7 @@ class CityService {
 
         for (f in fields) {
             if(f.building.type.instanceOf(Shop))
-                result += f.building.residents
+                result += f.building.type.idealCustomersCount
         }
 
         return result

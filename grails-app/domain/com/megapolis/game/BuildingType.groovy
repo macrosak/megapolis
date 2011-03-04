@@ -18,5 +18,7 @@ class BuildingType {
 
     static hasMany = [upgrades: BuildingType]
 
-    int profit(Field field, Calendar lastWithdrawal) {0}
+    int withdraw(Field field, Calendar lastWithdrawal) {0}
+
+    int currentProfit(Field field) {0}
 }
