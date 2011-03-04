@@ -15,6 +15,16 @@ class PlayerController {
 
     def profile = {
         def player =  facebookService.player
-        [name: player?.profile?.name]
+
+        def income = 0
+
+        def buildings = Building.byPlayer(player).list()
+
+        buildings.each {building->
+            income += building.currentProfit();  // zapocitat lukrativitu ?
+        }
+
+        [name: player?.profile?.name, buildingCount: Building.byPlayer(player).count(), money: player?.money,
+         income: income, profilePicture: player?.profilePicture]
     }
 }

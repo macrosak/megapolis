@@ -51,7 +51,17 @@ class FacebookService {
         def player = Player.findByFacebookId(id)
         if(!player) {
             player = playerService.newPlayer(id, profileJSON)
+            player.profilePicture = getProfilePicture()
         }
         return player
+    }
+
+    def getProfilePicture() {
+        try {
+            def urlConn = new URL(GRAPH_URI + "me?type=large&" + accessToken).openConnection()
+            if(urlConn.responseCode == 302)
+                return urlConn.headerFields["Location"]
+        } catch (IOException) {}
+        return null
     }
 }

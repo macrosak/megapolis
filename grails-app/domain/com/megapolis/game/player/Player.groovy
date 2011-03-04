@@ -12,6 +12,8 @@ class Player {
     int homeX = 0
     int homeY = 0
 
+    public String profilePicture // URL
+
     static hasMany = [fields: Field]
     static transients = ['profile']
     
@@ -24,4 +26,5 @@ class Player {
             profile = JSON.parse(profileJSON)
         return profile
     }
+
 }
