@@ -3,6 +3,8 @@ package com.megapolis
 import grails.converters.JSON
 import com.megapolis.game.player.Player
 import grails.util.GrailsUtil
+import java.net.URLConnection
+import javax.net.ssl.HttpsURLConnection
 
 class FacebookService {
 
@@ -23,20 +25,20 @@ class FacebookService {
 
     def me = null
     def meMap = null
-    String accessToken
+    String accessToken    // obalit metodou, ktera overi jestli accessToken je validni, pokud ne udelat znovu oauth
 
     def serviceMethod() {
 
     }
 
     def getProfileJSON() {
-        if(GrailsUtil.environment == 'production') {
+        //if(GrailsUtil.environment == 'production') {
             if (!me) {
                 me = new URL(GRAPH_URI + "me?" + accessToken).text
             }
             return me
-        }
-        return TEST_JSON
+        //}
+        //return TEST_JSON
     }
 
     def getProfile() {
@@ -51,16 +53,20 @@ class FacebookService {
         def player = Player.findByFacebookId(id)
         if(!player) {
             player = playerService.newPlayer(id, profileJSON)
-            player.profilePicture = getProfilePicture()
         }
+        player.profilePicture = this.getProfilePicture()
         return player
     }
 
-    def getProfilePicture() {
+    // returns URL of profile picture
+    String getProfilePicture() {
         try {
-            def urlConn = new URL(GRAPH_URI + "me?type=large&" + accessToken).openConnection()
-            if(urlConn.responseCode == 302)
-                return urlConn.headerFields["Location"]
+            def url = new URL(GRAPH_URI + "me/picture?type=large&" + accessToken) //.openConnection()
+            def conn = (HttpsURLConnection)url.openConnection()
+            conn.setFollowRedirects(false)
+            if(conn.getResponseCode() == 302) {
+                return conn.getHeaderField("Location")
+            }
         } catch (IOException) {}
         return null
     }
