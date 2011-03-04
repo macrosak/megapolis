@@ -26,34 +26,7 @@
   <g:set var="zindex" value="${1}"/>
   <g:each in="${(-1 * viewConfig.fields.x)..viewConfig.fields.x}" var="j">
     <g:each in="${viewConfig.fields.y..(-1 *viewConfig.fields.y)}" var="i">
-      <%
-        def field = fields.find { it.coordX == position.x + j && it.coordY == position.y + i}
-
-        def building = field?.building
-        def image = building?.type?.large
-
-        def height = image?.height ?: viewConfig.field.y
-        def width = image?.width ?: viewConfig.field.x
-
-        def bottom = ((i - j) * viewConfig.field.y / 2) + viewConfig.canvas.y / 2 - viewConfig.field.y / 2
-        def left = ((j + i) * viewConfig.field.x / 2) - viewConfig.field.x / 2 + viewConfig.canvas.x / 2
-
-        bottom += image?.offsetY ?: 0
-        left -= image?.offsetX ?: 0
-        left += viewConfig.field.x / 2
-
-      %>
-      <g:if test="${image}">
-      <div id="${position.x + j};${position.y + i}"
-      style="position:absolute; float: left;
-      bottom: ${bottom}px;
-      left:${left}px;
-      width: ${width}px;
-      height: ${height}px;
-      z-index: ${zindex++};">
-          <img alt="buildingID = [${building?.id}, ${building?.type?.id}, ${building?.type?.dirname}]" src="${resource(dir: 'images/buildings/' + building.type.dirname, file: image.filename)}"/>
-      </div>
-      </g:if>
+      <g:cityField viewConfig="${viewConfig}" i="${i}" j="${j}" fields="${fields}" zindex="${zindex++}" position="${position}"/>
     </g:each>
   </g:each>
 
