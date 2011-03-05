@@ -32,7 +32,7 @@ class Building {
         return type.currentProfit(this)
     }
 
-    int withdraw() {
+    boolean withdraw() {
         return type.withdraw(this)
     }
 

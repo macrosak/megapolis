@@ -27,9 +27,11 @@ class BuildingType {
     int currentProfit(Building building) {0}
 
     boolean withdraw(Building building) {
+        println "super!"
         def currentProfit = currentProfit(building)
         def now = Calendar.instance
-        def time = (building.lastWithdrawal.getTimeInMillis() - now.getTimeInMillis()) / 1000
+        def time = (now.getTimeInMillis() - building.lastWithdrawal.getTimeInMillis()) / 1000
+        println "time: $time"
 
         if(time < MINIMUM_WITHDRAW_TIME)
             return false
@@ -40,6 +42,7 @@ class BuildingType {
             player.refresh()
             player.money += profit
             building.lastWithdrawal = now
+            log.debug("profit: $profit, money: $player.money" )
             building.save()
             player.save(flush: true)
         }

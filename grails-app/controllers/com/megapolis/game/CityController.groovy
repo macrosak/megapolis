@@ -132,9 +132,10 @@ class CityController extends FacebookController {
         def x = coord[0].toInteger()
         def y = coord[1].toInteger()
         def field = Field.findByCoordXAndCoordY(x, y)
-        def building = new Building(type: BuildingType.get(params.buildingId))
+        def building = new Building(type: BuildingType.get(params.buildingId), lastWithdrawal: Calendar.instance)
         building.init()
         field.building = building
+        building.field = field
         field.save(flush:true)
         redirect(action: 'show')
     }
@@ -153,6 +154,7 @@ class CityController extends FacebookController {
         facebookService.accessToken = null
         facebookService.me = null
         facebookService.meMap = null
+        redirect(action: 'index')
     }
 
 }

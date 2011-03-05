@@ -1,8 +1,9 @@
 package com.megapolis.game
 
 import com.megapolis.game.player.Player
+import com.megapolis.FacebookController
 
-class PlayerController {
+class PlayerController extends FacebookController {
 
     def facebookService
 
