@@ -133,6 +133,7 @@ class CityController extends FacebookController {
         def y = coord[1].toInteger()
         def field = Field.findByCoordXAndCoordY(x, y)
         def building = new Building(type: BuildingType.get(params.buildingId))
+        building.init()
         field.building = building
         field.save(flush:true)
         redirect(action: 'show')

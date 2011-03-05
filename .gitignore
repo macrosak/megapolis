@@ -7,3 +7,5 @@ out/*
 *.iws
 *.ipr
 *.iml
+prodDb.properties
+prodDb.script

@@ -37,7 +37,7 @@ class CityService {
         }
     }
 
-    int lucrativity(Field field) {
+    double lucrativity(Field field) {
     
       def fields = getNearbyFields(field, W)
       
