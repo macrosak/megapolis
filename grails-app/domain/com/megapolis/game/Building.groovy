@@ -22,6 +22,10 @@ class Building {
         }
     }
 
+    void init() {
+        type.init(this)
+    }
+
     int currentProfit() {
         return type.currentProfit(field)
     }

@@ -2,7 +2,7 @@ package com.megapolis.game
 
 class BuildingType {
 
-    int lucrativity
+    double lucrativity
     String name
     String dirname
     int price
@@ -17,6 +17,8 @@ class BuildingType {
     }
 
     static hasMany = [upgrades: BuildingType]
+
+    void init(Building building) {} // abstract?
 
     int withdraw(Field field, Calendar lastWithdrawal) {0}
 
