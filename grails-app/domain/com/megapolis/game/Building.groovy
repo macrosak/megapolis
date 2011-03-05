@@ -1,5 +1,7 @@
 package com.megapolis.game
 
+import com.megapolis.game.player.Player
+
 class Building {
 
     int residents = 0
@@ -27,10 +29,18 @@ class Building {
     }
 
     int currentProfit() {
-        return type.currentProfit(field)
+        return type.currentProfit(this)
     }
 
     int withdraw() {
-        return type.withdraw(field, lastWithdrawal)
+        return type.withdraw(this)
+    }
+
+    Player getOwner() {
+        return field.owner
+    }
+
+    void setOwner(Player newOwner) {
+        field.owner = newOwner
     }
 }

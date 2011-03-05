@@ -1,11 +1,15 @@
 package com.megapolis.game
 
-class BuildingType {
+import com.megapolis.game.player.Player
 
+class BuildingType {
+    private static final int MINIMUM_WITHDRAW_TIME = 10
     double lucrativity
     String name
     String dirname
     int price
+     // in seconds
+    int profitTime
 
     Image large
     Image medium
@@ -18,9 +22,27 @@ class BuildingType {
 
     static hasMany = [upgrades: BuildingType]
 
-    void init(Building building) {} // abstract?
+    void init(Building building) {}
 
-    int withdraw(Field field, Calendar lastWithdrawal) {0}
+    int currentProfit(Building building) {0}
 
-    int currentProfit(Field field) {0}
+    boolean withdraw(Building building) {
+        def currentProfit = currentProfit(building)
+        def now = Calendar.instance
+        def time = (building.lastWithdrawal.getTimeInMillis() - now.getTimeInMillis()) / 1000
+
+        if(time < MINIMUM_WITHDRAW_TIME)
+            return false
+
+        def profit = currentProfit * Math.log(time) / Math.log(profitTime)
+        def player = building.owner
+        Player.withTransaction {
+            player.refresh()
+            player.money += profit
+            building.lastWithdrawal = now
+            building.save()
+            player.save(flush: true)
+        }
+        return true
+    }
 }
