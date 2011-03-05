@@ -100,6 +100,14 @@ class CityController extends FacebookController {
 
             if(roadEast + roadWest + roadNorth + roadSouth == 4)
                 road.building = new Building(type: cr)
+            else if(roadSouth + roadWest + roadEast == 3)
+                road.building = new Building(type: ts)
+            else if(roadSouth + roadNorth + roadEast == 3)
+                road.building = new Building(type: te)
+            else if(roadNorth + roadWest + roadEast == 3)
+                road.building = new Building(type: tn)
+            else if(roadSouth + roadWest + roadNorth == 3)
+                road.building = new Building(type: tw)
             else if(roadEast + roadWest == 2)
                 road.building = new Building(type: we)
             else if(roadNorth + roadSouth == 2)
@@ -112,14 +120,6 @@ class CityController extends FacebookController {
                 road.building = new Building(type: se)
             else if(roadSouth + roadWest == 2)
                 road.building = new Building(type: sw)
-            else if(roadSouth + roadWest + roadEast == 3)
-                road.building = new Building(type: ts)
-            else if(roadSouth + roadNorth + roadEast == 3)
-                road.building = new Building(type: te)
-            else if(roadNorth + roadWest + roadEast == 3)
-                road.building = new Building(type: tn)
-            else if(roadSouth + roadWest + roadNorth == 3)
-                road.building = new Building(type: tw)
             road.save(flush: true)
 
         }
@@ -139,6 +139,7 @@ class CityController extends FacebookController {
     }
 
     def repair = {
+
         redirect(action: 'show')
     }
 
