@@ -25,8 +25,12 @@ environments {
     }
     production {
         dataSource {
-            dbCreate = "update"
-            url = "jdbc:hsqldb:file:prodDb;shutdown=true"
+            driverClassName = "com.mysql.jdbc.Driver"
+            username = "megapolis"
+            password="bDYJZetDU4w2M6C8"
+            dbCreate = 'update'
+            dialect="org.hibernate.dialect.MySQL5InnoDBDialect"
+            url="jdbc:mysql://localhost:3306/megapolis?autoreconnect=true&useUnicode=true&characterEncoding=utf-8"
         }
     }
 }

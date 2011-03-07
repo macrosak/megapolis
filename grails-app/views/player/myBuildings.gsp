@@ -27,11 +27,14 @@
       </tr>
       <tr>
         <td>Last Withdrawal:</td>
-        <td>${building.lastWithdrawal}</td>
+        <td><g:formatDate date="${building.lastWithdrawal}"/></td>
       </tr>
       <tr>
         <td>Current Profit:</td>
         <td>${building.currentProfit()}</td>
+      </tr>
+      <tr>
+        <td colspan="2"><g:link controller="building" action="withdraw" id="${building.id}">Withdraw</g:link> </td>
       </tr>
     </table>
 

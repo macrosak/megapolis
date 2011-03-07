@@ -13,7 +13,7 @@ class FacebookController {
     if(!REDIRECT_URI)
         REDIRECT_URI = taglib.createLink(controller:"facebook",action:"oauth_redirect", absolute: true)
       
-    if(!facebookService.accessToken && GrailsUtil.environment == 'production')
+    if(!facebookService.accessToken) // && GrailsUtil.environment == 'production')
     {
       session.url = "${FacebookService.AUTHORIZE_URI}?client_id=${FacebookService.APP_ID}&redirect_uri=${REDIRECT_URI}"
       redirect(url: "${FacebookService.AUTHORIZE_URI}?client_id=${FacebookService.APP_ID}&redirect_uri=${REDIRECT_URI}")

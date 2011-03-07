@@ -1,8 +1,9 @@
 package com.megapolis.game
 
 import com.megapolis.game.player.Player
+import com.megapolis.FacebookController
 
-class PlayerController {
+class PlayerController extends FacebookController {
 
     def facebookService
 
@@ -16,12 +17,12 @@ class PlayerController {
     def profile = {
         def player =  facebookService.player
 
-        def income = 0
+        double income = 0
 
         def buildings = Building.byPlayer(player).list()
 
         buildings.each {building->
-            income += building.currentProfit();  // zapocitat lukrativitu ?
+            income += building.currentProfit();
         }
 
         [name: player?.profile?.name, buildingCount: Building.byPlayer(player).count(), money: player?.money,

@@ -52,7 +52,7 @@ class BootStrap {
         //////////////
 
         def house1 = new Residential(name: 'Luxury Residence', dirname: 'house1', price: 1000,
-                lucrativity: 10, maxResidents: 20,
+                lucrativity: 10, profitTime: 30, maxResidents: 20,
                 large: new Image(filename: 'iso.png', height: 184, width: 258, offsetX: 129, offsetY: -1).save()).save(failOnError: true)
         def shop = new Shop(name: 'City Mall', dirname: 'office2', price: 3000,
                 lucrativity: 30, profitTime: 60, salesRange: 2, maxProfit: 500, idealCustomersCount: 200,
