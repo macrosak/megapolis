@@ -13,7 +13,9 @@ class BuildingController extends FacebookController {
 
     def withdraw = {
         def building = Building.get(params.remove('id'))
-        building.withdraw()
+        def profit = building.withdraw()
+        if(profit >= 0)
+            flash.message = "You have earned \$$profit"
         redirect(controller: 'player', action: 'myBuildings')
     }
 }

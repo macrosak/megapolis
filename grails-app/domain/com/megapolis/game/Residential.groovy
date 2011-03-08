@@ -18,15 +18,18 @@ class Residential extends BuildingType {
         return building.residents * RENT_PER_RESIDENT * cityService.lucrativity(building.field)
     }
 
-    boolean withdraw(Building building) {
-        super.withdraw(building)
+    long withdraw(Building building) {
+        def profit = super.withdraw(building)
         // TODO residents based on lucrativity and lastWithdrawal
-        if(building.residents < maxResidents) {
-            Building.withTransaction {
-                building.residents = Math.min(maxResidents, (int) (building.residents + 0.1 * maxResidents))
-                building.save(flus: true)
+        if(profit >= 0) {
+            if(building.residents < maxResidents) {
+                Building.withTransaction {
+                    building.residents = Math.min(maxResidents, (int) (building.residents + 0.1 * maxResidents))
+                    building.save(flus: true)
+                }
             }
         }
+        return profit
     }
 
 }

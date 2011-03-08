@@ -3,6 +3,7 @@ package com.megapolis
 import com.megapolis.game.Field
 import org.codehaus.groovy.grails.commons.ConfigurationHolder
 import com.megapolis.game.Shop
+import com.megapolis.game.Ground
 
 class CityService {
 
@@ -38,9 +39,7 @@ class CityService {
     }
 
     double lucrativity(Field field) {
-    
       def fields = getNearbyFields(field, W)
-      
       def cat = [:]
     
       for (f in fields) {
@@ -72,6 +71,11 @@ class CityService {
                 le('coordX', field.coordX + range)
                 ge('coordY', field.coordY - range)
                 le('coordY', field.coordY + range)
+                building {
+                    type {
+                        ne('class' , Ground.class.name)
+                    }
+                }
                 isNotNull('building')
             }
       }

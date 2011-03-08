@@ -7,7 +7,7 @@
     <title>My Buildings</title>
   </head>
   <body>
-
+  <g:render template="/shared/message"/>
   <g:each in="${buildings}" var="building">
     <div>
       <img src="${resource(dir: 'images/buildings/' + building.type.dirname, file: building.type.large.filename)}" style="float:left;"/>
@@ -28,6 +28,10 @@
       <tr>
         <td>Last Withdrawal:</td>
         <td><g:formatDate date="${building.lastWithdrawal}"/></td>
+      </tr>
+      <tr>
+        <td>Current lucrativity:</td>
+        <td><g:formatNumber number="${cityService.lucrativity(building.field)}" maxFractionDigits="2"/></td>
       </tr>
       <tr>
         <td>Current Profit:</td>

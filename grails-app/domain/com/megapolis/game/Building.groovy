@@ -32,15 +32,11 @@ class Building {
         return type.currentProfit(this)
     }
 
-    boolean withdraw() {
+    long withdraw() {
         return type.withdraw(this)
     }
 
-    Player getOwner() {
+    def getOwner() {
         return field.owner
-    }
-
-    void setOwner(Player newOwner) {
-        field.owner = newOwner
     }
 }
