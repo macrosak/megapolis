@@ -2,6 +2,7 @@ package com.megapolis.game
 
 import com.megapolis.FacebookController
 import org.codehaus.groovy.grails.orm.hibernate.validation.UniqueConstraint
+import com.megapolis.game.player.Player
 
 class CityController extends FacebookController {
     def terrainService
@@ -51,12 +52,22 @@ class CityController extends FacebookController {
             fields << Field.findByCoordXAndCoordY(coord[0].toInteger(), coord[1].toInteger())
         }
 
-        fields.each { Field f ->
-            f.owner = player
-            f.save()
-        }
+        Player.withTransaction { status ->
+            long price = 0
+            fields.each { Field f ->
+                price += f.price()
+                f.owner = player
+            }
 
-        player.save(flush: true)
+            if (player.money < price){
+                status.setRollbackOnly()
+                flash.message = "Nemas na to pico!"
+                return
+            }
+
+            player.money -= price
+            player.save(flush: true)
+        }
         redirect(action: 'buyBuild')
 
     }

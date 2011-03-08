@@ -15,6 +15,6 @@ class Field {
     }
 
     int price() {
-        return 0;
+        return 200;
     }
 }

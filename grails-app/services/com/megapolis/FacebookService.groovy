@@ -48,7 +48,7 @@ class FacebookService {
         return meMap
     }
 
-    def getPlayer() {
+    Player getPlayer() {
         def id = profile?.id
         def player = Player.findByFacebookId(id)
         if(!player) {

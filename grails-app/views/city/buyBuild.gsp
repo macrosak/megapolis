@@ -59,7 +59,7 @@ function buy(x, y, p) {
   }
 
 </g:javascript>
-
+<g:render template="/shared/message"/>
 
   <table>
     <tr>
