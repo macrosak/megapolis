@@ -61,7 +61,7 @@ class CityController extends FacebookController {
 
             if (player.money < price){
                 status.setRollbackOnly()
-                flash.message = "Nemas na to pico!"
+                flash.message = "Nemate dostatek financnich prostredku!"
                 return
             }
 
@@ -138,17 +138,39 @@ class CityController extends FacebookController {
 
     }
 
+
     def build = {
+        def player =  facebookService.player
         def coord = params.field.split(';')
         def x = coord[0].toInteger()
         def y = coord[1].toInteger()
         def field = Field.findByCoordXAndCoordY(x, y)
-        def building = new Building(type: BuildingType.get(params.buildingId), lastWithdrawal: Calendar.instance)
-        building.init()
-        field.building = building
-        building.field = field
-        field.save(flush:true)
-        redirect(action: 'show')
+        def buildingType = BuildingType.get(params.buildingId)
+
+        if(!field || field.owner != player || !buildingType) {
+            flash.message = "Chyba!"
+            redirect(action: 'buyBuild')
+        }
+
+        Player.withTransaction { status ->
+            player.money = 100000
+
+            if (player.money < buildingType.price){
+                status.setRollbackOnly()
+                flash.message = "Nemate dostatek financnich prostredku!"
+                return
+            }
+
+            def building = new Building(type: BuildingType.get(params.buildingId), lastWithdrawal: Calendar.instance)
+            building.init()
+            field.building = building
+            building.field = field
+            player.money -= buildingType.price
+            field.save(flush:true)
+            player.save(flush: true)
+        }
+        redirect(action: 'buyBuild')
+
     }
 
     def repair = {
