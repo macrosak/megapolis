@@ -20,6 +20,9 @@ class TerrainService {
             it.delete()
         }
 
+        double theta = Math.PI/4;
+        def R = [Math.cos(theta), -Math.sin(theta), Math.sin(theta), Math.cos(theta)] as double[];
+
         (-30..30).each { x ->
             (-30..30).each { y ->
 //                if (x == 0 && y == 0)
@@ -34,7 +37,11 @@ class TerrainService {
 //                }
 //                else if (y == -1) {}
 //                else
-                    new Field(coordX: x, coordY: y/*, building: background*/).save()
+                double rx = R[0] * x + R[1] * y;
+                double ry = R[2] * x + R[3] * y;
+
+                new Field(coordX: x, coordY: y, rx: rx, ry: ry/*, building: background*/).save()
+
             }
         }
     }

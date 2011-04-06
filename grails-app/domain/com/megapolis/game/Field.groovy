@@ -5,6 +5,9 @@ import com.megapolis.game.player.Player
 class Field {
     int coordX
     int coordY
+    double rx
+    double ry
+
     Building building
     Player owner
     

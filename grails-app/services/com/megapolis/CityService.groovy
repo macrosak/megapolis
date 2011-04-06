@@ -67,10 +67,10 @@ class CityService {
     def getNearbyFields(Field field, int range) {
       return Field.createCriteria().list {
             and {
-                ge('coordX', field.coordX - range)
-                le('coordX', field.coordX + range)
-                ge('coordY', field.coordY - range)
-                le('coordY', field.coordY + range)
+                ge('rx', field.rx - range)
+                le('rx', field.rx + range)
+                ge('ry', field.ry - range)
+                le('ry', field.ry + range)
                 building {
                     type {
                         ne('class' , Ground.class.name)
