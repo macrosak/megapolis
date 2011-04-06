@@ -103,6 +103,12 @@ views {
         field = new Point(128, 64)
     }
 
+    citySmall {
+        fields = new Point(16, 16)
+        canvas = new Point(750, 500)
+        field = new Point(64, 32)
+    }
+
     buy {
         fields = new Point(12, 5)
         canvas = new Point(750, 500)

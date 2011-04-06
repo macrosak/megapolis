@@ -16,7 +16,7 @@ class CityController extends FacebookController {
         def player =  facebookService.player
         def x, y
         (x, y) = cityService.position(params.posX, params.posY)
-        def viewConfig = grailsApplication.config.views.cityLarge
+        def viewConfig = getViewConfig(zoom)
         def fields = cityService.getCityFields(x, y, viewConfig)
         [player: player, fields: fields, viewConfig: viewConfig, position: [x: x, y: y], zoom: zoom, nextZoom: nextZoom(zoom)]
     }
@@ -26,6 +26,14 @@ class CityController extends FacebookController {
             case  'small': return 'large'
             case  'medium': return 'small'
             case  'large': return 'medium'
+        }
+    }
+
+    private def getViewConfig(String zoom) {
+        switch(zoom) {
+            case  'small': return grailsApplication.config.views.citySmall
+            case  'medium': return grailsApplication.config.views.cityMedium
+            case  'large': return grailsApplication.config.views.cityLarge
         }
     }
 

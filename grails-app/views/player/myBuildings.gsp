@@ -38,6 +38,16 @@
         <td>${building.currentProfit()}</td>
       </tr>
       <tr>
+        <td colspan="2">
+        <div style="background-color:red">
+          <div style="width:${(now.getTimeInMillis() - building.lastWithdrawal?.getTimeInMillis()) / 10 / building.type.profitTime}%; background-color: green; display:inline-block;">
+            &nbsp;
+          </div>
+          &nbsp;
+        </div>
+        </td>
+      </tr>
+      <tr>
         <td colspan="2"><g:link controller="building" action="withdraw" id="${building.id}">Withdraw</g:link> </td>
       </tr>
     </table>
