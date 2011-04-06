@@ -12,7 +12,7 @@ class MegapolisTagLib {
         <area shape="rect" coords="35,18,53,36" href="${createLink(action:'show', params:[posX: position.x + 1, posY: position.y + 1])}" alt="" title=""    />
         <area shape="rect" coords="19,1,37,19" href="${createLink(action:'show', params:[posX: position.x - 1, posY: position.y + 1])}" alt="" title=""    />
         <area shape="rect" coords="3,18,21,36" href="${createLink(action:'show', params:[posX: position.x - 1, posY: position.y - 1])}" alt="" title=""    />
-        <area shape="rect" coords="19,18,37,35" href="${createLink(action:'showSmall')}" alt="" title=""    />
+        <area shape="rect" coords="19,18,37,35" href="${createLink(action: attrs.zoomAction, params: attrs.zoomParams)}" alt="" title=""    />
         </map>"""
     }
 

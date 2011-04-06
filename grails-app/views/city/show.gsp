@@ -15,11 +15,11 @@
   overflow:hidden;
   background-color: #adadad;
   border:1px solid black; ">
-  <g:klikatko position="${position}"/>
+  <g:klikatko position="${position}" zoomAction="show" zoomParams="[zoom: nextZoom]"/>
   <g:set var="zindex" value="${1}"/>
   <g:each in="${(-1 * viewConfig.fields.x)..viewConfig.fields.x}" var="j">
     <g:each in="${viewConfig.fields.y..(-1 *viewConfig.fields.y)}" var="i">
-      <g:cityField viewConfig="${viewConfig}" i="${i}" j="${j}" fields="${fields}" zindex="${zindex++}" position="${position}"/>
+      <g:cityField viewConfig="${viewConfig}" i="${i}" j="${j}" fields="${fields}" zindex="${zindex++}" position="${position}" type="${zoom}"/>
     </g:each>
   </g:each>
 
