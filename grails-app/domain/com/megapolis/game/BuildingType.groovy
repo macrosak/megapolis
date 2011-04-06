@@ -35,6 +35,7 @@ class BuildingType {
             return -1
 
         def profit = (long) (currentProfit * Math.log(time) / Math.log(profitTime))
+
         def player = building.owner
         Player.withTransaction {
             player.refresh()

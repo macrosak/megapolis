@@ -26,6 +26,7 @@ class Building {
 
     void init() {
         type.init(this)
+        lastWithdrawal = Calendar.getInstance()
     }
 
     int currentProfit() {
