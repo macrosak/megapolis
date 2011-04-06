@@ -1,33 +1,37 @@
 package com.megapolis
 
+import com.megapolis.game.BuildingType
+
 
 class MegapolisTagLib {
 
-    def klikatko ={attrs ->
-        def position=attrs.position
+    def klikatko = {attrs ->
+        def position = attrs.position
 
-        out << """<img style="position:absolute; z-index:1000" id="klikatko" src="${resource( dir:'images', file: 'mapcontrols.png')}" usemap="#_klikatko" border="0" width="59" height="59" alt="" />
+        out << """<img style="position:absolute; z-index:1000" id="klikatko" src="${resource(dir: 'images', file: 'mapcontrols.png')}" usemap="#_klikatko" border="0" width="59" height="59" alt="" />
         <map id="_klikatko" name="_klikatko">
-        <area shape="rect" coords="19,34,37,52" href="${createLink(action:'show', params:[posX: position.x + 1, posY: position.y - 1])}" alt="" title=""    />
-        <area shape="rect" coords="35,18,53,36" href="${createLink(action:'show', params:[posX: position.x + 1, posY: position.y + 1])}" alt="" title=""    />
-        <area shape="rect" coords="19,1,37,19" href="${createLink(action:'show', params:[posX: position.x - 1, posY: position.y + 1])}" alt="" title=""    />
-        <area shape="rect" coords="3,18,21,36" href="${createLink(action:'show', params:[posX: position.x - 1, posY: position.y - 1])}" alt="" title=""    />
+        <area shape="rect" coords="19,34,37,52" href="${createLink(action: 'show', params: [posX: position.x + 1, posY: position.y - 1])}" alt="" title=""    />
+        <area shape="rect" coords="35,18,53,36" href="${createLink(action: 'show', params: [posX: position.x + 1, posY: position.y + 1])}" alt="" title=""    />
+        <area shape="rect" coords="19,1,37,19" href="${createLink(action: 'show', params: [posX: position.x - 1, posY: position.y + 1])}" alt="" title=""    />
+        <area shape="rect" coords="3,18,21,36" href="${createLink(action: 'show', params: [posX: position.x - 1, posY: position.y - 1])}" alt="" title=""    />
         <area shape="rect" coords="19,18,37,35" href="${createLink(action: attrs.zoomAction, params: attrs.zoomParams)}" alt="" title=""    />
         </map>"""
     }
 
     def cityField = { attrs ->
-        def i=attrs.i
-        def j=attrs.j
-        def fields=attrs.fields
-        def viewConfig=attrs.viewConfig
-        def position=attrs.position
-        def zindex=attrs.zindex
-        def type=attrs.type ?: 'large'
+        def i = attrs.i
+        def j = attrs.j
+        def fields = attrs.fields
+        def viewConfig = attrs.viewConfig
+        def position = attrs.position
+        def zindex = attrs.zindex
+        def type = attrs.type ?: 'large'
+        def background = BuildingType.findByNameIlike('background')
 
 
         def field = fields.find { field ->
-            field.coordX == position.x + j && field.coordY == position.y +i}
+            field.coordX == position.x + j && field.coordY == position.y + i
+        }
 
         def building = field?.building
         def image = building?.type?."$type"
@@ -43,8 +47,8 @@ class MegapolisTagLib {
         left += viewConfig.field.x / 2
 
 
-      if (image){
-        out << """<div id='${position.x + j};${position.y + i}'
+        if (image) {
+            out << """<div id='${position.x + j};${position.y + i}'
         style='position:absolute; float: left;
         bottom: ${bottom}px;
         left:${left}px;
@@ -53,7 +57,17 @@ class MegapolisTagLib {
         z-index: ${zindex};'>
         <img alt='buildingID = [${building?.id}, ${building?.type?.id}, ${building?.type?.dirname}]' src='${resource(dir: 'images/buildings/' + building.type.dirname, file: image.filename)}'/>
         </div>"""
-      }
+        } else if (background) {
+            out << """<div id='${position.x + j};${position.y + i}'
+        style='position:absolute; float: left;
+        bottom: ${bottom}px;
+        left:${left}px;
+        width: ${width}px;
+        height: ${height}px;
+        z-index: 1;'>
+        <img src='${resource(dir: 'images/buildings/' + background.dirname, file: background."$type".filename)}'/>
+        </div>"""
+        }
     }
 
 }
