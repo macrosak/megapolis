@@ -17,8 +17,16 @@ class CityController extends FacebookController {
         def x, y
         (x, y) = cityService.position(params.posX, params.posY)
         def viewConfig = getViewConfig(zoom)
+//        def fields = cityService.getCityFields(x, y, viewConfig)
         def fields = cityService.getCityFields(x, y, viewConfig)
-        [player: player, fields: fields, viewConfig: viewConfig, position: [x: x, y: y], zoom: zoom, nextZoom: nextZoom(zoom)]
+        def background = BuildingType.findByNameIlike('background')
+        [player: player,
+                fields: fields,
+                viewConfig: viewConfig,
+                position: [x: x, y: y],
+                zoom: zoom,
+                nextZoom: nextZoom(zoom),
+                background: background]
     }
 
     private String nextZoom(String zoom) {
@@ -207,4 +215,7 @@ class CityController extends FacebookController {
         redirect(action: 'index')
     }
 
+    def testAjax = {
+        return 5
+}
 }

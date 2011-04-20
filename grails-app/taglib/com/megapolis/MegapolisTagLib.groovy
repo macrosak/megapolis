@@ -26,7 +26,7 @@ class MegapolisTagLib {
         def position = attrs.position
         def zindex = attrs.zindex
         def type = attrs.type ?: 'large'
-        def background = BuildingType.findByNameIlike('background')
+        def background = attrs.background ?: BuildingType.findByNameIlike('background')
 
 
         def field = fields.find { field ->
@@ -34,7 +34,11 @@ class MegapolisTagLib {
         }
 
         def building = field?.building
-        def image = building?.type?."$type"
+        def buildingType = building?.type
+        if(!building && field) {
+            buildingType = background
+        }
+        def image = buildingType?."$type"
 
         def height = image?.height ?: viewConfig.field.y
         def width = image?.width ?: viewConfig.field.x
@@ -55,7 +59,7 @@ class MegapolisTagLib {
         width: ${width}px;
         height: ${height}px;
         z-index: ${zindex};'>
-        <img alt='buildingID = [${building?.id}, ${building?.type?.id}, ${building?.type?.dirname}]' src='${resource(dir: 'images/buildings/' + building.type.dirname, file: image.filename)}'/>
+        <img alt='buildingID = [${building?.id}, ${building?.type?.id}, ${building?.type?.dirname}]' src='${resource(dir: 'images/buildings/' + buildingType.dirname, file: image.filename)}'/>
         </div>"""
         } else if (background) {
             out << """<div id='${position.x + j};${position.y + i}'

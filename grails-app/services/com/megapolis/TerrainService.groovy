@@ -2,6 +2,7 @@ package com.megapolis
 
 import com.megapolis.game.Field
 import com.megapolis.game.Building
+import com.megapolis.game.BuildingType
 
 class TerrainService {
 
@@ -25,22 +26,15 @@ class TerrainService {
 
         (-30..30).each { x ->
             (-30..30).each { y ->
-//                if (x == 0 && y == 0)
-//                    new Field(coordX: x, coordY: y, building: shops).save()
-//                else if (x == 3 && y == 0)
-//                    new Field(coordX: x, coordY: y, building: rainbow).save()
-//                else if (x == 0 && y == -3)
-//                    new Field(coordX: x, coordY: y, building: office).save()
-//                else if (y == -2) {
-//                    if(x % 2 == 0)
-//                        new Field(coordX: x, coordY: y, building: road).save()
-//                }
-//                else if (y == -1) {}
-//                else
+                def b = null
+                if (x == 0 && y == 0)
+                    b = new Building(type: BuildingType.findByDirname('road-upleft'))
+
+                b?.init()
                 double rx = R[0] * x + R[1] * y;
                 double ry = R[2] * x + R[3] * y;
 
-                new Field(coordX: x, coordY: y, rx: rx, ry: ry/*, building: background*/).save()
+                new Field(coordX: x, coordY: y, rx: rx, ry: ry, building: b).save()
 
             }
         }
