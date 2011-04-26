@@ -40,6 +40,7 @@
       <tr>
         <td colspan="2">
         <div style="background-color:red">
+          <g:set var="now" value="${Calendar.getInstance()}"/>
           <div style="width:${(now.getTimeInMillis() - building.lastWithdrawal?.getTimeInMillis()) / 10 / building.type.profitTime}%; background-color: green; display:inline-block;">
             &nbsp;
           </div>
