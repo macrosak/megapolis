@@ -8,13 +8,12 @@
 
   </head>
   <body>
-
   <div style="height: ${viewConfig.canvas.y}px;
   position: absolute;
   width: ${viewConfig.canvas.x}px;
   overflow:hidden;
   background-color: #adadad;
-  border:1px solid black; ">
+  border:1px solid black;">
   <g:klikatko position="${position}" zoomAction="show" zoomParams="[zoom: nextZoom]"/>
   <g:set var="zindex" value="${1}"/>
   <g:each in="${(-1 * viewConfig.fields.x)..viewConfig.fields.x}" var="j">

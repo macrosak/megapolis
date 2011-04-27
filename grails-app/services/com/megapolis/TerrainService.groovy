@@ -219,7 +219,31 @@ class TerrainService {
                     b?.init()
                     new Field(coordX: x, coordY: y, rx: rx, ry: ry, building: b).save()
                 }
-
+                if(x==-2 && y==1){
+                    b= new Building(type: BuildingType.findByDirname('office2'))
+                    b?.init()
+                    new Field(coordx: x, coordY: y, rx:rx, ry:ry,building:b).save()
+                }
+                if(x==1 && y==-1){
+                    b= new Building(type: BuildingType.findByDirname('office2'))
+                    b?.init()
+                    new Field(coordx: x, coordY: y, rx:rx, ry:ry,building:b).save()
+                }
+                if(x==-2 && y==4){
+                    b= new Building(type: BuildingType.findByDirname('office2'))
+                    b?.init()
+                    new Field(coordx: x, coordY: y, rx:rx, ry:ry,building:b).save()
+                }
+                if(x==0 && y==-3){
+                    b= new Building(type: BuildingType.findByDirname('house1'))
+                    b?.init()
+                    new Field(coordx: x, coordY: y, rx:rx, ry:ry,building:b).save()
+                }
+                if(x==4 && y==-1){
+                    b= new Building(type: BuildingType.findByDirname('house1'))
+                    b?.init()
+                    new Field(coordx: x, coordY: y, rx:rx, ry:ry,building:b).save()
+                }
             }
         }
     }
