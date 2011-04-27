@@ -8,7 +8,9 @@ class Image {
     int offsetY
     String filename
 
-    def mapx = [] as int[]
-    def mapy = [] as int[]
+    List mapx
+    List mapy
+
+    static hasMany = [mapx: Integer, mapy: Integer]
 }
 

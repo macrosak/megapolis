@@ -52,6 +52,13 @@ class MegapolisTagLib {
 
 
         if (image) {
+
+            String coord = ""
+            int kLast = image.mapx?.size()?:0
+            for (int k=0; k<kLast; k++) {
+                coord += image.mapx[k] + ',' + image.mapy[k] + k==kLast ? '' : ',';
+            }
+
             out << """<div id='${position.x + j};${position.y + i}||${field?.coordX};${field?.coordY}'
         style='position:absolute; float: left;
         bottom: ${bottom}px;
@@ -59,7 +66,10 @@ class MegapolisTagLib {
         width: ${width}px;
         height: ${height}px;
         z-index: ${zindex};'>
-        <img alt='buildingID = [${building?.id}, ${building?.type?.id}, ${building?.type?.dirname}]' src='${resource(dir: 'images/buildings/' + buildingType.dirname, file: image.filename)}'/>
+        <img alt='buildingID = [${building?.id}, ${building?.type?.id}, ${building?.type?.dirname}]' src='${resource(dir: 'images/buildings/' + buildingType.dirname, file: image.filename)}' usemap="#_building${building?.id}"/>
+        <map name="_building${building?.id}" data="${image.mapx}">
+        <area shape="rect" coords="${coord}" href="#" onclick="alert('abc')" alt="" title="" />
+        </map>
         </div>"""
         }
 //        else if (background) {
