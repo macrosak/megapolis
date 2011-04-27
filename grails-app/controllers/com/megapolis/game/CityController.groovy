@@ -199,7 +199,9 @@ class CityController extends FacebookController {
     }
 
     def repair = {
-
+        Field.list().each {
+            it.delete(flush: true)
+        }
         redirect(action: 'show')
     }
 
