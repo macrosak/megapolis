@@ -30,6 +30,5 @@
   <g:render template="/layouts/menu"/>
 
   </div>
-
   </body>
 </html>

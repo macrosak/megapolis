@@ -38,6 +38,23 @@ class CityService {
         }
     }
 
+    def getCityFields2(x, y, config) {
+        int width = config.fields.x
+        int height = config.fields.y
+        def rx = Field.getRx(x, y)
+        def ry = Field.getRy(x, y)
+        return Field.createCriteria().list {
+            and {
+                ge('rx', rx - width)
+                le('rx', rx + width)
+                ge('ry', ry - height)
+                le('ry', ry + height)
+                order('coordY', 'asc')
+                order('coordX', 'asc')
+            }
+        }
+    }
+
     double lucrativity(Field field) {
       def fields = getNearbyFields(field, W)
       def cat = [:]
