@@ -8,7 +8,7 @@
 
   </head>
   <body>
-
+              <input type="button" onclick="neco.show()">
   <div style="height: ${viewConfig.canvas.y}px;
   position: absolute;
   width: ${viewConfig.canvas.x}px;
@@ -30,6 +30,5 @@
   <g:render template="/layouts/menu"/>
 
   </div>
-
   </body>
 </html>

@@ -11,6 +11,11 @@ class CityController extends FacebookController {
 
     def index = { redirect action: 'show' }
 
+    def neco = {
+        render(template: "dialog", model: [building: new Building()])
+        render g.javascript { 'necox.show()' }
+    }
+
     def show = {
         def zoom = params.zoom ?: 'large'
         def player =  facebookService.player
@@ -18,8 +23,10 @@ class CityController extends FacebookController {
         (x, y) = cityService.position(params.posX, params.posY)
         def viewConfig = getViewConfig(zoom)
 //        def fields = cityService.getCityFields(x, y, viewConfig)
-        def fields = cityService.getCityFields(x, y, viewConfig)
+//        def fields = cityService.getCityFields(x, y, viewConfig)
+        def fields = cityService.getCityFields2(x, y, viewConfig)
         def background = BuildingType.findByNameIlike('background')
+//        def background = BuildingType.findByDirname('crossroad')
         [player: player,
                 fields: fields,
                 viewConfig: viewConfig,
@@ -199,7 +206,9 @@ class CityController extends FacebookController {
     }
 
     def repair = {
-
+        Field.list().each {
+            it.delete(flush: true)
+        }
         redirect(action: 'show')
     }
 
