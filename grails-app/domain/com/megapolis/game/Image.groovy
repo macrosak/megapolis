@@ -7,4 +7,8 @@ class Image {
     int offsetX
     int offsetY
     String filename
+
+    def mapx = [] as int[]
+    def mapy = [] as int[]
 }
+
