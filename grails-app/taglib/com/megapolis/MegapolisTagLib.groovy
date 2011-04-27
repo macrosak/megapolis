@@ -29,6 +29,8 @@ class MegapolisTagLib {
         def background = attrs.background ?: BuildingType.findByNameIlike('background')
 
 
+        def x = position.x + j
+        def y = position.y + i
         def field = fields.find { field ->
             field.coordX == position.x + j && field.coordY == position.y + i
         }
@@ -43,8 +45,11 @@ class MegapolisTagLib {
         def height = image?.height ?: viewConfig.field.y
         def width = image?.width ?: viewConfig.field.x
 
-        def bottom = ((i - j) * viewConfig.field.y / 2) + viewConfig.canvas.y / 2 - viewConfig.field.y / 2
-        def left = ((j + i) * viewConfig.field.x / 2) - viewConfig.field.x / 2 + viewConfig.canvas.x / 2
+//        def bottom = ((i - j) * viewConfig.field.y / 2) + viewConfig.canvas.y / 2 - viewConfig.field.y / 2
+//        def left = ((j + i) * viewConfig.field.x / 2) - viewConfig.field.x / 2 + viewConfig.canvas.x / 2
+
+        def bottom = ((y - x) * viewConfig.field.y / 2) + viewConfig.canvas.y / 2 - viewConfig.field.y / 2
+        def left = ((x + y) * viewConfig.field.x / 2) - viewConfig.field.x / 2 + viewConfig.canvas.x / 2
 
         bottom += image?.offsetY ?: 0
         left -= image?.offsetX ?: 0
