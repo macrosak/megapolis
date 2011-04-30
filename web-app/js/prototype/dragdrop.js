@@ -1,9 +1,23 @@
-// script.aculo.us dragdrop.js v1.8.3, Thu Oct 08 11:23:33 +0200 2009
+/*
+ * Copyright 2010-2011 by MegapolisTeam
+ *
+ * This file is part of Megapolis.
+ *
+ * Megapolis is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Megapolis is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with Megapolis.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
-// Copyright (c) 2005-2009 Thomas Fuchs (http://script.aculo.us, http://mir.aculo.us)
-//
-// script.aculo.us is freely distributable under the terms of an MIT-style license.
-// For details, see the script.aculo.us web site: http://script.aculo.us/
+// script.aculo.us dragdrop.js v1.8.3, Thu Oct 08 11:23:33 +0200 2009
 
 if(Object.isUndefined(Effect))
   throw("dragdrop.js requires including script.aculo.us' effects.js library");

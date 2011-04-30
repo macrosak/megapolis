@@ -1,8 +1,21 @@
-// Copyright (c) 2006 Sébastien Gruhier (http://xilinus.com, http://itseb.com)
-// YOU MUST INCLUDE window.js BEFORE
-//
-// Object to store hide/show windows status in a cookie
-// Just add at the end of your HTML file this javascript line: WindowStore.init()
+/*
+ * Copyright 2010-2011 by MegapolisTeam
+ *
+ * This file is part of Megapolis.
+ *
+ * Megapolis is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Megapolis is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with Megapolis.  If not, see <http://www.gnu.org/licenses/>.
+ */
 WindowStore = {
   doSetCookie: false,
   cookieName:  "__window_store__",
