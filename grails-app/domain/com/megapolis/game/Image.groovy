@@ -7,4 +7,10 @@ class Image {
     int offsetX
     int offsetY
     String filename
+
+    List mapx
+    List mapy
+
+    static hasMany = [mapx: Integer, mapy: Integer]
 }
+

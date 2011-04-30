@@ -52,26 +52,37 @@ class MegapolisTagLib {
 
 
         if (image) {
-            out << """<div id='${position.x + j};${position.y + i}'
+
+            String coord = ""
+            int kLast = image.mapx?.size()?:0
+            for (int k=0; k<kLast; k++) {
+                coord += image.mapx[k] + ',' + image.mapy[k] + k==kLast ? '' : ',';
+            }
+
+            out << """<div id='${position.x + j};${position.y + i}||${field?.coordX};${field?.coordY}'
         style='position:absolute; float: left;
         bottom: ${bottom}px;
         left:${left}px;
         width: ${width}px;
         height: ${height}px;
         z-index: ${zindex};'>
-        <img alt='buildingID = [${building?.id}, ${building?.type?.id}, ${building?.type?.dirname}]' src='${resource(dir: 'images/buildings/' + buildingType.dirname, file: image.filename)}'/>
-        </div>"""
-        } else if (background) {
-            out << """<div id='${position.x + j};${position.y + i}'
-        style='position:absolute; float: left;
-        bottom: ${bottom}px;
-        left:${left}px;
-        width: ${width}px;
-        height: ${height}px;
-        z-index: 1;'>
-        <img src='${resource(dir: 'images/buildings/' + background.dirname, file: background."$type".filename)}'/>
+        <img alt='buildingID = [${building?.id}, ${building?.type?.id}, ${building?.type?.dirname}]' src='${resource(dir: 'images/buildings/' + buildingType.dirname, file: image.filename)}' usemap="#_building${building?.id}"/>
+        <map name="_building${building?.id}" data="${image.mapx}">
+        <area shape="rect" coords="${coord}" href="#" onclick="alert('abc')" alt="" title="" />
+        </map>
         </div>"""
         }
+//        else if (background) {
+//            out << """<div id='${position.x + j};${position.y + i}||${field?.coordX};${field?.coordY}'
+//        style='position:absolute; float: left;
+//        bottom: ${bottom}px;
+//        left:${left}px;
+//        width: ${width}px;
+//        height: ${height}px;
+//        z-index: 1;'>
+//        <img src='${resource(dir: 'images/buildings/' + background.dirname, file: background."$type".filename)}'/>
+//        </div>"""
+//        }
     }
 
 }
