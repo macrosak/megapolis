@@ -85,9 +85,9 @@ class DialogTagLib {
         if(attrs.left)
             out << ", left: ${attrs.left}"
         if(attrs.width)
-            out << ",  width: ${attrs.width}"
+            out << ", width: ${attrs.width}"
         else
-            out << ",  width: 400"   
+            out << ", width: 400"
         if(attrs.height)
             out << ", height: ${attrs.height}"
         if(attrs.zIndex)
@@ -104,7 +104,8 @@ class DialogTagLib {
             out << ", draggable: ${attrs.draggable}"
         if(attrs.wiredDrag)
             out << ", wiredDrag: ${attrs.wiredDrag}"
-        out << "});\n}\n"
+        out << """});\n}\n"""
+        //.click( function() {${name}.hide();});
         out << '</script>'
     }
 }

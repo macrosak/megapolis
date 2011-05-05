@@ -20,6 +20,7 @@
 package com.megapolis
 
 import com.megapolis.game.BuildingType
+import com.megapolis.game.Ground
 
 
 class MegapolisTagLib {
@@ -76,6 +77,7 @@ class MegapolisTagLib {
         left -= image?.offsetX ?: 0
         left += viewConfig.field.x / 2
 
+        def imgClass = building && !building.type.instanceOf(Ground) ? 'building' : ''
 
         if (image) {
 
@@ -92,11 +94,17 @@ class MegapolisTagLib {
         width: ${width}px;
         height: ${height}px;
         z-index: ${zindex};'>
-        <img alt='buildingID = [${building?.id}, ${building?.type?.id}, ${building?.type?.dirname}]' src='${resource(dir: 'images/buildings/' + buildingType.dirname, file: image.filename)}' usemap="#_building${building?.id}"/>
+        """
+        if(building && !building.type.instanceOf(Ground) )
+            out << """<img style='position: absolute; bottom: 0px; left: 0px; z-index: 1;' src='${resource(dir: 'images/buildings/' + background.dirname, file: background?."$type"?.filename)}'/>"""
+
+        out <<"""<img style='position: absolute; bottom: 0px; left: 0px; z-index: ${zindex}' class='${imgClass}' alt='buildingID = [${building?.id}, ${building?.type?.id}, ${building?.type?.dirname}]' src='${resource(dir: 'images/buildings/' + buildingType.dirname, file: image.filename)}' usemap="#_building${building?.id}"/>
         <map name="_building${building?.id}" data="${image.mapx}">
         <area shape="rect" coords="${coord}" href="#" onclick="alert('abc')" alt="" title="" />
         </map>
-        </div>"""
+         </div>"""
+
+
         }
 //        else if (background) {
 //            out << """<div id='${position.x + j};${position.y + i}||${field?.coordX};${field?.coordY}'

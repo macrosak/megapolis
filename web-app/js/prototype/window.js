@@ -1774,6 +1774,7 @@ var WindowUtilities = {
       objOverlay.style.zIndex = Windows.maxZIndex + 1;
       Windows.maxZIndex++;
       objOverlay.style.width = '100%';
+      objOverlay.onclick = function() {Dialog.closeInfo()};
       parent.insertBefore(objOverlay, parent.firstChild);
       if (Prototype.Browser.WebKit && id == "overlay_modal") {
         setTimeout(function() {doneHandler()}, 10);

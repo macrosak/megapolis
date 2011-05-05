@@ -31,10 +31,11 @@
 		jQuery( "#canvas" ).draggable();
 	});
 
-    jQuery('#clickme').click(function() {
-      jQuery('#canvas').animate({
-        left: '+=50'}, 500);
-    });
+      jQuery(function() {
+//        jQuery('#test').click(function() {
+//          jQuery('.building').animate({opacity:0.1}, 2000)
+//        })
+      })
     </g:javascript>
 
   </head>
@@ -55,6 +56,7 @@
   width: ${viewConfig.canvas.x}px;
   overflow:hidden;
   background-color: #adadad;
+  /*background-color: red;*/
   border:1px solid black; ">
 
   <g:klikatko position="${position}" zoomAction="show" zoomParams="[zoom: nextZoom]"/>

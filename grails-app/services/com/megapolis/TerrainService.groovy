@@ -22,6 +22,7 @@ package com.megapolis
 import com.megapolis.game.Field
 import com.megapolis.game.Building
 import com.megapolis.game.BuildingType
+import com.megapolis.game.player.Player
 
 class TerrainService {
 

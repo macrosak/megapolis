@@ -43,7 +43,6 @@ class PlayerController extends FacebookController {
         buildings.each {building->
             income += building.currentProfit();
         }
-        println player.profileJSON
         [name: player?.profile?.name, buildingCount: Building.byPlayer(player).count(), money: player?.money,
          income: income, profilePicture: player?.profilePicture]
     }
