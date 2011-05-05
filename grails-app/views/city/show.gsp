@@ -51,6 +51,8 @@
 	</table>
   </g:dialog>
 
+  <div style="position:relative">
+
   <div style="height: ${viewConfig.canvas.y}px;
   position: absolute;
   width: ${viewConfig.canvas.x}px;
@@ -76,6 +78,14 @@
     <img alt="megapolisLogo" src="${resource(dir: 'images/', file: 'logo_small.png')}"/>
   </div>
   <g:render template="/layouts/menu"/>
+  </div>
+
+  <div style="position:absolute; top:${viewConfig.canvas.y}px">
+
+      <g:each in ="${player.friends}" var="friend">${friend.profile.name}<br></g:each>
+
+  </div>
+
   </div>
 
   </body>

@@ -112,7 +112,7 @@ function buy(x, y, p) {
       <div>
         <div>
         <h2>${b.name}</h2>
-        <input type="image" src="${resource(dir: 'images/buildings/' + b.dirname, file: b.large.filename)}" onclick="buildSubmit(${b.id})"/>
+        <input type="image" src="${resource(dir: 'images/buildings/' + b.dirname, file: b.medium.filename)}" onclick="buildSubmit(${b.id})"/>
         <br>
         Price: $${b.price}
         </div>
