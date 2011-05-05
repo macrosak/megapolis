@@ -24,7 +24,19 @@
     <meta name="layout" content="main"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>City</title>
+
     <g:importDialogs/>
+    <g:javascript>
+    jQuery(function() {
+		jQuery( "#canvas" ).draggable();
+	});
+
+    jQuery('#clickme').click(function() {
+      jQuery('#canvas').animate({
+        left: '+=50'}, 500);
+    });
+    </g:javascript>
+
   </head>
   <body>
   <g:dialog name="profileDialog" zIndex="10000" width="500" height="300" title="Profile">
@@ -44,8 +56,11 @@
   overflow:hidden;
   background-color: #adadad;
   border:1px solid black; ">
+
   <g:klikatko position="${position}" zoomAction="show" zoomParams="[zoom: nextZoom]"/>
   <g:set var="zindex" value="${1}"/>
+
+  <div id="canvas" style="position: relative;width: ${viewConfig.canvas.x}px;height: ${viewConfig.canvas.y}px;">
   <g:each in="${(-1 * viewConfig.fields.x)..viewConfig.fields.x}" var="j">
     <g:each in="${viewConfig.fields.y..(-1 *viewConfig.fields.y)}" var="i">
       <g:cityField viewConfig="${viewConfig}" i="${i}" j="${j}"
@@ -53,11 +68,12 @@
               type="${zoom}" background="${background}"/>
     </g:each>
   </g:each>
+    </div>
+
   <div id="logoSmall">
     <img alt="megapolisLogo" src="${resource(dir: 'images/', file: 'logo_small.png')}"/>
   </div>
   <g:render template="/layouts/menu"/>
-
   </div>
 
   </body>

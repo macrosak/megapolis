@@ -26,13 +26,15 @@ class MegapolisTagLib {
 
     def klikatko = {attrs ->
         def position = attrs.position
-
+        def offset = 300
+        def time = 200
+//      ${createLink(action: 'show', params: [posX: position.x + 1, posY: position.y - 1])}
         out << """<img style="position:absolute; z-index:1000" id="klikatko" src="${resource(dir: 'images', file: 'mapcontrols.png')}" usemap="#_klikatko" border="0" width="59" height="59" alt="" />
         <map id="_klikatko" name="_klikatko">
-        <area shape="rect" coords="19,34,37,52" href="${createLink(action: 'show', params: [posX: position.x + 1, posY: position.y - 1])}" alt="" title=""    />
-        <area shape="rect" coords="35,18,53,36" href="${createLink(action: 'show', params: [posX: position.x + 1, posY: position.y + 1])}" alt="" title=""    />
-        <area shape="rect" coords="19,1,37,19" href="${createLink(action: 'show', params: [posX: position.x - 1, posY: position.y + 1])}" alt="" title=""    />
-        <area shape="rect" coords="3,18,21,36" href="${createLink(action: 'show', params: [posX: position.x - 1, posY: position.y - 1])}" alt="" title=""    />
+        <area shape="rect" coords="19,34,37,52" href="#" onclick="jQuery('#canvas').animate({top: '-=${offset}'}, ${time})"/>
+        <area shape="rect" coords="35,18,53,36" href="#" onclick="jQuery('#canvas').animate({left: '-=${offset}'}, ${time})"/>
+        <area shape="rect" coords="19,1,37,19" href="#" onclick="jQuery('#canvas').animate({top: '+=${offset}'}, ${time})"/>
+        <area shape="rect" coords="3,18,21,36" href="#" onclick="jQuery('#canvas').animate({left: '+=${offset}'}, ${time})"/>
         <area shape="rect" coords="19,18,37,35" href="${createLink(action: attrs.zoomAction, params: attrs.zoomParams)}" alt="" title=""    />
         </map>"""
     }
@@ -48,6 +50,8 @@ class MegapolisTagLib {
         def background = attrs.background ?: BuildingType.findByNameIlike('background')
 
 
+        def x = position.x + j
+        def y = position.y + i
         def field = fields.find { field ->
             field.coordX == position.x + j && field.coordY == position.y + i
         }
@@ -62,8 +66,11 @@ class MegapolisTagLib {
         def height = image?.height ?: viewConfig.field.y
         def width = image?.width ?: viewConfig.field.x
 
-        def bottom = ((i - j) * viewConfig.field.y / 2) + viewConfig.canvas.y / 2 - viewConfig.field.y / 2
-        def left = ((j + i) * viewConfig.field.x / 2) - viewConfig.field.x / 2 + viewConfig.canvas.x / 2
+//        def bottom = ((i - j) * viewConfig.field.y / 2) + viewConfig.canvas.y / 2 - viewConfig.field.y / 2
+//        def left = ((j + i) * viewConfig.field.x / 2) - viewConfig.field.x / 2 + viewConfig.canvas.x / 2
+
+        def bottom = ((y - x) * viewConfig.field.y / 2) + viewConfig.canvas.y / 2 - viewConfig.field.y / 2
+        def left = ((x + y) * viewConfig.field.x / 2) - viewConfig.field.x / 2 + viewConfig.canvas.x / 2
 
         bottom += image?.offsetY ?: 0
         left -= image?.offsetX ?: 0
