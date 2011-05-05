@@ -28,7 +28,28 @@
     <g:importDialogs/>
     <g:javascript>
     jQuery(function() {
-		jQuery( "#canvas" ).draggable();
+        var dragging = false;
+
+		jQuery( "#canvas" ).draggable({
+            stop: function(event, ui) { dragging = true; }
+        });
+
+        jQuery('.tile').click(function(event){
+            event.stopPropagation();
+            if (dragging)
+            {
+              dragging = false;
+              return false;
+            }
+            alert('abc');
+            return true;
+        });
+
+
+
+
+
+
 	});
 
     jQuery('#clickme').click(function() {
