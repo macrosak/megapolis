@@ -51,7 +51,7 @@ ul.menu {
 
 .menu a {
     color: black;
-    background-color: #fdca00;
+    background-color: #ffffff;
     display: block;
     padding: 5px;
     width: 100%; /* border: 1px solid #d29e00;*/
@@ -59,7 +59,8 @@ ul.menu {
 }
 
 .menu a:hover {
-    background-color: #bfd000;
+    color: white;
+    background-color: #3B5998;
 }
 
 div.clear {
