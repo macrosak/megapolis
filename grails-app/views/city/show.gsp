@@ -27,16 +27,15 @@
     <g:importDialogs/>
   </head>
   <body>
-  <input type="button" onclick="profileDialog.show()">
-  <g:dialog name="profileDialog" zIndex="10000" width="600" height="300" top="50" left="80">
-    <img src="${profilePicture ? profilePicture : resource(dir: 'images/', file: 'default_profile_picture.png')}" style="vertical-align:middle;">
-    <h1 style="display:inline; margin-left:15px;">${name}</h1>
-
-    <p>Buildings: ${buildingCount}</p>
-
-    <p>Money: $${money}</p>
-
-    <p>Income: <span class="income">+$${income}</span></p>
+  <g:dialog name="profileDialog" zIndex="10000" width="500" height="300" title="Profile">
+    <table class="profileT">
+        <tr><td rowspan="6" class="pdPhoto"><img alt="profilePhoto" src="${profilePicture ? profilePicture : resource(dir: 'images/', file: 'default_profile_picture.png')}"/></td>
+        <tr><td class="pdName">${playerName}</td></tr>
+        <tr><td class="pdBuildings">Buildings: ${buildingCount}</td></tr>
+        <tr><td class="pdMoney">Money: $${player.money}</td></tr>
+        <tr><td class="pdIncome">Income: <span class="income">+$${income}</span></td></tr>
+	<tr><td></td></tr>
+	</table>
   </g:dialog>
 
   <div style="height: ${viewConfig.canvas.y}px;
@@ -55,7 +54,7 @@
     </g:each>
   </g:each>
   <div id="logoSmall">
-    <img src="${resource(dir: 'images/', file: 'logo_small.png')}"/>
+    <img alt="megapolisLogo" src="${resource(dir: 'images/', file: 'logo_small.png')}"/>
   </div>
   <g:render template="/layouts/menu"/>
 

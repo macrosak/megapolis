@@ -49,7 +49,7 @@ ul.menu {
     margin-right: 10px;
 }
 
-.menu a {
+.menu a, .menu span {
     color: black;
     background-color: #fdca00;
     display: block;
@@ -58,17 +58,17 @@ ul.menu {
     text-decoration: none;
 }
 
-.menu a:hover {
+.menu a:hover, .menu span:hover {
+	 cursor: pointer;
     background-color: #bfd000;
 }
+
 
 div.clear {
     clear: both;
 }
 
-.income {
-    color: green;
-}
+
 
 #menuDiv {
     position: absolute;
@@ -76,3 +76,38 @@ div.clear {
     top: 10px;
     left: 70px;
 }
+
+/***********************/
+/*****Profile Dialog****/
+.profileT{
+		position: relative;
+		padding-top: 5px;
+		padding-left: 15px;
+}
+.pdPhoto{
+}
+.pdPhoto img{
+	width: 110px;
+	height: auto;
+}
+.pdName{
+	font-weight: bold;
+}
+.pdBuildings{
+
+}
+.pdMoney{
+	
+}
+.pdIncome{
+	
+}
+.income {
+    color: green;
+}
+.pdClose{
+	display: block;
+}
+		
+	
+	

@@ -79,7 +79,7 @@ class DialogTagLib {
         out << "var $name = new Object();\n"
         out << "${name}.hide = function() { Dialog.closeInfo() };\n"
         out << "${name}.show = function() {\n"
-        out << "${name}.window = Dialog.info(\$('${name}_content_div').innerHTML, {className: 'alphacube'"
+        out << "${name}.window = Dialog.info(\$('${name}_content_div').innerHTML, {className: 'alphacube', closable:true"
         if(attrs.top)
             out << ",  top: ${attrs.top}"
         if(attrs.left)
