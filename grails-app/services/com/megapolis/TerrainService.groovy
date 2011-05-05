@@ -22,6 +22,7 @@ package com.megapolis
 import com.megapolis.game.Field
 import com.megapolis.game.Building
 import com.megapolis.game.BuildingType
+import com.megapolis.game.player.Player
 
 class TerrainService {
 
@@ -147,8 +148,12 @@ class TerrainService {
                 else if (x == -3 && y == 3)
                     b = new Building(type: BuildingType.findByDirname('office2'))
                 b?.init()
-                new Field(coordX: x, coordY: y, rx: rx, ry: ry, building: b).save(flush: true)
 
+                def owner = null
+                if(b)
+                    owner = Player.findByFacebookId(-1)
+
+                new Field(owner: owner, coordX: x, coordY: y, rx: rx, ry: ry, building: b).save(flush: true)
             }
         }
     }

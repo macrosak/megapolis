@@ -20,7 +20,6 @@
 package com.megapolis.game
 
 import com.megapolis.FacebookController
-import org.codehaus.groovy.grails.orm.hibernate.validation.UniqueConstraint
 import com.megapolis.game.player.Player
 
 class CityController extends FacebookController {
@@ -30,9 +29,10 @@ class CityController extends FacebookController {
 
     def index = { redirect action: 'show' }
 
-    def neco = {
-        render(template: "dialog", model: [building: new Building()])
-        render g.javascript { 'necox.show()' }
+    def buildingDetail = {
+	    def building = Building.get(params.id)
+	    render(template: "buildingDialog", model: [building: building, cityService: cityService, buildingOwner: building.owner])
+       render g.javascript { 'buildingDialog.show()' }
     }
 
     def show = {
