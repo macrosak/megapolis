@@ -27,6 +27,7 @@ class Player {
     long money
     long facebookId
     def profile
+    def friends
     String profileJSON
     int homeX = 0
     int homeY = 0
