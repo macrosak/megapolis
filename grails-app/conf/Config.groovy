@@ -111,7 +111,7 @@ log4j = {
 
 views {
     cityLarge {
-        fields = new Point(3, 3)
+        fields = new Point(10, 10)
         canvas = new Point(750, 500)
         field = new Point(256, 128)
     }

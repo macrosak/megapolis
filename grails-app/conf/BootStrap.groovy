@@ -25,11 +25,13 @@ import com.megapolis.game.Residential
 import com.megapolis.game.AdditionalBuilding
 import com.megapolis.game.Shop
 import com.megapolis.game.Ground
+import com.megapolis.game.player.Player
 
 class BootStrap {
     def terrainService
 
     def init = { servletContext ->
+        def systemPlayer = new Player(money: 0, facebookId: -1, profileJSON: """{"id":"-1","name":"Megapolis System","first_name":"Megapolis","last_name":"System","username":"megapolis"}""").save(failOnError: true)
 
         def house1 = new Residential(name: 'Luxury Residence', dirname: 'house1', price: 1000,
                 lucrativity: 10, profitTime: 30, maxResidents: 20,

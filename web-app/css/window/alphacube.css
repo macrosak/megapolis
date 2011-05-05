@@ -18,7 +18,8 @@
  */
 
 .overlay_alphacube {
-	background-color: #85BBEF;
+	/*background-color: #85BBEF;*/
+	background-color: grey;	
 	filter:alpha(opacity=60);
 	-moz-opacity: 0.6;
 	opacity: 0.6;
@@ -107,13 +108,13 @@
 
 .alphacube_title {
 	float:left;
-	height:14px;
-	font-size:14px;
+	height:16px;
+	font-size:16px;
 	text-align:center;
 	margin-top:2px;
-    padding-top: 3px;
+   padding-top: 3px;
 	width:100%;
-	color:#0D446D;
+	color:black;
 }
 
 .alphacube_content {

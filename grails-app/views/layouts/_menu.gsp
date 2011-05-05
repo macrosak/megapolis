@@ -1,6 +1,4 @@
-<div id="menuDiv">
-  <ul class="menu">
-    <li>%{--
+%{--
   - Copyright 2010-2011 by MegapolisTeam
   -
   - This file is part of Megapolis.
@@ -18,9 +16,10 @@
   - You should have received a copy of the GNU Lesser General Public License
   - along with Megapolis.  If not, see <http://www.gnu.org/licenses/>.
   --}%
-
-<g:link controller="city" action="show">City</g:link></li>
-    <li><g:link controller="player" action="profile">Profile</g:link></li>
+<div id="menuDiv">
+  <ul class="menu">
+    <li><g:link controller="city" action="show">City</g:link></li>
+    <li><span onclick="profileDialog.show()">Profile</span></li>
     <li><g:link controller="player" action="myBuildings">My Buildings</g:link></li>
     %{--<li><g:link action="economy" >Economy</g:link></li>--}%
     <li><g:link controller="city" action="buyBuild">Build</g:link></li>

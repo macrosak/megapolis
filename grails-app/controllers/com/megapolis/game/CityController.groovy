@@ -46,13 +46,26 @@ class CityController extends FacebookController {
         def fields = cityService.getCityFields2(x, y, viewConfig)
         def background = BuildingType.findByNameIlike('background')
 //        def background = BuildingType.findByDirname('crossroad')
+
+        double income = 0
+
+        def buildings = Building.byPlayer(player).list()
+
+        buildings.each {building->
+            income += building.currentProfit();
+        }
+
         [player: player,
                 fields: fields,
                 viewConfig: viewConfig,
                 position: [x: x, y: y],
                 zoom: zoom,
                 nextZoom: nextZoom(zoom),
-                background: background]
+                background: background,
+                income:income,
+                buildingCount:buildings.count(),
+                profilePicture: player?.profilePicture,
+                playerName:player?.profile?.name]
     }
 
     private String nextZoom(String zoom) {
