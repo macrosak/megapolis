@@ -51,16 +51,19 @@ ul.menu {
 
 .menu a, .menu span {
     color: black;
-    background-color: #fdca00;
+    background-color: #ffffff;
     display: block;
     padding: 5px;
     width: 100%; /* border: 1px solid #d29e00;*/
     text-decoration: none;
 }
 
+
 .menu a:hover, .menu span:hover {
-	 cursor: pointer;
-    background-color: #bfd000;
+    cursor: pointer;
+    color: white;
+    background-color: #3B5998;
+
 }
 
 
