@@ -50,6 +50,15 @@
 	</table>
   </g:dialog>
 
+ %{-- <g:remoteLink action="buildingDetail" update="buildingDC" params="[id: 40]">
+	- asdas
+   - </g:remoteLink>
+	--}%
+  <g:dialog name="buildingDialog" zIndex="10000" width="500" height="250" title="Detail of building">
+    <div id="buildingDC">
+    </div>
+  </g:dialog>
+
   <div style="height: ${viewConfig.canvas.y}px;
   position: absolute;
   width: ${viewConfig.canvas.x}px;
