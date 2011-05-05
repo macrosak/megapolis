@@ -22,6 +22,7 @@ import com.megapolis.game.Building
 import com.megapolis.game.Image
 import com.megapolis.game.BuildingType
 import com.megapolis.game.Residential
+import com.megapolis.game.AdditionalBuilding
 import com.megapolis.game.Shop
 import com.megapolis.game.Ground
 import com.megapolis.game.player.Player
@@ -79,8 +80,30 @@ class BootStrap {
                 small: new Image(filename: 'iso_small.png', height: 87, width: 64, offsetX: 32, offsetY: -1,
                     mapx: [0,11,11,30,39,39,54,54,65,32],
                     mapy: [71,65,9,0,5,8,15,66,72,88]).save()).save(failOnError: true)
+        def shop1 = new Shop(name: 'Great City Mall', dirname: 'office3', price: 10000,
+                lucrativity: 40, profitTime: 30, salesRange: 5, maxProfit: 1000, idealCustomersCount: 500,
+                large: new Image(filename: 'iso.png', height: 341, width: 258, offsetX: 129, offsetY: -1,
+                    mapx: [2,44,45,118,155,156,215,215,258,130],
+                    mapy: [286,262,35,1,20,32,62,262,286,350]).save(),
+                medium: new Image(filename: 'iso_medium.png', height: 169, width: 128, offsetX: 64, offsetY: -1,
+                    mapx: [1,22,23,59,78,78,108,108,129,65],
+                    mapy: [143,131,17,1,10,16,31,131,143,175]).save(),
+                small: new Image(filename: 'iso_small.png', height: 85, width: 64, offsetX: 32, offsetY: -1,
+                    mapx: [0,11,11,30,39,39,54,54,65,32],
+                    mapy: [71,65,9,0,5,8,15,66,72,88]).save()).save(failOnError: true)
 
-
+        def statue = new AdditionalBuilding(name: 'Heroic Statue', dirname: 'statue', price:4000,
+                lucrativity: 50, profitTime: 0,
+                large: new Image(filename: 'iso.png', height: 150, width: 258, offsetX: 129, offsetY: -1,
+                    mapx: [2,44,45,118,155,156,215,215,258,130],
+                    mapy: [286,262,35,1,20,32,62,262,286,350]).save(),
+                medium:new Image(filename: 'iso_medium.png', height: 75, width: 128, offsetX: 64, offsetY: -1,
+                    mapx: [2,44,45,118,155,156,215,215,258,130],
+                    mapy: [286,262,35,1,20,32,62,262,286,350]).save(),
+                small: new Image(filename: 'iso_small.png', height: 38, width: 64, offsetX: 32, offsetY: -1,
+                    mapx: [2,44,45,118,155,156,215,215,258,130],
+                    mapy: [286,262,35,1,20,32,62,262,286,350]).save()).save(failOnError: true)
+            
         def roadWE = new Ground(name: 'Road', dirname: 'road-upleft', price: 1, ground: true,
                 large: new Image(filename: 'iso.png', height: 130, width: 256, offsetX: 128, offsetY: -1).save(),
                 medium: new Image(filename: 'iso_medium.png', height: 65, width: 128, offsetX: 64, offsetY: -1).save(),

@@ -28,7 +28,28 @@
     <g:importDialogs/>
     <g:javascript>
     jQuery(function() {
-		jQuery( "#canvas" ).draggable();
+        var dragging = false;
+
+		jQuery( "#canvas" ).draggable({
+            stop: function(event, ui) { dragging = true; }
+        });
+
+        jQuery('.tile').click(function(event){
+            event.stopPropagation();
+            if (dragging)
+            {
+              dragging = false;
+              return false;
+            }
+            alert('abc');
+            return true;
+        });
+
+
+
+
+
+
 	});
 
     jQuery('#clickme').click(function() {
@@ -59,6 +80,8 @@
     </div>
   </g:dialog>
 
+  <div style="position:relative">
+  
   <div style="height: ${viewConfig.canvas.y}px;
   position: absolute;
   width: ${viewConfig.canvas.x}px;
@@ -83,6 +106,14 @@
     <img alt="megapolisLogo" src="${resource(dir: 'images/', file: 'logo_small.png')}"/>
   </div>
   <g:render template="/layouts/menu"/>
+  </div>
+
+  <div style="position:absolute; top:${viewConfig.canvas.y}px">
+
+      <g:each in ="${player.friends}" var="friend">${friend.profile.name}<br></g:each>
+
+  </div>
+
   </div>
 
   </body>

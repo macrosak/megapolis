@@ -19,7 +19,7 @@
 
 package com.megapolis
 
-import grails.converters.JSON
+import grails.converters.deep.JSON
 import com.megapolis.game.player.Player
 import grails.util.GrailsUtil
 import java.net.URLConnection
@@ -73,14 +73,15 @@ class FacebookService {
         if(!player) {
             player = playerService.newPlayer(id, profileJSON)
         }
-        player.profilePicture = this.getProfilePicture()
+        player.profilePicture = this.getProfilePicture(player.id)
+        player.friends = getPlayerFriends(player.id)
         return player
     }
 
     // returns URL of profile picture
-    String getProfilePicture() {
+    private String getProfilePicture(long id) {
         try {
-            def url = new URL(GRAPH_URI + "me/picture?type=large&" + accessToken) //.openConnection()
+            def url = new URL(GRAPH_URI + "${id}/picture?type=small&" + accessToken) //.openConnection()
             def conn = (HttpsURLConnection)url.openConnection()
             conn.setFollowRedirects(false)
             if(conn.getResponseCode() == 302) {
@@ -88,5 +89,24 @@ class FacebookService {
             }
         } catch (IOException) {}
         return null
+    }
+
+    private def getPlayerFriends(long id) {
+        try {
+            String friends = new URL(GRAPH_URI + "${id}/friends?" + accessToken).text
+            def result = []
+            def player
+            JSON.parse(friends)?.data.each {
+                player = Player.findByFacebookId(it.id as Long)
+                if (player)
+                {
+                    result += player
+                }
+            }
+            return result
+        } catch (Exception)
+        {
+            return []
+        }
     }
 }
