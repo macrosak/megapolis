@@ -30,11 +30,16 @@
     jQuery(function() {
 		jQuery( "#canvas" ).draggable();
 	});
+
+    jQuery('#clickme').click(function() {
+      jQuery('#canvas').animate({
+        left: '+=50'}, 500);
+    });
     </g:javascript>
 
   </head>
   <body>
-  <input type="button" onclick="profileDialog.show()">
+
   <g:dialog name="profileDialog" zIndex="10000" width="600" height="300" top="50" left="80">
     <img src="${profilePicture ? profilePicture : resource(dir: 'images/', file: 'default_profile_picture.png')}" style="vertical-align:middle;">
     <h1 style="display:inline; margin-left:15px;">${name}</h1>
