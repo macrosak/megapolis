@@ -26,13 +26,14 @@ import com.megapolis.game.AdditionalBuilding
 import com.megapolis.game.Shop
 import com.megapolis.game.Ground
 import com.megapolis.game.player.Player
+import com.megapolis.PlayerService
 
 class BootStrap {
     def terrainService
 
     def init = { servletContext ->
-        def systemPlayer = new Player(money: 0, facebookId: -1, profileJSON: """{"id":"-1","name":"Megapolis System","first_name":"Megapolis","last_name":"System","username":"megapolis"}""").save(failOnError: true)
-        def hany = new Player(money: 0, facebookId: 1678623744, profileJSON: """{
+        def systemPlayer = Player.findByFacebookId(-1) ?: new Player(money: 0, facebookId: -1, profileJSON: """{"id":"-1","name":"Megapolis System","first_name":"Megapolis","last_name":"System","username":"megapolis"}""").save(failOnError: true)
+        def hany = Player.findByFacebookId(1678623744) ?: new Player(facebookId: 1678623744, money: PlayerService.INITIAL_MONEY, profileJSON: """{
            "id": "1678623744",
            "name": "Martin Hanák",
            "first_name": "Martin",
@@ -48,7 +49,8 @@ class BootStrap {
            "updated_time": "2011-05-07T19:47:32+0000"
         }""").save(failOnError: true)
 
-        def house1 = new Residential(name: 'Luxury Residence', dirname: 'house1', price: 100000,
+        def house1 = Residential.findByDirname('house1') ?:
+            new Residential(name: 'Luxury Residence', dirname: 'house1', price: 100000,
                 lucrativity: 10, profitTime: 3600, maxResidents: 15,
                 large: new Image(filename: 'iso.png', height: 184, width: 258, offsetX: 129, offsetY: -1,
                     mapx: [2,36,36,59,89,106,153,171,200,223,224,259,254,195,131,128,1],
@@ -60,7 +62,8 @@ class BootStrap {
                     mapx: [0,9,9,15,22,26,38,43,50,56,56,65,64,49,33,32,0],
                     mapy: [27,23,13,6,5,0,1,5,6,13,25,29,31,38,46,46,30]).save()).save(failOnError: true)
 
-        def house2 = new Residential(name: 'Big Residence', dirname: 'house2', price: 170000,
+        def house2 = Residential.findByDirname('house2') ?:
+            new Residential(name: 'Big Residence', dirname: 'house2', price: 170000,
                 lucrativity: 25, profitTime: 3600, maxResidents: 50,
                 large: new Image(filename: 'iso_normal.png', height: 385, width: 256, offsetX: 128, offsetY: -1,
                     mapx: [2,36,36,59,89,106,153,171,200,223,224,259,254,195,131,128,1],
@@ -72,7 +75,8 @@ class BootStrap {
                     mapx: [0,9,9,15,22,26,38,43,50,56,56,65,64,49,33,32,0],
                     mapy: [27,23,13,6,5,0,1,5,6,13,25,29,31,38,46,46,30]).save()).save(failOnError: true)
 
-        def house3 = new Residential(name: 'Extra Luxurious Residence', dirname: 'house3', price: 210000,
+        def house3 = Residential.findByDirname('house3') ?:
+            new Residential(name: 'Extra Luxurious Residence', dirname: 'house3', price: 210000,
                 lucrativity: 50, profitTime: 3600, maxResidents: 20,
                 large: new Image(filename: 'iso_normal.png', height: 300, width: 256, offsetX: 128, offsetY: -1,
                     mapx: [2,36,36,59,89,106,153,171,200,223,224,259,254,195,131,128,1],
@@ -84,7 +88,8 @@ class BootStrap {
                     mapx: [0,9,9,15,22,26,38,43,50,56,56,65,64,49,33,32,0],
                     mapy: [27,23,13,6,5,0,1,5,6,13,25,29,31,38,46,46,30]).save()).save(failOnError: true)
 
-        def shop = new Shop(name: 'City Mall', dirname: 'office2', price: 150000,
+        def shop = Shop.findByDirname('office2') ?:
+            new Shop(name: 'City Mall', dirname: 'office2', price: 150000,
                 lucrativity: 30, profitTime: 3600, salesRange: 3, maxProfit: 15000, idealCustomersCount: 200,
                 large: new Image(filename: 'iso.png', height: 350, width: 258, offsetX: 129, offsetY: -1,
                     mapx: [2,44,45,118,155,156,215,215,258,130],
@@ -95,7 +100,8 @@ class BootStrap {
                 small: new Image(filename: 'iso_small.png', height: 87, width: 64, offsetX: 32, offsetY: -1,
                     mapx: [0,11,11,30,39,39,54,54,65,32],
                     mapy: [71,65,9,0,5,8,15,66,72,88]).save()).save(failOnError: true)
-        def shop1 = new Shop(name: 'Great City Mall', dirname: 'office3', price: 300000,
+        def shop1 = Shop.findByDirname('office3') ?:
+            new Shop(name: 'Great City Mall', dirname: 'office3', price: 300000,
                 lucrativity: 40, profitTime: 3600, salesRange: 5, maxProfit: 25000, idealCustomersCount: 500,
                 large: new Image(filename: 'iso.png', height: 341, width: 258, offsetX: 129, offsetY: -1,
                     mapx: [2,44,45,118,155,156,215,215,258,130],
@@ -107,7 +113,8 @@ class BootStrap {
                     mapx: [0,11,11,30,39,39,54,54,65,32],
                     mapy: [71,65,9,0,5,8,15,66,72,88]).save()).save(failOnError: true)
 
-        def statue = new AdditionalBuilding(name: 'Heroic Statue', dirname: 'statue', price:50000,
+        def statue = AdditionalBuilding.findByDirname('statue') ?:
+            new AdditionalBuilding(name: 'Heroic Statue', dirname: 'statue', price:50000,
                 lucrativity: 100, profitTime: 0,
                 large: new Image(filename: 'iso.png', height: 150, width: 258, offsetX: 129, offsetY: -1,
                     mapx: [2,44,45,118,155,156,215,215,258,130],
@@ -119,51 +126,63 @@ class BootStrap {
                     mapx: [2,44,45,118,155,156,215,215,258,130],
                     mapy: [286,262,35,1,20,32,62,262,286,350]).save()).save(failOnError: true)
             
-        def roadWE = new Ground(name: 'Road', dirname: 'road-upleft', price: 1, ground: true,
+        def roadWE = Ground.findByDirname('road-upleft') ?:
+            new Ground(name: 'Road', dirname: 'road-upleft', price: 1, ground: true,
                 large: new Image(filename: 'iso.png', height: 130, width: 256, offsetX: 128, offsetY: -1).save(),
                 medium: new Image(filename: 'iso_medium.png', height: 65, width: 128, offsetX: 64, offsetY: -1).save(),
                 small: new Image(filename: 'iso_small.png', height: 33, width: 64, offsetX: 32, offsetY: -1).save()).save(failOnError: true)
-        def roadNS = new Ground(name: 'Road', dirname: 'road-upright', price: 1, ground: true,
+        def roadNS = Ground.findByDirname('road-upright') ?:
+            new Ground(name: 'Road', dirname: 'road-upright', price: 1, ground: true,
                 large: new Image(filename: 'iso.png', height: 130, width: 256, offsetX: 128, offsetY: -1).save(),
                 medium: new Image(filename: 'iso_medium.png', height: 65, width: 128, offsetX: 64, offsetY: -1).save(),
                 small: new Image(filename: 'iso_small.png', height: 33, width: 64, offsetX: 32, offsetY: -1).save()).save(failOnError: true)
-        def roadNE = new Ground(name: 'Road', dirname: 'road-north-east', price: 1, ground: true,
+        def roadNE = Ground.findByDirname('road-north-east') ?:
+            new Ground(name: 'Road', dirname: 'road-north-east', price: 1, ground: true,
                 large: new Image(filename: 'iso.png', height: 130, width: 256, offsetX: 128, offsetY: -1).save(),
                 medium: new Image(filename: 'iso_medium.png', height: 65, width: 128, offsetX: 64, offsetY: -1).save(),
                 small: new Image(filename: 'iso_small.png', height: 33, width: 64, offsetX: 32, offsetY: -1).save()).save(failOnError: true)
-        def roadNW = new Ground(name: 'Road', dirname: 'road-north-west', price: 1, ground: true,
+        def roadNW = Ground.findByDirname('road-north-west') ?:
+            new Ground(name: 'Road', dirname: 'road-north-west', price: 1, ground: true,
                 large: new Image(filename: 'iso.png', height: 130, width: 256, offsetX: 128, offsetY: -1).save(),
                 medium: new Image(filename: 'iso_medium.png', height: 65, width: 128, offsetX: 64, offsetY: -1).save(),
                 small: new Image(filename: 'iso_small.png', height: 33, width: 64, offsetX: 32, offsetY: -1).save()).save(failOnError: true)
-        def roadSE = new Ground(name: 'Road', dirname: 'road-south-east', price: 1, ground: true,
+        def roadSE = Ground.findByDirname('road-south-east') ?:
+            new Ground(name: 'Road', dirname: 'road-south-east', price: 1, ground: true,
                 large: new Image(filename: 'iso.png', height: 130, width: 256, offsetX: 128, offsetY: -1).save(),
                 medium: new Image(filename: 'iso_medium.png', height: 65, width: 128, offsetX: 64, offsetY: -1).save(),
                 small: new Image(filename: 'iso_small.png', height: 33, width: 64, offsetX: 32, offsetY: -1).save()).save(failOnError: true)
-        def roadSW = new Ground(name: 'Road', dirname: 'road-south-west', price: 1, ground: true,
+        def roadSW = Ground.findByDirname('road-south-west') ?:
+            new Ground(name: 'Road', dirname: 'road-south-west', price: 1, ground: true,
                 large: new Image(filename: 'iso.png', height: 130, width: 256, offsetX: 128, offsetY: -1).save(),
                 medium: new Image(filename: 'iso_medium.png', height: 65, width: 128, offsetX: 64, offsetY: -1).save(),
                 small: new Image(filename: 'iso_small.png', height: 33, width: 64, offsetX: 32, offsetY: -1).save()).save(failOnError: true)
-        def roadCR = new Ground(name: 'Road', dirname: 'crossroad', price: 1, ground: true,
+        def roadCR = Ground.findByDirname('crossroad') ?:
+            new Ground(name: 'Road', dirname: 'crossroad', price: 1, ground: true,
                 large: new Image(filename: 'iso.png', height: 130, width: 256, offsetX: 128, offsetY: -1).save(),
                 medium: new Image(filename: 'iso_medium.png', height: 65, width: 128, offsetX: 64, offsetY: -1).save(),
                 small: new Image(filename: 'iso_small.png', height: 33, width: 64, offsetX: 32, offsetY: -1).save()).save(failOnError: true)
-        def roadTN = new Ground(name: 'Road', dirname: 'Tcrossroad-north', price: 1, ground: true,
+        def roadTN = Ground.findByDirname('Tcrossroad-north') ?:
+            new Ground(name: 'Road', dirname: 'Tcrossroad-north', price: 1, ground: true,
                 large: new Image(filename: 'iso.png', height: 130, width: 256, offsetX: 128, offsetY: -1).save(),
                 medium: new Image(filename: 'iso_medium.png', height: 65, width: 128, offsetX: 64, offsetY: -1).save(),
                 small: new Image(filename: 'iso_small.png', height: 33, width: 64, offsetX: 32, offsetY: -1).save()).save(failOnError: true)
-        def roadTE = new Ground(name: 'Road', dirname: 'Tcrossroad-east', price: 1, ground: true,
+        def roadTE = Ground.findByDirname('Tcrossroad-east') ?:
+            new Ground(name: 'Road', dirname: 'Tcrossroad-east', price: 1, ground: true,
                 large: new Image(filename: 'iso.png', height: 130, width: 256, offsetX: 128, offsetY: -1).save(),
                 medium: new Image(filename: 'iso_medium.png', height: 65, width: 128, offsetX: 64, offsetY: -1).save(),
                 small: new Image(filename: 'iso_small.png', height: 33, width: 64, offsetX: 32, offsetY: -1).save()).save(failOnError: true)
-        def roadTS = new Ground(name: 'Road', dirname: 'Tcrossroad-south', price: 1, ground: true,
+        def roadTS = Ground.findByDirname('Tcrossroad-south') ?:
+            new Ground(name: 'Road', dirname: 'Tcrossroad-south', price: 1, ground: true,
                 large: new Image(filename: 'iso.png', height: 130, width: 256, offsetX: 128, offsetY: -1).save(),
                 medium: new Image(filename: 'iso_medium.png', height: 65, width: 128, offsetX: 64, offsetY: -1).save(),
                 small: new Image(filename: 'iso_small.png', height: 33, width: 64, offsetX: 32, offsetY: -1).save()).save(failOnError: true)
-        def roadTW = new Ground(name: 'Road', dirname: 'Tcrossroad-west', price: 1, ground: true,
+        def roadTW = Ground.findByDirname('Tcrossroad-west') ?:
+            new Ground(name: 'Road', dirname: 'Tcrossroad-west', price: 1, ground: true,
                 large: new Image(filename: 'iso.png', height: 130, width: 256, offsetX: 128, offsetY: -1).save(),
                 medium: new Image(filename: 'iso_medium.png', height: 65, width: 128, offsetX: 64, offsetY: -1).save(),
                 small: new Image(filename: 'iso_small.png', height: 33, width: 64, offsetX: 32, offsetY: -1).save()).save(failOnError: true)
-        def background = new Ground(name: 'Background', dirname: 'background', price: 1, ground: true,
+        def background = Ground.findByDirname('background') ?:
+            new Ground(name: 'Background', dirname: 'background', price: 1, ground: true,
                 large: new Image(filename: 'iso.png', height: 130, width: 256, offsetX: 128, offsetY: -1).save(),
                 medium: new Image(filename: 'iso_medium.png', height: 65, width: 128, offsetX: 64, offsetY: -1).save(),
                 small: new Image(filename: 'iso_small.png', height: 33, width: 64, offsetX: 32, offsetY: -1).save()).save(failOnError: true)

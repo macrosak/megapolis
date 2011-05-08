@@ -217,9 +217,8 @@ class CityController extends FacebookController {
         def coord = params.field.split(';')
         def x = coord[0].toInteger()
         def y = coord[1].toInteger()
-        def field = Field.findByCoordXAndCoordY(x, y)
         def buildingType = BuildingType.get(params.buildingId)
-
+        def field = Field.findByCoordXAndCoordY(x, y)
         if(!field || field.owner != player || !buildingType) {
             flash.message = "Chyba!"
             redirect(action: 'buyBuild')
@@ -227,6 +226,7 @@ class CityController extends FacebookController {
 
         Player.withTransaction { status ->
 //            player.money = 100000
+            field = Field.findByCoordXAndCoordY(x, y)
 
             if (player.money < buildingType.price){
                 status.setRollbackOnly()
