@@ -20,7 +20,7 @@
 package com.megapolis.game
 
 class Residential extends BuildingType {
-    private static final int RENT_PER_RESIDENT = 10
+    private static final int RENT_PER_RESIDENT = 1000
 
     def cityService
 
