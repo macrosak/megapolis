@@ -30,6 +30,10 @@
 
 <g:javascript>
 
+jQuery(function() {
+  jQuery( "#canvas" ).draggable();
+});
+
 function buy(x, y, p) {
   var coords = "[" + x + "; " + y + "]"
   var divId = x + ";" + y
@@ -79,29 +83,8 @@ function buy(x, y, p) {
 
 </g:javascript>
 <g:render template="/shared/message"/>
+  <div id="buyList" style="display: none;"></div>
 
-  <table>
-    <tr>
-      <td style="width: 50px">Money:</td>
-      <td>$<span id="moneySpan">${player.money}</span></td>
-    </tr>
-    <tr>
-      <td style="width: 50px">Buy:</td>
-      <td><div id="buyList"></div></td>
-    </tr>
-    <tr>
-      <td style="width: 50px">Price:</td>
-      <td><span id="priceOuterSpan">$<span id="priceSpan">0</span></span></td>
-    </tr>
-    <tr>
-      <td colspan="2" align="left">
-        <g:form action="buy">
-          <span id="buyFormHidden"></span>
-          <g:submitButton name="buy" value="Buy land" id="buyButton"/>
-        </g:form>
-      </td>
-    </tr>
-  </table>
 
 <g:dialog name="buildDialog" title="Build" draggable="true" width="450" height="600" resizable="true">
   <div id="buildDialogDiv" style="z-index:10000">
@@ -126,19 +109,33 @@ function buy(x, y, p) {
   </div>
 </g:dialog>
 
+<g:dialog name="profileDialog" zIndex="10000" width="500" height="300" title="Profile">
+    <table class="profileT">
+        <tr><td rowspan="6" class="pdPhoto"><img alt="profilePhoto" src="${player?.profilePicture ?: resource(dir: 'images/', file: 'default_profile_picture.png')}"/></td>
+        <tr><td class="pdName">${player?.profile?.name}</td></tr>
+        <tr><td class="pdBuildings">Buildings: ${buildingCount}</td></tr>
+        <tr><td class="pdMoney">Money: $${player.money}</td></tr>
+        <tr><td class="pdIncome">Income: <span class="income">+$${income}</span></td></tr>
+	<tr><td></td></tr>
+	</table>
+  </g:dialog>
+
 <div style="height: ${viewConfig.canvas.y}px;
 position: absolute;
 width: ${viewConfig.canvas.x}px;
 overflow:hidden;
 background-color: #adadad;">
-  <img style="position:absolute; z-index:1000" id="klikatko" src="${resource( dir:'images', file: 'mapcontrols.png')}" usemap="#_klikatko" border="0" width="59" height="59" alt="" />
-    <map id="_klikatko" name="_klikatko">
-    <area shape="rect" coords="19,34,37,52" href="${createLink(action:'buyBuild', params:[posY: position.y - 1])}" alt="" title=""    />
-    <area shape="rect" coords="35,18,53,36" href="${createLink(action:'buyBuild', params:[posX: position.x + 1])}" alt="" title=""    />
-    <area shape="rect" coords="19,1,37,19" href="${createLink(action:'buyBuild', params:[posY: position.y + 1])}" alt="" title=""    />
-    <area shape="rect" coords="3,18,21,36" href="${createLink(action:'buyBuild', params:[posX: position.x - 1])}" alt="" title=""    />
+  %{--<img style="position:absolute; z-index:1000" id="klikatko" src="${resource( dir:'images', file: 'mapcontrols.png')}" usemap="#_klikatko" border="0" width="59" height="59" alt="" />--}%
+    %{--<map id="_klikatko" name="_klikatko">--}%
+    %{--<area shape="rect" coords="19,34,37,52" href="${createLink(action:'buyBuild', params:[posY: position.y - 1])}" alt="" title=""    />--}%
+    %{--<area shape="rect" coords="35,18,53,36" href="${createLink(action:'buyBuild', params:[posX: position.x + 1])}" alt="" title=""    />--}%
+    %{--<area shape="rect" coords="19,1,37,19" href="${createLink(action:'buyBuild', params:[posY: position.y + 1])}" alt="" title=""    />--}%
+    %{--<area shape="rect" coords="3,18,21,36" href="${createLink(action:'buyBuild', params:[posX: position.x - 1])}" alt="" title=""    />--}%
     %{--<area shape="rect" coords="19,18,37,35" href="${createLink(action:'buyBuild')}" alt="" title=""    />--}%
-    </map>
+    %{--</map>--}%
+  <g:klikatko position="${position}"/>
+
+  <div id="canvas" style="position: relative;width: ${viewConfig.canvas.x}px;height: ${viewConfig.canvas.y}px;">
   <g:set var="zindex" value="${1}"/>
   <g:each in="${(-1 * viewConfig.fields.x)..viewConfig.fields.x}" var="j">
     <g:each in="${viewConfig.fields.y..(-1 *viewConfig.fields.y)}" var="i">
@@ -205,6 +202,35 @@ background-color: #adadad;">
 
     </g:each>
   </g:each>
+    </div>
+    <div id="logoSmall">
+    <img alt="megapolisLogo" src="${resource(dir: 'images/', file: 'logo_small.png')}"/>
+  </div>
+  <g:render template="/layouts/menu"/>
+  <div id="buyDiv">
+  <table>
+    <tr>
+      <td style="width: 50px">Money:</td>
+      <td>$<span id="moneySpan">${player.money}</span></td>
+    </tr>
+    %{--<tr>--}%
+      %{--<td style="width: 50px">Buy:</td>--}%
+      %{--<td><div id="buyList"></div></td>--}%
+    %{--</tr>--}%
+    <tr>
+      <td style="width: 50px">Price:</td>
+      <td><span id="priceOuterSpan">$<span id="priceSpan">0</span></span></td>
+    </tr>
+    <tr>
+      <td colspan="2" align="left">
+        <g:form action="buy">
+          <span id="buyFormHidden"></span>
+          <g:submitButton name="buy" value="Buy land" id="buyButton"/>
+        </g:form>
+      </td>
+    </tr>
+  </table>
+  </div>
  </div>
 
 

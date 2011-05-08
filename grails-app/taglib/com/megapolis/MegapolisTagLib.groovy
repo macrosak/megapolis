@@ -35,9 +35,10 @@ class MegapolisTagLib {
         <area shape="rect" coords="19,34,37,52" href="#" onclick="jQuery('#canvas').animate({top: '-=${offset}'}, ${time})"/>
         <area shape="rect" coords="35,18,53,36" href="#" onclick="jQuery('#canvas').animate({left: '-=${offset}'}, ${time})"/>
         <area shape="rect" coords="19,1,37,19" href="#" onclick="jQuery('#canvas').animate({top: '+=${offset}'}, ${time})"/>
-        <area shape="rect" coords="3,18,21,36" href="#" onclick="jQuery('#canvas').animate({left: '+=${offset}'}, ${time})"/>
-        <area shape="rect" coords="19,18,37,35" href="${createLink(action: attrs.zoomAction, params: attrs.zoomParams)}" alt="" title=""    />
-        </map>"""
+        <area shape="rect" coords="3,18,21,36" href="#" onclick="jQuery('#canvas').animate({left: '+=${offset}'}, ${time})"/>"""
+        if(attrs.zoomAction)
+            out << """<area shape="rect" coords="19,18,37,35" href="${createLink(action: attrs.zoomAction, params: attrs.zoomParams)}" alt="" title=""> """
+        out << "</map>"
     }
 
     def cityField = { attrs ->
@@ -77,7 +78,7 @@ class MegapolisTagLib {
         left -= image?.offsetX ?: 0
         left += viewConfig.field.x / 2
 
-        def imgClass = building && !building.type.instanceOf(Ground) ? 'building' : ''
+        def imgClass = building && !building.type.instanceOf(Ground) && building.owner != attrs.player ? 'otherBuilding' : ''
 
         if (image) {
 

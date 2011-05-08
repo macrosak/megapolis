@@ -1,6 +1,4 @@
-<html>
-    <head>
-        <title>%{--
+%{--
   - Copyright 2010-2011 by MegapolisTeam
   -
   - This file is part of Megapolis.
@@ -18,6 +16,9 @@
   - You should have received a copy of the GNU Lesser General Public License
   - along with Megapolis.  If not, see <http://www.gnu.org/licenses/>.
   --}%
+<html>
+    <head>
+        <title>
 
 <g:layoutTitle default="Grails" /></title>
          <link rel="stylesheet" href="${resource(dir:'css',file:'megapolis.css')}" />

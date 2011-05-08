@@ -20,10 +20,12 @@
   <ul class="menu">
     <li><g:link controller="city" action="show">City</g:link></li>
     <li><span onclick="profileDialog.show()">Profile</span></li>
-    <li><g:link controller="player" action="myBuildings">My Buildings</g:link></li>
     %{--<li><g:link action="economy" >Economy</g:link></li>--}%
     <li><g:link controller="city" action="buyBuild">Build</g:link></li>
-    <li><g:link controller="city" action="roads">Roads</g:link></li>
+    %{--<li><g:link controller="city" action="roads">Roads</g:link></li>--}%
+     <g:if test="${actionName != 'buyBuild'}">
+    <li><a href="#" id="myBuildings">My Buildings</a><g:hiddenField name="myb" id="myb" value="true"/> </li>
+       </g:if>
   </ul>
 
   <div class="clear" style="margin-bottom: 10px;">&nbsp;</div>

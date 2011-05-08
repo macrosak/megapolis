@@ -63,7 +63,7 @@ class CityController extends FacebookController {
                 nextZoom: nextZoom(zoom),
                 background: background,
                 income:income,
-                buildingCount:buildings.count(),
+                buildingCount:buildings.size(),
                 profilePicture: player?.profilePicture,
                 playerName:player?.profile?.name]
     }
@@ -99,7 +99,12 @@ class CityController extends FacebookController {
         (x, y) = cityService.position(params.posX, params.posY)
         def viewConfig = grailsApplication.config.views.buy
         def fields = cityService.getCityFields(x, y, viewConfig)
-        [player: player, fields: fields, viewConfig: viewConfig, position: [x: x, y: y]]
+        def buildings = Building.byPlayer(player).list()
+        def income = 0
+        buildings.each {building->
+            income += building.currentProfit();
+        }
+        [player: player, income: income, buildingCount: buildings.size(), fields: fields, viewConfig: viewConfig, position: [x: x, y: y]]
     }
 
     def roads = {
@@ -239,6 +244,11 @@ class CityController extends FacebookController {
 
     def repair = {
         Field.list().each {
+            it.owner = null
+            it.building = null
+            it.save()
+        }
+        Building.list().each {
             it.delete(flush: true)
         }
         redirect(action: 'show')

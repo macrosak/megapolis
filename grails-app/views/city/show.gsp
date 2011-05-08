@@ -32,9 +32,17 @@
 	});
 
       jQuery(function() {
-//        jQuery('#test').click(function() {
-//          jQuery('.building').animate({opacity:0.1}, 2000)
-//        })
+        jQuery('#myBuildings').click(function() {
+          if($('myb').value == 'true') {
+            jQuery('.otherBuilding').animate({opacity:0.2}, 2000)
+            $('myb').value = 'false'
+            $('myBuildings').innerHTML = 'All buildings'
+          } else {
+            jQuery('.otherBuilding').animate({opacity:1}, 2000)
+            $('myb').value = 'true'
+            $('myBuildings').innerHTML = 'My buildings'
+          }
+        })
       })
     </g:javascript>
 
@@ -69,7 +77,8 @@
     <g:each in="${viewConfig.fields.y..(-1 *viewConfig.fields.y)}" var="i">
       <g:cityField viewConfig="${viewConfig}" i="${i}" j="${j}"
               fields="${fields}" zindex="${zindex++}" position="${position}"
-              type="${zoom}" background="${background}"/>
+              type="${zoom}" background="${background}"
+              player="${player}"/>
     </g:each>
   </g:each>
     </div>
