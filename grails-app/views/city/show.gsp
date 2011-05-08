@@ -31,10 +31,11 @@
         var dragging = false;
 
 		jQuery( "#canvas" ).draggable({
+		    start: function(event, ui) { dragging = true; },
             stop: function(event, ui) { dragging = true; }
         });
 
-        jQuery('.tile').click(function(event){
+        jQuery('.tile, .otherBuilding').click(function(event){
             event.stopPropagation();
             if (dragging)
             {
@@ -45,21 +46,28 @@
         });
 
         jQuery('.buildingMap').click(function(event){
-          new Ajax.Updater('buildingDC','${createLink(action: 'buildingDetail')}/' + event.currentTarget.id,{asynchronous:true,evalScripts:true});
+            event.stopPropagation();
+            if (dragging)
+            {
+              dragging = false;
+              return false;
+            }
+
+            new Ajax.Updater('buildingDC','${createLink(action: 'buildingDetail')}/' + event.currentTarget.id,{asynchronous:true,evalScripts:true});
         });
 //	});
 //
 //      jQuery(function() {
-        jQuery('#myBuildings').click(function() {
-          if($('myb').value == 'true') {
+        jQuery('#myBuildings').click(function(event) {
+            if($('myb').value == 'true') {
             jQuery('.otherBuilding').animate({opacity:0.2}, 2000)
             $('myb').value = 'false'
             $('myBuildings').innerHTML = 'All buildings'
-          } else {
+            } else {
             jQuery('.otherBuilding').animate({opacity:1}, 2000)
             $('myb').value = 'true'
             $('myBuildings').innerHTML = 'My buildings'
-          }
+            }
         })
       })
     </g:javascript>
