@@ -28,7 +28,28 @@
     <g:importDialogs/>
     <g:javascript>
     jQuery(function() {
-		jQuery( "#canvas" ).draggable();
+        var dragging = false;
+
+		jQuery( "#canvas" ).draggable({
+            stop: function(event, ui) { dragging = true; }
+        });
+
+        jQuery('.tile').click(function(event){
+            event.stopPropagation();
+            if (dragging)
+            {
+              dragging = false;
+              return false;
+            }
+            alert('abc');
+            return true;
+        });
+
+
+
+
+
+
 	});
 
       jQuery(function() {
@@ -59,8 +80,17 @@
 	</table>
   </g:dialog>
 
-  <div style="position:relative">
+ %{-- <g:remoteLink action="buildingDetail" update="buildingDC" params="[id: 40]">
+	- asdas
+   - </g:remoteLink>
+	--}%
+  <g:dialog name="buildingDialog" zIndex="10000" width="500" height="250" title="Detail of building">
+    <div id="buildingDC">
+    </div>
+  </g:dialog>
 
+  <div style="position:relative">
+  
   <div style="height: ${viewConfig.canvas.y}px;
   position: absolute;
   width: ${viewConfig.canvas.x}px;

@@ -73,15 +73,15 @@ class FacebookService {
         if(!player) {
             player = playerService.newPlayer(id, profileJSON)
         }
-        player.profilePicture = this.getProfilePicture(player.id)
-        player.friends = getPlayerFriends(player.id)
+        player.profilePicture = this.getProfilePicture(player.facebookId)
+        player.friends = getPlayerFriends(player.facebookId)
         return player
     }
 
     // returns URL of profile picture
     private String getProfilePicture(long id) {
         try {
-            def url = new URL(GRAPH_URI + "${id}/picture?type=small&" + accessToken) //.openConnection()
+            def url = new URL(GRAPH_URI + "${id}/picture?" + accessToken) //.openConnection()
             def conn = (HttpsURLConnection)url.openConnection()
             conn.setFollowRedirects(false)
             if(conn.getResponseCode() == 302) {

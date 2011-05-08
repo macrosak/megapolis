@@ -86,7 +86,7 @@ function buy(x, y, p) {
   <div id="buyList" style="display: none;"></div>
 
 
-<g:dialog name="buildDialog" title="Build" draggable="true" width="450" height="600" resizable="true">
+<g:dialog name="buildDialog" zIndex="10000" title="Build" draggable="true" width="450" height="600" resizable="true">
   <div id="buildDialogDiv" style="z-index:10000">
     <form action="build">
       <input type="hidden" name="field" value="" id="buildCoord"/>

@@ -148,8 +148,12 @@ class TerrainService {
                 else if (x == -3 && y == 3)
                     b = new Building(type: BuildingType.findByDirname('office2'))
                 b?.init()
-                new Field(coordX: x, coordY: y, rx: rx, ry: ry, building: b).save(flush: true)
 
+                def owner = null
+                if(b)
+                    owner = Player.findByFacebookId(-1)
+
+                new Field(owner: owner, coordX: x, coordY: y, rx: rx, ry: ry, building: b).save(flush: true)
             }
         }
     }

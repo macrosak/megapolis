@@ -85,27 +85,32 @@ class MegapolisTagLib {
             String coord = ""
             int kLast = image.mapx?.size()?:0
             for (int k=0; k<kLast; k++) {
-                coord += image.mapx[k] + ',' + image.mapy[k] + k==kLast ? '' : ',';
+                coord += image.mapx[k] + ',' + image.mapy[k] + (k==kLast ? '' : ',');
             }
 
             out << """<div id='${position.x + j};${position.y + i}||${field?.coordX};${field?.coordY}'
-        style='position:absolute; float: left;
+        class="tile" style='position:absolute; float: left;
         bottom: ${bottom}px;
         left:${left}px;
         width: ${width}px;
         height: ${height}px;
         z-index: ${zindex};'>
+        <img style='position: absolute; bottom: 0px; left: 0px; z-index: ${zindex}' class='${imgClass}'
+        alt='buildingID = [${building?.id}, ${building?.type?.id}, ${building?.type?.dirname}]'
+        src='${resource(dir: 'images/buildings/' + buildingType.dirname, file: image.filename)}'
+        usemap="${building ? "#_building${building?.id}" : ""}"/>
         """
+
         if(building && !building.type.instanceOf(Ground) )
             out << """<img style='position: absolute; bottom: 0px; left: 0px; z-index: 1;' src='${resource(dir: 'images/buildings/' + background.dirname, file: background?."$type"?.filename)}'/>"""
 
-        out <<"""<img style='position: absolute; bottom: 0px; left: 0px; z-index: ${zindex}' class='${imgClass}' alt='buildingID = [${building?.id}, ${building?.type?.id}, ${building?.type?.dirname}]' src='${resource(dir: 'images/buildings/' + buildingType.dirname, file: image.filename)}' usemap="#_building${building?.id}"/>
-        <map name="_building${building?.id}" data="${image.mapx}">
-        <area shape="rect" coords="${coord}" href="#" onclick="alert('abc')" alt="" title="" />
-        </map>
-         </div>"""
+        if(building) {
+            out << """<map name="_building${building?.id}">
+            <area shape="poly" coords="${coord}" href="#" alt="" title="" />
+            </map>"""
+        }
 
-
+        out << "</div>"
         }
 //        else if (background) {
 //            out << """<div id='${position.x + j};${position.y + i}||${field?.coordX};${field?.coordY}'
