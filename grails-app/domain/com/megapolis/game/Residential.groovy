@@ -44,7 +44,7 @@ class Residential extends BuildingType {
             if(building.residents < maxResidents) {
                 Building.withTransaction {
                     building.residents = Math.min(maxResidents, (int) (building.residents + 0.1 * maxResidents))
-                    building.save(flus: true)
+                    building.save(flush: true)
                 }
             }
         }

@@ -28,7 +28,7 @@
         <td>Name:</td>
         <td>${building.type.name}</td>
       </tr>
-      <g:if test="${building.type..instanceOf(Residential)}">
+      <g:if test="${building.type.instanceOf(Residential)}">
       <tr>
         <td>Residents:</td>
         <td>${building.residents}</td>
