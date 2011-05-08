@@ -19,7 +19,7 @@
 <%@ page import="com.megapolis.game.Residential" contentType="text/html;charset=UTF-8" %>  
 <div style="text-align:left">
     <img src="${resource(dir: 'images/buildings/' + building.type.dirname, file: building.type.large.filename)}" style="float:left;width:150px;height:auto;"/>
-    <table style="padding-top:18px">
+    <table style="padding-top:18px" cellpadding="5">
     	<tr>
     	<td>Owner:</td>
     	<td>${buildingOwner.profile.name}</td>
@@ -28,11 +28,11 @@
         <td>Name:</td>
         <td>${building.type.name}</td>
       </tr>
-      <tr>
-        <td>Position:</td>
-        <td><g:link controller="city" action="show" params="[posX: building.field.coordX, posY: building.field.coordY]">go to positon</g:link> </td>
-      </tr>
-		<g:if test="${building.instanceOf(Residential)}">      
+      %{--<tr>--}%
+        %{--<td>Position:</td>--}%
+        %{--<td><g:link controller="city" action="show" params="[posX: building.field.coordX, posY: building.field.coordY]">go to positon</g:link> </td>--}%
+      %{--</tr>--}%
+		<g:if test="${building.type.instanceOf(Residential)}">
       <tr>
         <td>Residents:</td>
         <td>${building.residents}</td>
@@ -40,7 +40,7 @@
       </g:if>
       <tr>
         <td>Last Withdrawal:</td>
-        <td><g:formatDate date="${building.lastWithdrawal}"/></td>
+        <td><g:formatDate date="${building.lastWithdrawal}" format="dd.MM.yyyy (HH:mm)"/></td>
       </tr>
       <tr>
         <td>Lucrativity:</td>
@@ -54,12 +54,26 @@
         <td style="text-align:right">
         <g:link controller="building" action="withdraw" id="${building.id}">Withdraw</g:link>
 		          
-			</td><td>
-			<img src="${resource(dir: 'images/withdraw.gif')}" width="50px"/>        
+			</td>
+        <td>
+			<g:link controller="building" action="withdraw" id="${building.id}">
+              <img src="${resource(dir: 'images/withdraw.gif')}" width="50px" border="0"/>
+              </g:link>
+         </td>
+      </tr>
+      <tr>
+        <td style="text-align:right">
+        <g:link controller="building" action="delete" id="${building.id}">Demolish</g:link>
+
+			</td>
+        <td>
+			<g:link controller="building" action="delete" id="${building.id}">
+              <img src="${resource(dir: 'images/bomb.png')}" width="50px" border="0"/>
+              </g:link>
          </td>
       </tr>
     </table>
-    <span style="padding-left:39px;">
-		<g:link controller="building" action="delete" id="${building.id}">Demolish</g:link>
-	 </span>	
+    %{--<span style="padding-left:39px;">--}%
+
+	 %{--</span>	--}%
     </div>

@@ -100,6 +100,7 @@ class FacebookService {
                 player = Player.findByFacebookId(it.id as Long)
                 if (player)
                 {
+                    player.profilePicture = getProfilePicture(player.facebookId)
                     result += player
                 }
             }

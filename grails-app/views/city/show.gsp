@@ -41,18 +41,15 @@
               dragging = false;
               return false;
             }
-            alert('abc');
             return true;
         });
 
-
-
-
-
-
-	});
-
-      jQuery(function() {
+        jQuery('.buildingMap').click(function(event){
+          new Ajax.Updater('buildingDC','${createLink(action: 'buildingDetail')}/' + event.currentTarget.id,{asynchronous:true,evalScripts:true});
+        });
+//	});
+//
+//      jQuery(function() {
         jQuery('#myBuildings').click(function() {
           if($('myb').value == 'true') {
             jQuery('.otherBuilding').animate({opacity:0.2}, 2000)
@@ -71,7 +68,7 @@
   <body>
   <g:dialog name="profileDialog" zIndex="10000" width="500" height="300" title="Profile">
     <table class="profileT">
-        <tr><td rowspan="6" class="pdPhoto"><img alt="profilePhoto" src="${profilePicture ? profilePicture : resource(dir: 'images/', file: 'default_profile_picture.png')}"/></td>
+        <tr><td rowspan="6" class="pdPhoto" valign="top"><img alt="profilePhoto" src="${profilePicture ? profilePicture : resource(dir: 'images/', file: 'default_profile_picture.png')}"/></td>
         <tr><td class="pdName">${playerName}</td></tr>
         <tr><td class="pdBuildings">Buildings: ${buildingCount}</td></tr>
         <tr><td class="pdMoney">Money: $${player.money}</td></tr>
@@ -120,8 +117,18 @@
   </div>
 
   <div style="position:absolute; top:${viewConfig.canvas.y}px">
+    <br/>
+    <g:render template="/shared/message"/>
 
-      <g:each in ="${player.friends}" var="friend">${friend.profile.name}<br></g:each>
+    <g:if test="${player.friends?.size() > 0}">
+      <h3>My friends playing Megapolis:</h3>
+      <g:each in ="${player.friends}" var="friend">
+        <div style="vertical-align:top">
+          <img alt="profilePhoto" src="${friend.profilePicture ?: resource(dir: 'images/', file: 'default_profile_picture.png')}" width="50"/>
+          ${friend.profile.name}
+        </div>
+      </g:each>
+      </g:if>
 
   </div>
 

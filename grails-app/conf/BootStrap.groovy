@@ -32,9 +32,24 @@ class BootStrap {
 
     def init = { servletContext ->
         def systemPlayer = new Player(money: 0, facebookId: -1, profileJSON: """{"id":"-1","name":"Megapolis System","first_name":"Megapolis","last_name":"System","username":"megapolis"}""").save(failOnError: true)
+        def hany = new Player(money: 0, facebookId: 1678623744, profileJSON: """{
+           "id": "1678623744",
+           "name": "Martin Hanák",
+           "first_name": "Martin",
+           "last_name": "Hanák",
+           "link": "http://www.facebook.com/profile.php?id=1678623744",
+           "birthday": "06/19/1988",
+           "quotes": "\\\"Peace and prosperity through superior firepower.\\\" -Colonel Quaritch",
+           "gender": "male",
+           "religion": "Nihilist",
+           "timezone": 2,
+           "locale": "en_GB",
+           "verified": true,
+           "updated_time": "2011-05-07T19:47:32+0000"
+        }""").save(failOnError: true)
 
-        def house1 = new Residential(name: 'Luxury Residence', dirname: 'house1', price: 1000,
-                lucrativity: 10, profitTime: 30, maxResidents: 20,
+        def house1 = new Residential(name: 'Luxury Residence', dirname: 'house1', price: 100000,
+                lucrativity: 10, profitTime: 3600, maxResidents: 15,
                 large: new Image(filename: 'iso.png', height: 184, width: 258, offsetX: 129, offsetY: -1,
                     mapx: [2,36,36,59,89,106,153,171,200,223,224,259,254,195,131,128,1],
                     mapy: [107,90,50,25,21,2,2,20,26,50,99,117,123,153,184,184,121]).save(),
@@ -45,8 +60,8 @@ class BootStrap {
                     mapx: [0,9,9,15,22,26,38,43,50,56,56,65,64,49,33,32,0],
                     mapy: [27,23,13,6,5,0,1,5,6,13,25,29,31,38,46,46,30]).save()).save(failOnError: true)
 
-        def house2 = new Residential(name: 'Big Residence', dirname: 'house2', price: 1000,
-                lucrativity: 10, profitTime: 30, maxResidents: 20,
+        def house2 = new Residential(name: 'Big Residence', dirname: 'house2', price: 170000,
+                lucrativity: 25, profitTime: 3600, maxResidents: 50,
                 large: new Image(filename: 'iso_normal.png', height: 385, width: 256, offsetX: 128, offsetY: -1,
                     mapx: [2,36,36,59,89,106,153,171,200,223,224,259,254,195,131,128,1],
                     mapy: [107,90,50,25,21,2,2,20,26,50,99,117,123,153,184,184,121]).save(),
@@ -57,8 +72,8 @@ class BootStrap {
                     mapx: [0,9,9,15,22,26,38,43,50,56,56,65,64,49,33,32,0],
                     mapy: [27,23,13,6,5,0,1,5,6,13,25,29,31,38,46,46,30]).save()).save(failOnError: true)
 
-        def house3 = new Residential(name: 'Extra Luxurious Residence', dirname: 'house3', price: 1000,
-                lucrativity: 10, profitTime: 30, maxResidents: 20,
+        def house3 = new Residential(name: 'Extra Luxurious Residence', dirname: 'house3', price: 210000,
+                lucrativity: 50, profitTime: 3600, maxResidents: 20,
                 large: new Image(filename: 'iso_normal.png', height: 300, width: 256, offsetX: 128, offsetY: -1,
                     mapx: [2,36,36,59,89,106,153,171,200,223,224,259,254,195,131,128,1],
                     mapy: [107,90,50,25,21,2,2,20,26,50,99,117,123,153,184,184,121]).save(),
@@ -69,8 +84,8 @@ class BootStrap {
                     mapx: [0,9,9,15,22,26,38,43,50,56,56,65,64,49,33,32,0],
                     mapy: [27,23,13,6,5,0,1,5,6,13,25,29,31,38,46,46,30]).save()).save(failOnError: true)
 
-        def shop = new Shop(name: 'City Mall', dirname: 'office2', price: 3000,
-                lucrativity: 30, profitTime: 60, salesRange: 2, maxProfit: 500, idealCustomersCount: 200,
+        def shop = new Shop(name: 'City Mall', dirname: 'office2', price: 150000,
+                lucrativity: 30, profitTime: 3600, salesRange: 3, maxProfit: 15000, idealCustomersCount: 200,
                 large: new Image(filename: 'iso.png', height: 350, width: 258, offsetX: 129, offsetY: -1,
                     mapx: [2,44,45,118,155,156,215,215,258,130],
                     mapy: [286,262,35,1,20,32,62,262,286,350]).save(),
@@ -80,8 +95,8 @@ class BootStrap {
                 small: new Image(filename: 'iso_small.png', height: 87, width: 64, offsetX: 32, offsetY: -1,
                     mapx: [0,11,11,30,39,39,54,54,65,32],
                     mapy: [71,65,9,0,5,8,15,66,72,88]).save()).save(failOnError: true)
-        def shop1 = new Shop(name: 'Great City Mall', dirname: 'office3', price: 10000,
-                lucrativity: 40, profitTime: 30, salesRange: 5, maxProfit: 1000, idealCustomersCount: 500,
+        def shop1 = new Shop(name: 'Great City Mall', dirname: 'office3', price: 300000,
+                lucrativity: 40, profitTime: 3600, salesRange: 5, maxProfit: 25000, idealCustomersCount: 500,
                 large: new Image(filename: 'iso.png', height: 341, width: 258, offsetX: 129, offsetY: -1,
                     mapx: [2,44,45,118,155,156,215,215,258,130],
                     mapy: [286,262,35,1,20,32,62,262,286,350]).save(),
@@ -92,8 +107,8 @@ class BootStrap {
                     mapx: [0,11,11,30,39,39,54,54,65,32],
                     mapy: [71,65,9,0,5,8,15,66,72,88]).save()).save(failOnError: true)
 
-        def statue = new AdditionalBuilding(name: 'Heroic Statue', dirname: 'statue', price:4000,
-                lucrativity: 50, profitTime: 0,
+        def statue = new AdditionalBuilding(name: 'Heroic Statue', dirname: 'statue', price:50000,
+                lucrativity: 100, profitTime: 0,
                 large: new Image(filename: 'iso.png', height: 150, width: 258, offsetX: 129, offsetY: -1,
                     mapx: [2,44,45,118,155,156,215,215,258,130],
                     mapy: [286,262,35,1,20,32,62,262,286,350]).save(),

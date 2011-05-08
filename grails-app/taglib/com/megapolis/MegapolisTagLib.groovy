@@ -106,7 +106,7 @@ class MegapolisTagLib {
 
         if(building) {
             out << """<map name="_building${building?.id}">
-            <area shape="poly" coords="${coord}" href="#" alt="" title="" />
+            <area shape="poly" coords="${coord}" href="#" alt="" title="" id="${building.id}" class="buildingMap"/>
             </map>"""
         }
 

@@ -22,7 +22,7 @@ package com.megapolis.game
 import com.megapolis.game.player.Player
 
 class BuildingType {
-    private static final int MINIMUM_WITHDRAW_TIME = 10
+    private static final int MINIMUM_WITHDRAW_TIME = 10 * 60
     double lucrativity
     String name
     String dirname

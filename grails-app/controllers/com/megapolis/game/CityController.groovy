@@ -31,7 +31,11 @@ class CityController extends FacebookController {
 
     def buildingDetail = {
 	    def building = Building.get(params.id)
-	    render(template: "buildingDialog", model: [building: building, cityService: cityService, buildingOwner: building.owner])
+        def player =  facebookService.player
+        if(building.owner == player)
+	        render(template: "buildingDialog", model: [building: building, cityService: cityService, buildingOwner: building.owner])
+        else
+	        render(template: "othersBuildingDialog", model: [building: building, cityService: cityService, buildingOwner: building.owner])
        render g.javascript { 'buildingDialog.show()' }
     }
 
@@ -222,7 +226,7 @@ class CityController extends FacebookController {
         }
 
         Player.withTransaction { status ->
-            player.money = 100000
+//            player.money = 100000
 
             if (player.money < buildingType.price){
                 status.setRollbackOnly()

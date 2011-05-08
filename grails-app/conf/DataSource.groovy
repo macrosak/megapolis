@@ -52,6 +52,22 @@ environments {
             dbCreate = 'update'
             dialect="org.hibernate.dialect.MySQL5InnoDBDialect"
             url="jdbc:mysql://localhost:3306/megapolis?autoreconnect=true&useUnicode=true&characterEncoding=utf-8"
+            properties {
+                maxActive = 50
+                maxIdle = 25
+                minIdle = 1
+                initialSize = 1
+                minEvictableIdleTimeMillis = 30 * 60 * 1000
+                timeBetweenEvictionRunsMillis = 30 * 60 * 1000
+                numTestsPerEvictionRun = 3
+                maxWait = 10000
+
+                testOnBorrow = true
+                testWhileIdle = true
+                testOnReturn = false
+
+                validationQuery = "SELECT 1"
+            }
         }
     }
 }

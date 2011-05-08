@@ -24,7 +24,7 @@ import org.codehaus.groovy.grails.commons.DefaultGrailsDomainClass
 
 class BuildingController extends FacebookController {
 
-    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+    def facebookService
 
     def index = {
         redirect(action: "list", params: params)
@@ -32,9 +32,24 @@ class BuildingController extends FacebookController {
 
     def withdraw = {
         def building = Building.get(params.remove('id'))
-        def profit = building.withdraw()
-        if(profit >= 0)
-            flash.message = "You have earned \$$profit"
-        redirect(controller: 'player', action: 'myBuildings')
+        if(facebookService.player == building.owner) {
+            def profit = building.withdraw()
+            if(profit >= 0)
+                flash.message = "You have earned \$$profit."
+            else
+                flash.message = "You cannot withdraw money yet. Try it later."
+        }
+        redirect(controller: 'city', action: 'show')
+    }
+
+    def delete = {
+        def building = Building.get(params.remove('id'))
+        if(facebookService.player == building.owner) {
+            building.field.building = null
+            def name = building.type.name
+            building.delete(flush: true)
+            flash.message = "You have demolished building $name."
+        }
+        redirect(controller: 'city', action: 'show')
     }
 }

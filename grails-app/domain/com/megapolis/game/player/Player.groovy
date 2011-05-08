@@ -35,7 +35,7 @@ class Player {
     public String profilePicture // URL
 
     static hasMany = [fields: Field]
-    static transients = ['profile']
+    static transients = ['profile', 'friends', 'profilePicture']
     
     static constraints = {
         profileJSON(maxSize: 4068, nullable: false, blank: false)
@@ -46,5 +46,19 @@ class Player {
             profile = JSON.parse(profileJSON)
         return profile
     }
+
+//    def facebookServiceProxy
+//
+//    def getProfilePicture() {
+//        if(!profilePicture)
+//            profilePicture = facebookServiceProxy.getProfilePicture(facebookId)
+//        return profilePicture
+//    }
+//
+//    def getFriends() {
+//        if(!friends)
+//            friends = facebookServiceProxy.getPlayerFriends(facebookId)
+//        return friends
+//    }
 
 }

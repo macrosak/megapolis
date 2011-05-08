@@ -40,7 +40,7 @@ class Field {
     }
 
     int price() {
-        return 200;
+        return 10000;
     }
 
 
