@@ -121,7 +121,7 @@
     <g:render template="/shared/message"/>
 
     <g:if test="${player.friends?.size() > 0}">
-      <h3>My friends playing Megapolis:</h3>
+      <h3>My friends who also play Megapolis:</h3>
       <g:each in ="${player.friends}" var="friend">
         <div style="vertical-align:top">
           <img alt="profilePhoto" src="${friend.profilePicture ?: resource(dir: 'images/', file: 'default_profile_picture.png')}" width="50"/>

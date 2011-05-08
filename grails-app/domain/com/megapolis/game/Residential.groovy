@@ -20,7 +20,7 @@
 package com.megapolis.game
 
 class Residential extends BuildingType {
-    private static final int RENT_PER_RESIDENT = 1000
+    private static final int RENT_PER_RESIDENT = 50
 
     def cityService
 
@@ -43,7 +43,8 @@ class Residential extends BuildingType {
         if(profit >= 0) {
             if(building.residents < maxResidents) {
                 Building.withTransaction {
-                    building.residents = Math.min(maxResidents, (int) (building.residents + 0.1 * maxResidents))
+                    def addition = (int) Math.ceil((maxResidents - building.residents) / 2)
+                    building.residents += addition
                     building.save(flush: true)
                 }
             }
