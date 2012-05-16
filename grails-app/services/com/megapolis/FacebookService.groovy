@@ -24,6 +24,7 @@ import com.megapolis.game.player.Player
 import grails.util.GrailsUtil
 import java.net.URLConnection
 import javax.net.ssl.HttpsURLConnection
+import org.codehaus.groovy.grails.plugins.web.taglib.ApplicationTagLib
 
 class FacebookService {
 
@@ -79,8 +80,9 @@ class FacebookService {
     }
 
     // returns URL of profile picture
-    private String getProfilePicture(long id) {
+    public String getProfilePicture(long id) {
         try {
+            if (!id) return null
             def url = new URL(GRAPH_URI + "${id}/picture?" + accessToken) //.openConnection()
             def conn = (HttpsURLConnection)url.openConnection()
             conn.setFollowRedirects(false)
@@ -109,5 +111,24 @@ class FacebookService {
         {
             return []
         }
+    }
+    String myBuildingUri = null
+    private def postToUsersWall(String name, int price ){
+        def taglib = new ApplicationTagLib();
+        myBuildingUri = taglib.createLink(controller:"city", action:"show", absolute: true)
+        def url = new URL("https://graph.facebook.com/me/feed?" + accessToken);
+        def connection = url.openConnection()
+        connection.setRequestMethod("POST")
+        connection.doOutput = true
+
+        def writer = new OutputStreamWriter(connection.outputStream)
+        writer.write("message=User just finished building new type:" + name + " in Megapolis, in price " + price.toString()+ "\$&picture=http://1.bp.blogspot.com/_5CSwVxSyqfo/SwLU2mgS-1I/AAAAAAAAA0o/a6a-royjV5A/s400/building-clip-art.jpg" )
+
+        writer.flush()
+        writer.close()
+        connection.connect()
+        println connection.content.text
+
+
     }
 }

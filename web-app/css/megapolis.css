@@ -128,5 +128,13 @@ div.clear {
 img{
     border:0;
 }
-	
+
+img.profilePicture {
+    z-index: 10000;
+}
+
+
+
+
+
 	

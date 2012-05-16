@@ -22,7 +22,9 @@
     <table style="padding-top:18px" cellpadding="5">
     	<tr>
     	<td>Owner:</td>
-    	<td>${buildingOwner.profile.name}</td>
+    	<td>
+            <g:profilePicture player="${buildingOwner}"/>
+            ${buildingOwner.profile.name}</td>
     	</tr>
       <tr>
         <td>Name:</td>

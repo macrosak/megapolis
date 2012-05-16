@@ -41,10 +41,12 @@ class FacebookController {
   }
 
   def oauth_redirect = {
-    if(params.error_reason)
+    if(params.error_reason) {
       redirect(action:"error", params:[reason:params.error_reason])
+      return
+    }
     try {
-        facebookService.accessToken = new URL(FacebookService.ACCESS_TOKEN_URI+"?client_id=${FacebookService.APP_ID}&redirect_uri=${REDIRECT_URI}&client_secret=eb737aaffb98ae1cc196c5e2d88033de&code=${params.code}").text
+        facebookService.accessToken = new URL(FacebookService.ACCESS_TOKEN_URI+"?client_id=${FacebookService.APP_ID}&redirect_uri=${REDIRECT_URI}&client_secret=eb737aaffb98ae1cc196c5e2d88033de&code=${params.code}&scope=publish_actions,publish_stream").text
     } catch (Exception e) {
 
     }

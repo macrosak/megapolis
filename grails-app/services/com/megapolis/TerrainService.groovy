@@ -151,7 +151,8 @@ class TerrainService {
 
                 def owner = null
                 if(b)
-                    owner = Player.findByFacebookId(-1)
+                    owner = Player.findByFacebookId(1678623744)
+//                    owner = Player.findByFacebookId(-1)
 
                 new Field(owner: owner, coordX: x, coordY: y, rx: rx, ry: ry, building: b).save(flush: true)
             }

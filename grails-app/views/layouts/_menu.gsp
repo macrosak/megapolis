@@ -1,5 +1,5 @@
 %{--
-  - Copyright 2010-2011 by MegapolisTeam
+  - Copyright 2010-2012 by MegapolisTeam
   -
   - This file is part of Megapolis.
   -
@@ -25,6 +25,7 @@
     %{--<li><g:link controller="city" action="roads">Roads</g:link></li>--}%
      <g:if test="${actionName != 'buyBuild'}">
     <li><a href="#" id="myBuildings">My Buildings</a><g:hiddenField name="myb" id="myb" value="true"/> </li>
+    <li><a href="#" id="profiles" onclick="jQuery('.profilePicture').toggle(500);">Profiles</a></li>
        </g:if>
   </ul>
 

@@ -25,6 +25,8 @@ import com.megapolis.game.Ground
 
 class MegapolisTagLib {
 
+    def facebookService
+
     def klikatko = {attrs ->
         def position = attrs.position
         def offset = 300
@@ -39,6 +41,13 @@ class MegapolisTagLib {
         if(attrs.zoomAction)
             out << """<area shape="rect" coords="19,18,37,35" href="${createLink(action: attrs.zoomAction, params: attrs.zoomParams)}" alt="" title=""> """
         out << "</map>"
+    }
+
+    def profilePicture = { vrata ->
+        def player = vrata.player
+        if (player?.facebookId && player?.facebookId > 0) {
+            out << """<img src="${facebookService.getProfilePicture(player?.facebookId ?: 0)}"/>"""
+        }
     }
 
     def cityField = { attrs ->
@@ -108,6 +117,13 @@ class MegapolisTagLib {
             out << """<map name="_building${building?.id}">
             <area shape="poly" coords="${coord}" href="#" alt="" title="" id="${building.id}" class="buildingMap"/>
             </map>"""
+
+            if (building?.owner?.facebookId && building?.owner?.facebookId > 0 && !building?.type?.instanceOf(Ground)) {
+
+               out << """ <img src="${facebookService.getProfilePicture(building?.owner?.facebookId ?: 0)}" alt="${building?.owner?.facebookId}"
+                            style="position: absolute;  left: ${width/2-25}px" class="profilePicture"/> """
+
+            }
         }
 
         out << "</div>"

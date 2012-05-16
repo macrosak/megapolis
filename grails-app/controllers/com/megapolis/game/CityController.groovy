@@ -52,7 +52,7 @@ class CityController extends FacebookController {
 //        def background = BuildingType.findByDirname('crossroad')
 
         double income = 0
-
+        def myBuildingUri = taglib.createLink(controller:"city", action:"show", absolute: true)
         def buildings = Building.byPlayer(player).list()
 
         buildings.each {building->
@@ -66,6 +66,7 @@ class CityController extends FacebookController {
                 zoom: zoom,
                 nextZoom: nextZoom(zoom),
                 background: background,
+                myUri: myBuildingUri,
                 income:income,
                 buildingCount:buildings.size(),
                 profilePicture: player?.profilePicture,
@@ -138,7 +139,9 @@ class CityController extends FacebookController {
                 return
             }
 
+
             player.money -= price
+
             player.save(flush: true)
         }
         redirect(action: 'buyBuild')
@@ -239,6 +242,13 @@ class CityController extends FacebookController {
             field.building = building
             building.field = field
             player.money -= buildingType.price
+            boolean postIt = true;
+            for (Field f: player.fields){
+               if (f.building.type.equals(building.type) && !f.building.equals(building)){
+                   postIt = false
+               }
+            }
+            if (postIt) facebookService.postToUsersWall(buildingType.name, buildingType.price);
             field.save(flush:true)
             player.save(flush: true)
         }

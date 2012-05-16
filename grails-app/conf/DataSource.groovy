@@ -45,7 +45,7 @@ environments {
         }
     }
     production {
-        dataSource {
+/*        dataSource {
             driverClassName = "com.mysql.jdbc.Driver"
             username = "megapolis"
             password="bDYJZetDU4w2M6C8"
@@ -69,5 +69,11 @@ environments {
                 validationQuery = "SELECT 1"
             }
         }
+        */
+        dataSource {
+            dbCreate = "create-drop" // one of 'create', 'create-drop','update'
+            url = "jdbc:hsqldb:mem:devDB"
+        }
+
     }
 }

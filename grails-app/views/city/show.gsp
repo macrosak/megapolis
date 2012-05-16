@@ -19,10 +19,18 @@
 
 <%@ page contentType="text/html;charset=UTF-8" %>
 
-<html>
-  <head>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US"
+      xmlns:fb="https://www.facebook.com/2008/fbml">
+  <head prefix="og: http://ogp.me/ns# mega-polis:
+        http://ogp.me/ns/apps/mega-polis#">
     <meta name="layout" content="main"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta property="fb:app_id" content="167042136651099" />
+    <meta property="og:type" content="mega-polis:building" />
+    <meta property="og:title" content="Industrial building" />
+    <meta property="og:image" content="http://www.coloringpages365.com/coloring/building-coloring-pages-5.jpg" />
+    <meta property="og:url" content="${myUri}">
+
     <title>City</title>
 
     <g:importDialogs/>

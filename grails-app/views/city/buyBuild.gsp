@@ -19,9 +19,9 @@
 
 <%@ page import="com.megapolis.game.Ground; com.megapolis.game.BuildingType; com.megapolis.game.Field; com.megapolis.game.Building" %>
 <html>
-<head>
+<head >
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-  <meta name="layout" content="main"/>
+    <meta name="layout" content="main"/>
   <g:set var="entityName" value="${message(code: 'building.label', default: 'Building')}"/>
   <title><g:message code="default.show.label" args="[entityName]"/></title>
   <g:importDialogs />
